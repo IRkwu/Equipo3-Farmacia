@@ -1,7 +1,6 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from MenuSeleccion import MenuSeleccion
-from RegistrarCliente import RegistrarCliente
 from VentanaIngresarCliente import VentanaIngresarCliente
 
 class DebugMode(object):
@@ -53,7 +52,7 @@ class DebugMode(object):
     def retranslateUi(self, DebugMode):
         _translate = QtCore.QCoreApplication.translate
         DebugMode.setWindowTitle(_translate("DebugMode", "Debug Mode"))
-        self.Boton1.setText(_translate("DebugMode", "Registrar Cliente"))
+        self.Boton1.setText(_translate("DebugMode", "Ingresar Cliente"))
         self.Boton2.setText(_translate("DebugMode", "Menu Seleccion"))
         self.Boton3.setText(_translate("DebugMode", "Boton3"))
         self.Boton4.setText(_translate("DebugMode", "Boton4"))
