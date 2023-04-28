@@ -68,6 +68,7 @@ class VentanaIngresarCliente(object):
         self.rutLineEdit.setGeometry(QtCore.QRect(106, 321, 200, 50))
         self.rutLineEdit.setMaxLength(8)
         self.rutLineEdit.setValidator(QIntValidator())
+        self.rutLineEdit.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp("[0-9]*")))
         self.rutLineEdit.setPlaceholderText("Ingrese rut sin puntos")
         
         
@@ -88,6 +89,7 @@ class VentanaIngresarCliente(object):
         self.telefonoLineEdit.setGeometry(QtCore.QRect(504, 321, 260, 50))
         self.telefonoLineEdit.setMaxLength(9)
         self.telefonoLineEdit.setValidator(QIntValidator())
+        self.telefonoLineEdit.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp("[0-9]*")))
         self.telefonoLineEdit.setPlaceholderText("Ingrese su numero de 9 digitos")
         
         # Etiqueta email y LineEdit
