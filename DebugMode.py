@@ -2,6 +2,7 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from MenuSeleccion import MenuSeleccion
 from RegistrarCliente import RegistrarCliente
+from VentanaIngresarCliente import VentanaIngresarCliente
 
 class DebugMode(object):
     def setupUi(self, DebugMode):
@@ -63,10 +64,10 @@ class DebugMode(object):
         self.Boton9.setText(_translate("DebugMode", "Boton9"))
         
     def onActionBoton1(self):
-        self.RegistrarCliente = QtWidgets.QMainWindow()
-        self.ui = RegistrarCliente()
-        self.ui.setupUi(self.RegistrarCliente)
-        self.RegistrarCliente.show()
+        self.VentanaIngresarCliente = QtWidgets.QMainWindow()
+        self.ui = VentanaIngresarCliente()
+        self.ui.setupUi(self.VentanaIngresarCliente)
+        self.VentanaIngresarCliente.show()
         
     def onActionBoton2(self):
         self.MenuSeleccion = QtWidgets.QMainWindow()
