@@ -1,2 +1,27 @@
-ID,Nombres,Apellidos,Género,Fecha Nacimiento,Email,RUT,Teléfono,Domicilio
-5228,Felipe Javier,Castro Casanova,Masculino,01/04/2003,xxfelipegamer777xx@live.cl,21.295.966-9,932782378,Psj Bosque Verde
+ID,Nombres,Apellidos,Genero,Fecha Nacimiento,Email,RUT,Telefono,Domicilio
+5228,Felipe Javier,Castro Casanova,Masculino,01/04/2003,xxfelipegamer777xx@live.cl,21.295.966-9,932782378,Psj. Bosque Verde
+1298,Carla Sofia,Rodriguez Castro,Femenino,15/07/1995,carla.rodriguez@gmail.com,17.529.864-5,912345678,Av. Los Pinos
+2654,Diego Alejandro,Fernandez Flores,Masculino,20/11/1998,diegoferflores@yahoo.com,20.123.456-7,987654321,Calle Santa Maria
+3991,Maria Jose,Perez Hernandez,Femenino,04/05/2001,mjphdez@gmail.com,16.789.123-4,978654321,Av. Los Alamos
+5231,Ana Luisa,Mendez Ruiz,Femenino,03/09/1992,aluisa.mr@gmail.com,18.345.987-6,943567821,Calle Los Olivos
+6778,Cristian Eduardo,Avila Morales,Masculino,17/06/1997,criseduardo.avila@gmail.com,19.567.234-5,936785412,Psj Los Cerezos
+7296,Martin Alonso,Marquez Flores,Masculino,21/08/1989,martinalonso@gmail.com,15.456.789-2,947821365,Av. Las Palmeras
+9423,Marcelo Andres,Salas Vega,Masculino,11/03/1996,masave96@hotmail.com,13.456.789-0,925684173,Av. Las Azaleas
+1056,Antonella Sofia,Rodriguez Rojas,Femenino,09/06/2000,antonellasr@gmail.com,16.345.789-3,982563471,Calle Los Aromos
+1168,Mauricio David,Valenzuela Gutierrez,Masculino,25/01/1991,maudavgtz@gmail.com,17.890.123-5,912346871,Av. Las Acacias
+1257,Laura Isabel,Ortiz Gomez,Femenino,12/10/1998,lauraog94@hotmail.com,19.567.891-2,946271538,Calle Los Rosales
+1875,Francisco Jose,Torres Castro,Masculino,08/07/1994,franctorresc@gmail.com,14.567.890-1,913467825,Av. Los Naranjos
+1425,Isidora Andrea,Soto Silva,Femenino,19/02/1999,isasotos@gmail.com,18.678.901-4,968734125,Calle Los Tilos
+1963,Juan Pablo,Saavedra Perez,Masculino,02/12/1987,jpsaavedra@hotmail.com,11.234.567-8,967543218,Av. Las Camelias
+2675,Ana Maria,Rojas Torres,Femenino,15/05/1995,anamariarojas@gmail.com,12.345.678-9,978654321,Calle Los Almendros
+3478,Francisco Javier,Rodriguez Gomez,Masculino,29/09/1980,fjrodriguez@gmail.com,23.456.789-0,986532147,Av. Los Leones
+4732,Alejandra,Contreras Hernandez,Femenino,21/06/1991,alecontreras@gmail.com,14.567.890-1,945671238,Calle Las Acacias
+5218,Mauricio,Valenzuela Rojas,Masculino,07/11/1997,mavalenzuela@hotmail.com,15.678.901-2,956782134,Av. Los Aromos
+6423,Carla,Alvarado Castro,Femenino,10/08/1994,calvaradoc@gmail.com,16.789.012-3,964512378,Calle Las Rosas
+7654,Jorge,Chavez Perez,Masculino,23/03/1985,jchavez@hotmail.com,17.890.123-4,978643215,Av. Los Pajaritos
+8324,Isabel,Bravo Silva,Femenino,01/02/1990,isbravos@gmail.com,18.213.459-4,987654321,Calle Los Laureles
+1056,Carolina,Gonzalez Garcia,Femenino,27/07/1996,cgonzalezg@hotmail.com,19.123.456-7,945671238,Calle Los Pinos
+2341,Sebastian,Fernandez Torres,Masculino,03/05/1989,sfernandezt@hotmail.com,18.234.567-8,967543218,Av. Los Nogales
+3567,Camila,Aravena Diaz,Femenino,08/12/1992,camilaaravenad@gmail.com,19.345.678-9,978654321,Calle Las Palmeras
+4790,Andres,Lopez Perez,Masculino,18/09/1982,alopezp@gmail.com,16.456.789-0,986532147,Av. Las Magnolias
+5210,Valentina,Morales Rojas,Femenino,02/02/1997,vamoralesr@gmail.com,20.567.890-1,945671238,Calle Las Dalias

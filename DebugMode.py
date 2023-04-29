@@ -1,10 +1,18 @@
+### MENU PARA PRUEBAS DE INTERFACES ###
+### MENU PARA PRUEBAS DE INTERFACES ###
+### MENU PARA PRUEBAS DE INTERFACES ###
+
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtGui import QIcon
 from MenuSeleccion import MenuSeleccion
 from VentanaIngresarCliente import VentanaIngresarCliente
+from VentanaEditarCliente import VentanaEditarCliente
 
 class DebugMode(object):
     def setupUi(self, DebugMode):
+        IconoTitulo = QtGui.QIcon('Imagenes/icono_titulo.png')
+        DebugMode.setWindowIcon(IconoTitulo)
         DebugMode.setObjectName("DebugMode")
         DebugMode.resize(400, 300)
         self.gridLayoutWidget = QtWidgets.QWidget(DebugMode)
@@ -53,8 +61,8 @@ class DebugMode(object):
         _translate = QtCore.QCoreApplication.translate
         DebugMode.setWindowTitle(_translate("DebugMode", "Debug Mode"))
         self.Boton1.setText(_translate("DebugMode", "Ingresar Cliente"))
-        self.Boton2.setText(_translate("DebugMode", "Menu Seleccion"))
-        self.Boton3.setText(_translate("DebugMode", "Boton3"))
+        self.Boton2.setText(_translate("DebugMode", "Editar Cliente"))
+        self.Boton3.setText(_translate("DebugMode", "Menu Seleccion"))
         self.Boton4.setText(_translate("DebugMode", "Boton4"))
         self.Boton5.setText(_translate("DebugMode", "Boton5"))
         self.Boton6.setText(_translate("DebugMode", "Boton6"))
@@ -69,13 +77,16 @@ class DebugMode(object):
         self.VentanaIngresarCliente.show()
         
     def onActionBoton2(self):
+        self.VentanaEditarCliente = QtWidgets.QMainWindow()
+        self.ui = VentanaEditarCliente()
+        self.ui.setupUi(self.VentanaEditarCliente)
+        self.VentanaEditarCliente.show()
+
+    def onActionBoton3(self):
         self.MenuSeleccion = QtWidgets.QMainWindow()
         self.ui = MenuSeleccion()
         self.ui.setupUi(self.MenuSeleccion)
         self.MenuSeleccion.show()
-
-    def onActionBoton3(self):
-        print("Se ha hecho clic en Boton3")
 
     def onActionBoton4(self):
         print("Se ha hecho clic en Boton4")
