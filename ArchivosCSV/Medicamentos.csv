@@ -1,0 +1,31 @@
+ID,Nombre Medicamento,Descripcion,Precio,Stock
+001,Enrofloxacina,Medicamento antibiotico para perros y gatos,1500,50
+002,Meloxicam,Medicamento antiinflamatorio no esteroideo para perros y gatos,2500,30
+003,Fenobarbital,Medicamento antiepileptico para perros y gatos,5000,20
+004,Lomper,Medicamento antiparasitario para perros y gatos,1200,80
+005,Metronidazol,Medicamento antibiotico y antiparasitario para perros y gatos,1800,60
+006,Cefalexina,Medicamento antibiotico para perros y gatos,2000,40
+007,Prednisona,Medicamento esteroideo para perros y gatos,3500,25
+008,Levotiroxina,Medicamento hormonal para perros y gatos,15000,10
+009,Cisaprida,Medicamento gastroproquinetico para perros y gatos,5000,15
+010,Fluconazol,Medicamento antifungico para perros y gatos,3000,70
+011,Amoxicilina,Medicamento antibiotico para perros y gatos,1800,75
+012,Ciprofloxacina,Medicamento antibiotico para perros y gatos,2500,60
+013,Ketoprofeno,Medicamento antiinflamatorio no esteroideo para perros y gatos,2300,45
+014,Praziquantel,Medicamento antiparasitario para perros y gatos,1600,90
+015,Itraconazol,Medicamento antifungico para perros y gatos,5000,20
+016,Tramadol,Medicamento analgesico para perros y gatos,2200,55
+017,Bromuro de Potasio,Medicamento antiepileptico para perros y gatos,4500,30
+018,Furosemida,Medicamento diuretico para perros y gatos,1800,70
+019,Clavulanato de Potasio,Medicamento antibiotico para perros y gatos,2700,50
+020,Metoclopramida,Medicamento gastroproquinetico para perros y gatos,1900,65
+021,Clorfeniramina,Medicamento antihistaminico para perros y gatos,1400,80
+022,Trilostano,Medicamento hormonal para perros y gatos con enfermedad de Cushing,18000,10
+023,Benazepril,Medicamento antihipertensivo para perros y gatos,3500,40
+024,Carprofeno,Medicamento antiinflamatorio no esteroideo para perros,2800,35
+025,Pimobendan,Medicamento para insuficiencia cardiaca en perros,15000,12
+026,Milteforan,Medicamento para leishmaniasis en perros,20000,10
+027,Moxidectina,Medicamento antiparasitario para perros y gatos,1900,70
+028,Alprazolam,Medicamento ansiolitico para perros y gatos,4000,25
+029,Selegilina,Medicamento para tratar la enfermedad de Parkinson en perros,7500,18
+030,Difenhidramina,Medicamento antihistaminico para perros y gatos,1200,95

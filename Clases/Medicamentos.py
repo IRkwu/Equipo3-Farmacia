@@ -1,16 +1,17 @@
-#Clase Revisada
+import csv
 
 class Medicamentos:
-    def __init__(self,Nombre_Medicamento:str, Descripcion:str, Precio:int, Stock:int):
+    def __init__(self,ID:str,Nombre_Medicamento:str, Descripcion:str, Precio:int, Stock:int):
+        self.__ID = ID
         self.__Nombre_Medicamento=Nombre_Medicamento
         self.__Descripcion=Descripcion
         self.__Precio=Precio
         self.__Stock=Stock
 
-#Atributos estan creados 
-#Los getters Funciona (esta es la clase medic) y estan creados (lista)
-
     #GETTERS
+    def get_id(self):
+        return self.__ID
+    
     def get_nombre(self): 
         return self.__Nombre_Medicamento
      
@@ -22,58 +23,46 @@ class Medicamentos:
     
     def get_stock(self):
         return self.__Stock
-
-
     
     #SETTERS
-
-#set 1 funciona
-    def set_nombre(self):
-         
-        self.__Nombre_Medicamento = str(input("Ingrese nuevo nombre: "))
-  
-
-#set 2 funciona
-    def set_descripcion(self):
-        self.__Descripcion = str(input("Ingrese nueva descripcion: "))
+    def set_id(self, ID):
+        self.__ID = ID
     
-#pide edad al usuario en vez del precio
+    def set_nombre(self, Nombre_Medicamento):
+        self.__Nombre_Medicamento = Nombre_Medicamento
 
-#set 3 funciona
-    def set_precio(self):
-        #try para que se ingrese un int
-        try:
-            new_price= int(input("Ingrese precio: "))
-            #if para que el int sea mayor o igual a 0
-            if new_price >= 0:
-                self.__Precio=new_price
-            else:
-                print("El precio debe ser un número positivo.")
-        except ValueError:
-            print("El precio debe ser un número entero.")
+    def set_descripcion(self, Descripcion):
+        self.__Descripcion = Descripcion
+    
+    def set_precio(self, Precio):
+        self.__Precio = Precio
 
-#set 4 funciona
-    def set_stock(self):
-        try:
-             new_stock = int(input("Introduce nuevo stock: "))
-             if new_stock >= 0:
-                  self.__Stock =new_stock
-             else:
-              print("El stock debe ser un número positivo.")
-        except ValueError:
-             print("El stock debe ser un número entero.")
+    def set_stock(self, Stock):
+        self.__Stock = Stock
+        
+    def agregar_stock(self, Cantidad):
+        self.__Stock = self.__Stock + Cantidad
+        
+    def retirar_stock(self, Cantidad):
+        self.__Stock = self.__Stock - Cantidad
              
+    def guardar_medicamentos_CSV(self, lista_medicamentos):
+        with open('ArchivosCSV/Medicamentos.csv', mode='w', newline='') as file:
+            writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            writer.writerow(['ID', 'Nombre', 'Descripcion', 'Precio', 'Stock'])
+            for medicamento in lista_medicamentos:
+                writer.writerow([medicamento.get_id(), medicamento.get_nombre(), medicamento.get_descripcion(), medicamento.get_precio(), medicamento.get_stock()])
+                
+    def cargar_medicamentos_CSV(self):
+        lista_medicamentos = []
+        with open('ArchivosCSV/Medicamentos.csv', mode='r') as file:
+            reader = csv.reader(file)
+            next(reader)
+            for row in reader:
+                ID, Nombre_Medicamento, Descripcion, Precio, Stock = row
+                medicamento = Medicamentos(ID, Nombre_Medicamento, Descripcion, Precio, Stock)
+                lista_medicamentos.append(medicamento)
+        return lista_medicamentos
 
-medic1 = Medicamentos('paracetamol','sirve para todo', 200, 2)
-
-print(medic1.get_nombre())
-print(medic1.get_descripcion())
-print(medic1.get_precio())
-print(medic1.get_stock())
-
-
-medic1.set_stock()
-print(medic1.get_stock())
-
-
-#No contiene Main formal (no estaba definido)
+# Inicializar la lista de medicamentos
+lista_medicamentos = Medicamentos.cargar_medicamentos_CSV(None)
