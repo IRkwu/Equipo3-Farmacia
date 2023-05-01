@@ -8,7 +8,7 @@ ID,Nombre,Precio,Stock,Descripcion
 021,Clorfeniramina,1400,80,Medicamento antihistaminico para perros y gatos
 039,Melengestrol,20000,10,Medicamento hormonal para ganado y cerdos
 012,Ciprofloxacina,2500,60,Medicamento antibiotico para perros y gatos
-040,Butafosfan,1800,50,Medicamento para mejorar la función hepática en caballos y ganado
+040,Butafosfan,1800,50,Medicamento para mejorar la funcion hepatica en caballos y ganado
 014,Praziquantel,1600,90,Medicamento antiparasitario para perros y gatos
 045,Trimetoprim-sulfametoxazol,2000,50,Medicamento antibacteriano para aves y ganado
 033,Tiamulina,4000,20,Medicamento antibacteriano para cerdos y aves
@@ -40,7 +40,7 @@ ID,Nombre,Precio,Stock,Descripcion
 038,Amprolium,2500,40,Medicamento antiparasitario para pollos y gallinas
 024,Carprofeno,2800,35,Medicamento antiinflamatorio no esteroideo para perros
 027,Moxidectina,1900,70,Medicamento antiparasitario para perros y gatos
-037,Oxitocina,3500,30,Medicamento para estimular la producción de leche en vacas y ovejas
+037,Oxitocina,3500,30,Medicamento para estimular la produccion de leche en vacas y ovejas
 018,Furosemida,1800,70,Medicamento diuretico para perros y gatos
 025,Pimobendan,15000,12,Medicamento para insuficiencia cardiaca en perros
 015,Itraconazol,5000,20,Medicamento antifungico para perros y gatos
