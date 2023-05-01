@@ -191,11 +191,11 @@ class VentanaComprarMedicamentos(object):
             self.alertBox("Se han comprado los medicamentos.\nLa lista de medicamentos se ha actualizado", "Compra exitosa")
         
     def onActionBtnInfo(self):
-        self.alertBox("- Para comprar un medicamento debe seleccionarlo desde la\nlista de medicamentos y hacer click en Agregar Medicamento\n"
-                      "\n- Para quitar un medicamento del carrito, debe\n seleccionarlo y dar click en Quitar Medicamento\n"
-                      "\n- Para comprar los medicamentos debe haber agregado al menos\nun medicamento al carrito, de lo contrario la compra no se va efectuar\n"
-                      "\n- Si necesita envio, debe marcar la opción:\n Seleccione si necesita envío\n"
-                      "\n- Si usted tiene una receta, debe marcar la opción:\n Seleccione si tiene receta", "Lista de Instrucciones")
+        self.alertBox("- Para comprar un medicamento debe seleccionarlo desde la lista de\nmedicamentos y hacer click en Agregar Medicamento\n"
+                      "\n- Para quitar un medicamento del carrito, debe seleccionarlo y dar click\nen Quitar Medicamento\n"
+                      "\n- Para comprar los medicamentos debe haber agregado al menos un\nmedicamento al carrito, de lo contrario la compra no se va efectuar\n"
+                      "\n- Si necesita envio, debe marcar la opción: [Seleccione si necesita envío]\nEl costo del envío son $2000 pero si el total supera los $30000 el envío es gratis\n"
+                      "\n- Si usted tiene una receta, debe marcar la opción: [Seleccione si tiene receta]\nSi el cliente tiene receta se aplica un 10% de descuento, este es aplicado\nen el subtotal por lo que no afecta el costro de envío", "Lista de Instrucciones")
 
     # Metodo para que cargue los clientes desde el archivo CSV
     def cargarMedicamentosCSV(self):
