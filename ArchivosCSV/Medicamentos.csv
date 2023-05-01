@@ -1,31 +1,46 @@
-ID,Nombre Medicamento,Descripcion,Precio,Stock
-001,Enrofloxacina,Medicamento antibiotico para perros y gatos,1500,50
-002,Meloxicam,Medicamento antiinflamatorio no esteroideo para perros y gatos,2500,30
-003,Fenobarbital,Medicamento antiepileptico para perros y gatos,5000,20
-004,Lomper,Medicamento antiparasitario para perros y gatos,1200,80
-005,Metronidazol,Medicamento antibiotico y antiparasitario para perros y gatos,1800,60
-006,Cefalexina,Medicamento antibiotico para perros y gatos,2000,40
-007,Prednisona,Medicamento esteroideo para perros y gatos,3500,25
-008,Levotiroxina,Medicamento hormonal para perros y gatos,15000,10
-009,Cisaprida,Medicamento gastroproquinetico para perros y gatos,5000,15
-010,Fluconazol,Medicamento antifungico para perros y gatos,3000,70
-011,Amoxicilina,Medicamento antibiotico para perros y gatos,1800,75
-012,Ciprofloxacina,Medicamento antibiotico para perros y gatos,2500,60
-013,Ketoprofeno,Medicamento antiinflamatorio no esteroideo para perros y gatos,2300,45
-014,Praziquantel,Medicamento antiparasitario para perros y gatos,1600,90
-015,Itraconazol,Medicamento antifungico para perros y gatos,5000,20
-016,Tramadol,Medicamento analgesico para perros y gatos,2200,55
-017,Bromuro de Potasio,Medicamento antiepileptico para perros y gatos,4500,30
-018,Furosemida,Medicamento diuretico para perros y gatos,1800,70
-019,Clavulanato de Potasio,Medicamento antibiotico para perros y gatos,2700,50
-020,Metoclopramida,Medicamento gastroproquinetico para perros y gatos,1900,65
-021,Clorfeniramina,Medicamento antihistaminico para perros y gatos,1400,80
-022,Trilostano,Medicamento hormonal para perros y gatos con enfermedad de Cushing,18000,10
-023,Benazepril,Medicamento antihipertensivo para perros y gatos,3500,40
-024,Carprofeno,Medicamento antiinflamatorio no esteroideo para perros,2800,35
-025,Pimobendan,Medicamento para insuficiencia cardiaca en perros,15000,12
-026,Milteforan,Medicamento para leishmaniasis en perros,20000,10
-027,Moxidectina,Medicamento antiparasitario para perros y gatos,1900,70
-028,Alprazolam,Medicamento ansiolitico para perros y gatos,4000,25
-029,Selegilina,Medicamento para tratar la enfermedad de Parkinson en perros,7500,18
-030,Difenhidramina,Medicamento antihistaminico para perros y gatos,1200,95
+ID,Nombre,Precio,Stock,Descripcion
+004,Lomper,1200,79,Medicamento antiparasitario para perros y gatos
+032,Florfenicol,3000,25,Medicamento antibiotico para aves de corral
+003,Fenobarbital,5000,20,Medicamento antiepileptico para perros y gatos
+002,Meloxicam,2500,30,Medicamento antiinflamatorio no esteroideo para perros y gatos
+011,Amoxicilina,1800,75,Medicamento antibiotico para perros y gatos
+026,Milteforan,20000,10,Medicamento para leishmaniasis en perros
+021,Clorfeniramina,1400,80,Medicamento antihistaminico para perros y gatos
+039,Melengestrol,20000,10,Medicamento hormonal para ganado y cerdos
+012,Ciprofloxacina,2500,60,Medicamento antibiotico para perros y gatos
+040,Butafosfan,1800,50,Medicamento para mejorar la función hepática en caballos y ganado
+014,Praziquantel,1600,90,Medicamento antiparasitario para perros y gatos
+045,Trimetoprim-sulfametoxazol,2000,50,Medicamento antibacteriano para aves y ganado
+033,Tiamulina,4000,20,Medicamento antibacteriano para cerdos y aves
+029,Selegilina,7500,18,Medicamento para tratar la enfermedad de Parkinson en perros
+043,Ceftiofur,1500,45,Medicamento antibacteriano para cerdos y vacas
+028,Alprazolam,4000,25,Medicamento ansiolitico para perros y gatos
+035,Sulfadiazina,1800,80,Medicamento antibacteriano para caballos
+019,Clavulanato de Potasio,2700,50,Medicamento antibiotico para perros y gatos
+044,Altrenogest,10000,15,Medicamento hormonal para cerdas y yeguas
+031,Enrofloxacina,1500,50,Medicamento antibiotico para animales de granja
+041,Enfuvirtida,8000,10,Medicamento antiviral para peces
+013,Ketoprofeno,2300,45,Medicamento antiinflamatorio no esteroideo para perros y gatos
+010,Fluconazol,3000,70,Medicamento antifungico para perros y gatos
+034,Ivermectina,2500,60,Medicamento antiparasitario para ganado y ovejas
+016,Tramadol,2200,55,Medicamento analgesico para perros y gatos
+005,Metronidazol,1800,60,Medicamento antibiotico y antiparasitario para perros y gatos
+008,Levotiroxina,15000,10,Medicamento hormonal para perros y gatos
+020,Metoclopramida,1900,65,Medicamento gastroproquinetico para perros y gatos
+007,Prednisona,3500,25,Medicamento esteroideo para perros y gatos
+042,Levamisol,2500,30,Medicamento antiparasitario para caballos y ovejas
+030,Difenhidramina,1200,95,Medicamento antihistaminico para perros y gatos
+009,Cisaprida,5000,15,Medicamento gastroproquinetico para perros y gatos
+036,Boldenona,50000,5,Medicamento hormonal para ganado
+023,Benazepril,3500,40,Medicamento antihipertensivo para perros y gatos
+017,Bromuro de Potasio,4500,30,Medicamento antiepileptico para perros y gatos
+022,Trilostano,18000,10,Medicamento hormonal para perros y gatos con enfermedad de Cushing
+006,Cefalexina,2000,40,Medicamento antibiotico para perros y gatos
+001,Enrofloxacina,1500,50,Medicamento antibiotico para perros y gatos
+038,Amprolium,2500,40,Medicamento antiparasitario para pollos y gallinas
+024,Carprofeno,2800,35,Medicamento antiinflamatorio no esteroideo para perros
+027,Moxidectina,1900,70,Medicamento antiparasitario para perros y gatos
+037,Oxitocina,3500,30,Medicamento para estimular la producción de leche en vacas y ovejas
+018,Furosemida,1800,70,Medicamento diuretico para perros y gatos
+025,Pimobendan,15000,12,Medicamento para insuficiencia cardiaca en perros
+015,Itraconazol,5000,20,Medicamento antifungico para perros y gatos

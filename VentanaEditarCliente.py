@@ -27,7 +27,8 @@ class VentanaEditarCliente(object):
         self.btnRegresar.setGeometry(QtCore.QRect(20, 20, 50, 50))
         self.btnRegresar.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.btnRegresar.setIcon(IconoRegresar)
-        self.btnRegresar.setIconSize(QtCore.QSize(60, 60)) 
+        self.btnRegresar.setIconSize(QtCore.QSize(60, 60))
+        self.btnRegresar.setCursor(QtCore.Qt.PointingHandCursor)
         self.btnRegresar.clicked.connect(VentanaEditarCliente.close)
         
         # Tabla con columnas y filas y que sean 9 columnas [ID, Nombres, Apellidos, Genero, Fecha_Nacimiento, Rut, Telefono, Email, Domicilio]
@@ -119,7 +120,7 @@ class VentanaEditarCliente(object):
                 # Elimina la fila seleccionada
                 self.tableWidget.removeRow(fila)
         else:
-            self.alertBox("Debe seleccionar una 'ID' para borrar el cliente")
+            self.alertBox("Debe seleccionar una 'ID' para borrar el cliente", "Instrucciones para borrar")
     
     # Accion al clickear boton editar
     def onActionBtnEditar(self):
@@ -127,7 +128,7 @@ class VentanaEditarCliente(object):
         celda = self.tableWidget.currentItem() 
         if celda is None:
             # Si no hay una celda seleccionada, imprime el siguiente mensaje
-            self.alertBox("Debe seleccionar una celda")
+            self.alertBox("Debe seleccionar una celda", "Intrucciones para editar")
         else:
             # Comprueba que la celda no sea nula
             columna = self.tableWidget.currentColumn()
@@ -146,16 +147,16 @@ class VentanaEditarCliente(object):
             writer.writerow(encabezados)
             # Sobreescribe los datos de los clientes con los nuevos valores (Cliente editado o eliminado)
             for fila in range(self.tableWidget.rowCount()):
-                row_data = []
+                datos_de_la_fila = []
                 for columna in range(self.tableWidget.columnCount()):
                     celda = self.tableWidget.item(fila, columna)
                     if celda is not None:
-                        row_data.append(celda.text())
+                        datos_de_la_fila.append(celda.text())
                     else:
-                        row_data.append('')
-                writer.writerow(row_data)
+                        datos_de_la_fila.append('')
+                writer.writerow(datos_de_la_fila)
         # Mensaje de que los cambios se guardaron correctamente
-        self.alertBox("Se han guardado los cambios")
+        self.alertBox("Se han guardado los cambios exitosamente!", "Se han completado los cambios")
 
     # Metodo para que cargue los clientes desde el archivo CSV
     def cargarClienteCSV(self):
@@ -178,8 +179,10 @@ class VentanaEditarCliente(object):
         self.tableWidget.resizeRowsToContents()
         
     # Mensajes de alerta, ventana emergente
-    def alertBox(self, Mensaje):
+    def alertBox(self, Mensaje, Titulo):
+        IconoTitulo = QtGui.QIcon('Imagenes/icono_titulo.png')
         alert = QMessageBox()
         alert.setText(Mensaje)
-        alert.setWindowTitle("Mensaje de alerta")
+        alert.setWindowTitle(Titulo)
+        alert.setWindowIcon(IconoTitulo)
         alert.exec_()

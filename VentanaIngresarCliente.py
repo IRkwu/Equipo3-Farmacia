@@ -87,7 +87,6 @@ class VentanaIngresarCliente(object):
         self.emailLineEdit = QtWidgets.QLineEdit(VentanaIngresarCliente)
         self.emailLineEdit.setGeometry(QtCore.QRect(106, 413, 260, 50))
         self.emailLineEdit.setPlaceholderText("Ingrese su email")
-
         
         # Etiqueta domicilio y LineEdit
         self.domicilioLabel = QtWidgets.QLabel(VentanaIngresarCliente)
@@ -112,7 +111,8 @@ class VentanaIngresarCliente(object):
         self.btnRegresar.setGeometry(QtCore.QRect(20, 20, 50, 50))
         self.btnRegresar.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.btnRegresar.setIcon(IconoRegresar)
-        self.btnRegresar.setIconSize(QtCore.QSize(60, 60)) 
+        self.btnRegresar.setIconSize(QtCore.QSize(60, 60))
+        self.btnRegresar.setCursor(QtCore.Qt.PointingHandCursor)
         self.btnRegresar.clicked.connect(VentanaIngresarCliente.close)
         
         # Definir textos
@@ -141,10 +141,12 @@ class VentanaIngresarCliente(object):
         self.btnIngresar.setText(_translate("VentanaIngresarCliente", "Ingresar Cliente"))
         
     # Mensajes de alerta, ventana emergente
-    def alertBox(self, Mensaje):
+    def alertBox(self, Mensaje, Titulo):
+        IconoTitulo = QtGui.QIcon('Imagenes/icono_titulo.png')
         alert = QMessageBox()
         alert.setText(Mensaje)
-        alert.setWindowTitle("Mensaje de alerta")
+        alert.setWindowTitle(Titulo)
+        alert.setWindowIcon(IconoTitulo)
         alert.exec_()
 
     # Accion al clickear boton ingresar
@@ -169,22 +171,22 @@ class VentanaIngresarCliente(object):
             rut_con_digito_verificador = ""
         # El .strip es para verificar que tenga datos
         if nombres.strip() == "":
-            self.alertBox("Falta ingresar el nombre")
+            self.alertBox("Falta ingresar el nombre", "Falta un dato")
         elif apellidos.strip() == "":
-            self.alertBox("Falta ingresar el apellido")
+            self.alertBox("Falta ingresar el apellido", "Falta un dato")
         elif len(self.rutLineEdit.text()) != 8:
-            self.alertBox("Faltan numeros en el rut")
+            self.alertBox("Faltan numeros en el rut", "Falta un dato")
         elif len(self.digito_verificadorLineEdit.text()) != 1:
-            self.alertBox("Falta ingresar el digito verificador")
+            self.alertBox("Falta ingresar el digito verificador", "Falta un dato")
         elif len(self.telefonoLineEdit.text()) != 9:
-            self.alertBox("Faltan numeros en el telefono")
+            self.alertBox("Faltan numeros en el telefono", "Falta un dato")
         elif email.strip() == "":
-            self.alertBox("Falta ingresar el email")
+            self.alertBox("Falta ingresar el email", "Falta un dato")
         elif domicilio.strip() == "":
-            self.alertBox("Falta ingresar el domicilio")
+            self.alertBox("Falta ingresar el domicilio", "Falta un dato")
         else:
             Cliente.agregar_cliente(nombres, apellidos, domicilio, genero, fecha_nacimiento, rut_con_digito_verificador, email, telefono)
-            self.alertBox("El usuario: "+nombres+" "+apellidos+" ha sido ingresado")
+            self.alertBox("El usuario: "+nombres+" "+apellidos+" ha sido ingresado", "Se ha ingresado el cliente")
             
             # Limpiar LineEdit
             self.nombresLineEdit.setText("")
