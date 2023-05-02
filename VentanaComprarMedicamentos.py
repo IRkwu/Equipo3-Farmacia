@@ -189,6 +189,11 @@ class VentanaComprarMedicamentos(object):
                     writer.writerow(datos_de_la_fila)
             # Mensaje de que los cambios se guardaron correctamente
             self.alertBox("Se han comprado los medicamentos.\nLa lista de medicamentos se ha actualizado", "Compra exitosa")
+            self.tableWidgetCarrito.setRowCount(0)
+            # Aqui se borra, pero en verdad se tendría que guardar para la boleta, pero no es tarea nuestra wuejeje
+            self.carrito = []
+            self.actualizarDatos()
+            
         
     def onActionBtnInfo(self):
         self.alertBox("- Para comprar un medicamento debe seleccionarlo desde la lista de\nmedicamentos y hacer click en Agregar Medicamento\n"
