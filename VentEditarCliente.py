@@ -4,35 +4,35 @@ from PyQt5.QtWidgets import QInputDialog, QMessageBox
 from PyQt5.QtGui import QIntValidator, QIcon
 
 
-class VentanaEditarCliente(object):
-    def setupUi(self, VentanaEditarCliente):
+class VentEditarCliente(object):
+    def setupUi(self, VentEditarCliente):
         ImagenBanner = QtGui.QPixmap('Imagenes/banner_cvi.png')
         IconoRegresar = QtGui.QIcon('Imagenes/boton_regresar.png')
         IconoTitulo = QtGui.QIcon('Imagenes/icono_titulo.png')
 
-        VentanaEditarCliente.setWindowIcon(IconoTitulo)
+        VentEditarCliente.setWindowIcon(IconoTitulo)
         
-        VentanaEditarCliente.resize(865, 565)
-        VentanaEditarCliente.setMinimumSize(QtCore.QSize(865, 565))
-        VentanaEditarCliente.setMaximumSize(QtCore.QSize(865, 565))
+        VentEditarCliente.resize(865, 565)
+        VentEditarCliente.setMinimumSize(QtCore.QSize(865, 565))
+        VentEditarCliente.setMaximumSize(QtCore.QSize(865, 565))
         
         # Etiqueta imagen superior
-        self.imagen_on_topLabel = QtWidgets.QLabel(VentanaEditarCliente)
+        self.imagen_on_topLabel = QtWidgets.QLabel(VentEditarCliente)
         self.imagen_on_topLabel.setGeometry(QtCore.QRect(0, 0, 865, 96))
         self.imagen_on_topLabel.setText("")
         self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(865, 96))
 
         # Boton regresar y accion al pulsar
-        self.btnRegresar = QtWidgets.QPushButton(VentanaEditarCliente)
+        self.btnRegresar = QtWidgets.QPushButton(VentEditarCliente)
         self.btnRegresar.setGeometry(QtCore.QRect(20, 20, 50, 50))
         self.btnRegresar.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.btnRegresar.setIcon(IconoRegresar)
         self.btnRegresar.setIconSize(QtCore.QSize(60, 60))
         self.btnRegresar.setCursor(QtCore.Qt.PointingHandCursor)
-        self.btnRegresar.clicked.connect(VentanaEditarCliente.close)
+        self.btnRegresar.clicked.connect(VentEditarCliente.close)
         
         # Tabla con columnas y filas y que sean 9 columnas [ID, Nombres, Apellidos, Genero, Fecha_Nacimiento, Rut, Telefono, Email, Domicilio]
-        self.tableWidget = QtWidgets.QTableWidget(VentanaEditarCliente)
+        self.tableWidget = QtWidgets.QTableWidget(VentEditarCliente)
         self.tableWidget.setGeometry(QtCore.QRect(10, 140, 845, 342))
         self.tableWidget.setColumnCount(9) 
         
@@ -62,36 +62,36 @@ class VentanaEditarCliente(object):
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
         # Boton editar y accion al pulsar
-        self.btnEditar = QtWidgets.QPushButton(VentanaEditarCliente)
+        self.btnEditar = QtWidgets.QPushButton(VentEditarCliente)
         self.btnEditar.setGeometry(QtCore.QRect(20, 500, 121, 50))
         self.btnEditar.clicked.connect(self.onActionBtnEditar)
         
         # Boton eliminar y accion al pulsar
-        self.btnEliminar = QtWidgets.QPushButton(VentanaEditarCliente)
+        self.btnEliminar = QtWidgets.QPushButton(VentEditarCliente)
         self.btnEliminar.setGeometry(QtCore.QRect(160, 500, 121, 50))
         self.btnEliminar.clicked.connect(self.onActionBtnEliminar)
         
         # Boton guardar y accion al pulsar
-        self.btnGuardar = QtWidgets.QPushButton(VentanaEditarCliente)
+        self.btnGuardar = QtWidgets.QPushButton(VentEditarCliente)
         self.btnGuardar.setGeometry(QtCore.QRect(725, 500, 121, 50))
         self.btnGuardar.clicked.connect(self.onActionBtnGuardar)
         
         # Etiqueta de instruccion para editar clientes
-        self.mensajeEditarLabel = QtWidgets.QLabel(VentanaEditarCliente)
+        self.mensajeEditarLabel = QtWidgets.QLabel(VentEditarCliente)
         self.mensajeEditarLabel.setGeometry(QtCore.QRect(14, 94, 865, 50))
         
         # Etiqueta de instruccion para eliminar clientes
-        self.mensajeEliminarLabel = QtWidgets.QLabel(VentanaEditarCliente)
+        self.mensajeEliminarLabel = QtWidgets.QLabel(VentEditarCliente)
         self.mensajeEliminarLabel.setGeometry(QtCore.QRect(460, 94, 865, 50))
         
-        self.retranslateUi(VentanaEditarCliente)
-        QtCore.QMetaObject.connectSlotsByName(VentanaEditarCliente)
+        self.retranslateUi(VentEditarCliente)
+        QtCore.QMetaObject.connectSlotsByName(VentEditarCliente)
         
         # Cargar Clientes del CSV
         self.cargarClienteCSV()
         
     # Metodo definir textos
-    def retranslateUi(self, VentanaEditarCliente):
+    def retranslateUi(self, VentEditarCliente):
         # Fuente de texto
         fuenteEstado = QtGui.QFont()
         fuenteEstado.setPointSize(9)
@@ -100,13 +100,13 @@ class VentanaEditarCliente(object):
         
         # Definiendo textos
         _translate = QtCore.QCoreApplication.translate
-        VentanaEditarCliente.setWindowTitle(_translate("VentanaEditarCliente", "Ventana - Editar Cliente"))
-        self.btnEditar.setText(_translate("VentanaEditarCliente", "Editar"))
-        self.btnEliminar.setText(_translate("VentanaEditarCliente", "Eliminar"))
-        self.btnGuardar.setText(_translate("VentanaEditarCliente", "Guardar Cambios"))
-        self.mensajeEditarLabel.setText(_translate("VentanaEditarCliente", "Para editar el cliente seleccione una celda y haga click en Editar"))
+        VentEditarCliente.setWindowTitle(_translate("VentEditarCliente", "Vent - Editar Cliente"))
+        self.btnEditar.setText(_translate("VentEditarCliente", "Editar"))
+        self.btnEliminar.setText(_translate("VentEditarCliente", "Eliminar"))
+        self.btnGuardar.setText(_translate("VentEditarCliente", "Guardar Cambios"))
+        self.mensajeEditarLabel.setText(_translate("VentEditarCliente", "Para editar el cliente seleccione una celda y haga click en Editar"))
         self.mensajeEditarLabel.setFont(fuenteEstado)
-        self.mensajeEliminarLabel.setText(_translate("VentanaEditarCliente", "Para eliminar el cliente seleccione una ID y haga click en Eliminar"))
+        self.mensajeEliminarLabel.setText(_translate("VentEditarCliente", "Para eliminar el cliente seleccione una ID y haga click en Eliminar"))
         self.mensajeEliminarLabel.setFont(fuenteEstado)
         
         
@@ -178,7 +178,7 @@ class VentanaEditarCliente(object):
         self.tableWidget.resizeColumnsToContents()
         self.tableWidget.resizeRowsToContents()
         
-    # Mensajes de alerta, ventana emergente
+    # Mensajes de alerta, Vent emergente
     def alertBox(self, Mensaje, Titulo):
         IconoTitulo = QtGui.QIcon('Imagenes/icono_titulo.png')
         alert = QMessageBox()
