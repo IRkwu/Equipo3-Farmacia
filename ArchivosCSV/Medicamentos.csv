@@ -1,9 +1,9 @@
-ID,Nombre,Precio,Stock,Descripcion
-004,Lomper,1200,71,Medicamento antiparasitario para perros y gatos
+ID,Nombre,Precio,Stock,Descripcion,Lote 1,Fecha Caducidad L1,Lote 2,Fecha Caducidad L2
+004,Lomper,1200,65,Medicamento antiparasitario para perros y gatos,40,11/07/2023,25,11/09/2023
 032,Florfenicol,3000,25,Medicamento antibiotico para aves de corral
 003,Fenobarbital,5000,20,Medicamento antiepileptico para perros y gatos
 002,Meloxicam,2500,30,Medicamento antiinflamatorio no esteroideo para perros y gatos
-011,Amoxicilina,1800,75,Medicamento antibiotico para perros y gatos
+011,Amoxicilina,1800,70,Medicamento antibiotico para perros y gatos
 026,Milteforan,20000,10,Medicamento para leishmaniasis en perros
 021,Clorfeniramina,1400,80,Medicamento antihistaminico para perros y gatos
 039,Melengestrol,20000,10,Medicamento hormonal para ganado y cerdos
