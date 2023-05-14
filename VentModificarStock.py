@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QMessageBox, QDialog
 import csv, datetime
 from VentAgregarStock import AgregarStockDialog
 
+
 class VentModificarStock(object):
     def __init__(self):
         self.carrito = []  # Lista para almacenar los medicamentos del carrito
@@ -86,7 +87,7 @@ class VentModificarStock(object):
     # Metodo definir textos
     def retranslateUi(self, VentModificarStock):
         _translate = QtCore.QCoreApplication.translate
-        VentModificarStock.setWindowTitle(_translate("VentModificarStock", "Vent - Modificar Stock de Productos"))
+        VentModificarStock.setWindowTitle(_translate("VentModificarStock", "Modificar Stock de Productos"))
         self.BtnAgregar.setText(_translate("VentModificarStock", "Agregar Lote al Medicamento del\nproducto seleccionado (+)"))
         self.BtnRetirar.setText(_translate("VentModificarStock", "Retirar 1 al Stock del\nproducto seleccionado (-)"))
         self.btnInfo.setText(_translate("VentModificarStock", "Instrucciones (!)"))
@@ -201,37 +202,65 @@ class VentModificarStock(object):
                       "\n- Para ver en cuales productos están por vencer, hacer click en \nRevisar caducidad cercana de los Medicamentos\n"
                       "\n- Para guardar los cambios hechos haga click en Confirmar Cambios", "Lista de Instrucciones")
         
+
+    
     def onActionBtnCaducidad(self):
-        # Toma la fecha actual y pone como limite un mes para caducidad cercana
+        # Toma la fecha actual y pone como límite un mes para caducidad cercana
         fecha_actual = datetime.date.today()
         limite_mes = fecha_actual + datetime.timedelta(days=30)
 
         # Arreglos para imprimir los datos en una alertBox
         medicamentos_por_caducar = []
+        medicamentos_caducados = []
         dias_para_caducar = []
+        dias_caducados = []
 
-        # Obtiene la caducidad cercana de los medicamentos y si es menor a un mes la guarda como medicamentos_por_caducar
+        # Obtiene la caducidad cercana de los medicamentos y los clasifica según la cantidad de días restantes
         for fila in range(self.tableWidget.rowCount()):
             caducidad = self.tableWidget.item(fila, 6).text()
             caducidad = datetime.datetime.strptime(caducidad, "%d/%m/%Y").date()
 
-            if caducidad < limite_mes:
+            # Con .days se obtiene el numero de días
+            dias_restantes = (caducidad - fecha_actual).days
+
+            # Si los dias restantes son < 0 está caducado
+            if dias_restantes < 0:
+                medicamentos = self.tableWidget.item(fila, 1).text()
+                medicamentos_caducados.append(medicamentos)
+                dias_caducados.append(dias_restantes)
+            # Si los días restantes son < al limite está por caducar
+            elif dias_restantes < (limite_mes - fecha_actual).days:
                 medicamentos = self.tableWidget.item(fila, 1).text()
                 medicamentos_por_caducar.append(medicamentos)
-
-                dias_restantes = (caducidad - fecha_actual).days
                 dias_para_caducar.append(dias_restantes)
 
-        # Si el medicamento esta por caducar manda alertbox
+        # String mensaje para mostrar todos los datos juntos en la alertbox y no hacer 2 separadas
+        mensaje = ""
+
+        # Si hay medicamentos por caducar los agrega al mensaje
         if medicamentos_por_caducar:
-            mensaje = "Medicamentos por caducar:\n\n"
+            mensaje += "Medicamentos por caducar:\n\n"
             for i in range(len(medicamentos_por_caducar)):
                 medicamento = medicamentos_por_caducar[i]
                 dias_restantes = dias_para_caducar[i]
-                mensaje += medicamento+": "+(str(dias_restantes))+" días\n"
-            self.alertBox(mensaje, "Medicamentos por caducar")
-        else:
-            self.alertBox("No hay medicamentos cercanos por caducar", "Medicamentos por caducar")
+                mensaje += medicamento + ": " + str(dias_restantes) + " días\n"
+
+        # Si hay medicamentos vencidos los agrega al mensaje
+        if medicamentos_caducados:
+            mensaje += "\nMedicamentos vencidos:\n\n"
+            for i in range(len(medicamentos_caducados)):
+                medicamento_vencido = medicamentos_caducados[i]
+                dias_caducados = dias_caducados[i]
+                mensaje += medicamento_vencido + ": " + str(dias_caducados*-1) + " días\n"
+
+        # Si no hay medicamentos cercanos por caducar ni medicamentos vencidos llama un alertbox para avisar
+        if not medicamentos_por_caducar and not medicamentos_caducados:
+            mensaje = "No hay medicamentos cercanos por caducar ni medicamentos vencidos"
+
+        # Crea el alertbox con el mensaje de medicamentos por caducar y/o vencidos
+        self.alertBox(mensaje, "Medicamentos por caducar/vencidos")
+
+
             
     def onActionBtnGuardar(self):
         for fila in range(self.tableWidget.rowCount()):

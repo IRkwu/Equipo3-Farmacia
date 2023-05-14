@@ -122,7 +122,7 @@ class VentIngresarCliente(object):
     def retranslateUi(self, VentIngresarCliente):
         # Definiendo textos
         _translate = QtCore.QCoreApplication.translate
-        VentIngresarCliente.setWindowTitle(_translate("VentIngresarCliente", "Vent - Ingresar Cliente"))
+        VentIngresarCliente.setWindowTitle(_translate("VentIngresarCliente", "Ingresar Cliente"))
         self.nombresLabel.setText(_translate("VentIngresarCliente", "Nombres"))
         self.apellidosLabel.setText(_translate("VentIngresarCliente", "Apellidos"))
         self.generoLabel.setText(_translate("VentIngresarCliente", "Genero"))

@@ -2,7 +2,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QMessageBox
 from VentIngresarCliente import VentIngresarCliente
-from VentEditarCliente import VentEditarCliente
+from VentListaClientes import VentListaClientes
 from VentComprarMedicamentos import VentComprarMedicamentos
 from VentIngresarUsuario import VentIngresarUsuario
 from VentModificarStock import VentModificarStock
@@ -62,7 +62,7 @@ class VentMenuGerente(object):
         
         # Acción clickear botones
         self.BtnIngresarCliente.clicked.connect(lambda: self.cambiarVent(VentIngresarCliente))
-        self.BtnEditarCliente.clicked.connect(lambda: self.cambiarVent(VentEditarCliente))
+        self.BtnEditarCliente.clicked.connect(lambda: self.cambiarVent(VentListaClientes))
         self.BtnIngresarUsuario.clicked.connect(lambda: self.cambiarVent(VentIngresarUsuario))
         self.BtnCarrito.clicked.connect(lambda: self.cambiarVent(VentComprarMedicamentos))
         self.BtnModificarStock.clicked.connect(lambda: self.cambiarVent(VentModificarStock))
@@ -74,7 +74,7 @@ class VentMenuGerente(object):
 
     def retranslateUi(self, VentMenuGerente):
         _translate = QtCore.QCoreApplication.translate
-        VentMenuGerente.setWindowTitle(_translate("VentMenuGerente", "Menu Inicial - Farmacia CVI"))
+        VentMenuGerente.setWindowTitle(_translate("VentMenuGerente", "Menu Gerente"))
 
     def cambiarVent(self, nombre_Vent):
         self.nombre_Vent = QtWidgets.QMainWindow()

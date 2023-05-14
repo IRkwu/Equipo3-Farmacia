@@ -1,7 +1,7 @@
 ID,Nombre,Precio,Stock,Descripcion,Stock Lote 1,Caducidad Lote 1,Stock Lote 2,Caducidad Lote 2
 004,Lomper,1200,70,Medicamento antiparasitario para perros y gatos,29,30/06/2023,41,30/10/2023
 032,Florfenicol,3000,25,Medicamento antibiotico para aves de corral,10,28/07/2023,15,28/12/2023
-003,Fenobarbital,5000,20,Medicamento antiepileptico para perros y gatos,5,29/05/2023,15,29/08/2023
+003,Fenobarbital,5000,14,Medicamento antiepileptico para perros y gatos,1,29/05/2023,13,29/08/2023
 002,Meloxicam,2500,35,Medicamento antiinflamatorio no esteroideo para perros y gatos,35,30/06/2023,0,
 011,Amoxicilina,1800,75,Medicamento antibiotico para perros y gatos,35,15/08/2023,40,15/01/2024
 026,Milteforan,20000,15,Medicamento para leishmaniasis en perros,15,30/07/2023,0,
@@ -29,7 +29,7 @@ ID,Nombre,Precio,Stock,Descripcion,Stock Lote 1,Caducidad Lote 1,Stock Lote 2,Ca
 020,Metoclopramida,1900,65,Medicamento gastroproquinetico para perros y gatos,7,05/08/2023,58,05/12/2023
 007,Prednisona,3500,25,Medicamento esteroideo para perros y gatos,4,27/06/2023,21,27/10/2023
 042,Levamisol,2500,30,Medicamento antiparasitario para caballos y ovejas,13,30/07/2023,17,30/11/2023
-030,Difenhidramina,1200,95,Medicamento antihistaminico para perros y gatos,28,17/05/2023,67,17/08/2023
+030,Difenhidramina,1200,95,Medicamento antihistaminico para perros y gatos,28,13/05/2023,67,17/08/2023
 009,Cisaprida,5000,15,Medicamento gastroproquinetico para perros y gatos,2,30/05/2023,13,30/08/2023
 036,Boldenona,50000,5,Medicamento hormonal para ganado,1,26/10/2023,4,26/12/2023
 023,Benazepril,3500,30,Medicamento antihipertensivo para perros y gatos,30,13/07/2023,0,

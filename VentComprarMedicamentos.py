@@ -143,7 +143,7 @@ class VentComprarMedicamentos(object):
     # Metodo definir textos
     def retranslateUi(self, VentComprarMedicamentos):
         _translate = QtCore.QCoreApplication.translate
-        VentComprarMedicamentos.setWindowTitle(_translate("VentComprarMedicamentos", "Vent - Agregar medicamentos al carrito"))
+        VentComprarMedicamentos.setWindowTitle(_translate("VentComprarMedicamentos", "Agregar medicamentos al carrito"))
         self.cantidad_medicamentosLabel.setText(_translate("VentComprarMedicamentos", "Cantidad de\nMedicamentos:"))
         self.subtotalLabel.setText(_translate("VentComprarMedicamentos", "Subtotal:"))
         self.descuentoLabel.setText(_translate("VentComprarMedicamentos", "Descuento:"))

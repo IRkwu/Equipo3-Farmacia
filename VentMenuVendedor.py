@@ -48,7 +48,7 @@ class VentMenuVendedor(object):
 
     def retranslateUi(self, VentMenuVendedor):
         _translate = QtCore.QCoreApplication.translate
-        VentMenuVendedor.setWindowTitle(_translate("VentMenuVendedor", "Menu Inicial - Farmacia CVI"))
+        VentMenuVendedor.setWindowTitle(_translate("VentMenuVendedor", "Menu Vendedor"))
         
     def cambiarVent(self, nombre_Vent):
         self.nombre_Vent = QtWidgets.QMainWindow()

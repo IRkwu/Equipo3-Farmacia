@@ -44,8 +44,8 @@ class VentIniciarSesion(object):
 
     def retranslateUi(self, VentIniciarSesion):
         _translate = QtCore.QCoreApplication.translate
-        VentIniciarSesion.setWindowTitle(_translate("VentIniciarSesion", "Vent - Ingresar Sesión"))
-        self.btnIngresarCliente.setText(_translate("VentIniciarSesion", "Ingresar Sesión"))
+        VentIniciarSesion.setWindowTitle(_translate("VentIniciarSesion", "Ingresar Sesión"))
+        self.btnIngresarCliente.setText(_translate("VentIniciarSesion", "Iniciar Sesión"))
         
     # Mensajes de alerta, Vent emergente
     def alertBox(self, Mensaje, Datos, Titulo):
