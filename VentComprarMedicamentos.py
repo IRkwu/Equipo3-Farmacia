@@ -35,8 +35,8 @@ class VentComprarMedicamentos(object):
         # Tabla con columnas y filas para el carrito
         self.tableWidgetCarrito = QtWidgets.QTableWidget(VentComprarMedicamentos)
         self.tableWidgetCarrito.setGeometry(QtCore.QRect(620, 210, 300, 180))
-        self.tableWidgetCarrito.setColumnCount(3)
-        self.tableWidgetCarrito.setHorizontalHeaderLabels(["ID", "Nombre", "Precio"])
+        self.tableWidgetCarrito.setColumnCount(4)
+        self.tableWidgetCarrito.setHorizontalHeaderLabels(["ID", "Nombre", "Precio", "Lote"])
         
         # Para que no se puedan editar los elementos del carrito
         self.tableWidgetCarrito.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
@@ -45,26 +45,19 @@ class VentComprarMedicamentos(object):
         self.tableWidgetCarrito.setColumnWidth(0, 20)
         self.tableWidgetCarrito.setColumnWidth(1, 144)
         self.tableWidgetCarrito.setColumnWidth(2, 100)
+        # Para ocultar el lote del producto que fue agregado al carrito
+        self.tableWidgetCarrito.setColumnHidden(3, True) 
         
-        # Tabla con columnas y filas y que sean 5 columnas [ID, Nombre, Precio, Stock, Descripcion]
+        # Tabla con columnas y filas y que sean 9 columnas [ID, Nombre, Precio, Stock, Descripcion], carga las demás columnas, las de vencimiento y lote pero no las muestra, es para que al guardar no se vacien
         self.tableWidget = QtWidgets.QTableWidget(VentComprarMedicamentos)
         self.tableWidget.setGeometry(QtCore.QRect(10, 210, 600, 545))
-        self.tableWidget.setColumnCount(5)
-                
-        # Posicionar Encabezados
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setVerticalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(0, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(1, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(2, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(3, item)
-        item = QtWidgets.QTableWidgetItem()
-        self.tableWidget.setHorizontalHeaderItem(4, item)
+        self.tableWidget.setColumnCount(9)
         
+        # Columnas a ocultar
+        columnas_ocultar = [5, 6, 7, 8]
+        for columna in columnas_ocultar:
+            self.tableWidget.setColumnHidden(columna, True)
+
         # Para que no se puedan editar los medicamentos de la lista de medicamentos
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         
@@ -168,6 +161,9 @@ class VentComprarMedicamentos(object):
         if self.tableWidgetCarrito.rowCount() == 0:
             self.alertBox("No se han agregado medicamentos al carrito\npor lo que no se ha comprado nada", "Falta ingresar medicamentos")
         else:
+            for fila in range(self.tableWidget.rowCount()):
+                if self.tableWidget.item(fila, 5).text() == '0':
+                    self.actualizarLotes(fila)
             # Abre el archivo CSV para guardar los datos
             with open('ArchivosCSV/Medicamentos.csv', 'w', newline='') as csvfile:
                 writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
@@ -191,6 +187,19 @@ class VentComprarMedicamentos(object):
             # Aqui se borra, pero en verdad se tendría que guardar para la boleta, pero no es tarea nuestra wuejeje
             self.carrito = []
             self.actualizarDatos()
+            
+    def actualizarLotes(self, fila):
+        # Si el stock del lote 1 es igual a 0 copia el stock y vencimiento del lote 2 al lote 1, dejando el lote 2 libre para agregar un nuevo lote de medicamentos
+        if self.tableWidget.item(fila, 7) is not None:
+            stock_lote_2 = self.tableWidget.item(fila, 7).text()
+            self.tableWidget.setItem(fila, 5, QTableWidgetItem(stock_lote_2))
+            self.tableWidget.setItem(fila, 7, QTableWidgetItem("0"))
+            
+            vencimiento_lote_2 = self.tableWidget.item(fila, 8).text()
+            self.tableWidget.setItem(fila, 6, QTableWidgetItem(vencimiento_lote_2))
+            self.tableWidget.setItem(fila, 8, QTableWidgetItem(""))
+            if (self.tableWidget.item(fila, 5).text() == "0"):
+                self.tableWidget.setItem(fila, 6, QTableWidgetItem(""))
             
         
     def onActionBtnInfo(self):
@@ -232,7 +241,7 @@ class VentComprarMedicamentos(object):
 
     # Metodo para la barra de busqueda
     def buscarMedicamentos(self):
-        # Buscar los medicamentos que coinciden con la cadena de búsqueda y mostrarlos en la tabla
+        # Busca los medicamentos que coinciden con la búsqueda y los muestra en la tabla
         texto = self.buscarLineEdit.text().strip().lower()
         if texto:
             for i in range(self.tableWidget.rowCount()):
@@ -273,11 +282,25 @@ class VentComprarMedicamentos(object):
             else:
                 
                 # Resta 1 al stock del medicamento agregado
-                stock_medicamento -= 1
-                self.tableWidget.setItem(fila_seleccionada, 3, QTableWidgetItem(str(stock_medicamento)))
+                stock_lote_1 = int(self.tableWidget.item(fila_seleccionada, 5).text())
+                stock_lote_2 = int(self.tableWidget.item(fila_seleccionada, 7).text())
+                if (stock_lote_1>0):
+                    # Retira 1 al stock del medicamento seleccionado en el Lote 1 y actualiza Stock
+                    stock_lote_1 -= 1
+                    self.tableWidget.setItem(fila_seleccionada, 5, QTableWidgetItem(str(stock_lote_1)))
+                    self.tableWidget.setItem(fila_seleccionada, 3, QTableWidgetItem(str(stock_lote_1+stock_lote_2)))
+                    lote = 1
+                elif (stock_lote_2>0):
+                    # Retira 1 al stock del medicamento seleccionado en el Lote 2 y actualiza Stock
+                    stock_lote_2 -= 1
+                    self.tableWidget.setItem(fila_seleccionada, 7, QTableWidgetItem(str(stock_lote_2)))
+                    self.tableWidget.setItem(fila_seleccionada, 3, QTableWidgetItem(str(stock_lote_1+stock_lote_2)))
+                    lote = 2
+                else:
+                    self.alertBox("No se puede retirar más stock", "Alerta Stock")
                 
                 # Agrega el medicamento al carrito
-                self.carrito.append((id_medicamento, nombre_medicamento, precio_medicamento))
+                self.carrito.append((id_medicamento, nombre_medicamento, precio_medicamento, lote))
 
                 # Actualiza la tabla de carrito
                 self.actualizarTablaCarrito()
@@ -306,11 +329,21 @@ class VentComprarMedicamentos(object):
                 self.tableWidget.setRowCount(fila + 1)
                 self.tableWidget.setItem(fila, 0, QTableWidgetItem(str(id_medicamento)))
 
-            # Agrega 1 al stock del medicamento eliminado a la tabla de medicamentos, devuelve el medicamento a su tableWidget
-            stock_medicamento = int(self.tableWidget.item(fila, 3).text())
-            stock_medicamento += 1
-            self.tableWidget.setItem(fila, 3, QTableWidgetItem(str(stock_medicamento)))
-
+            # Obtiene el stock del lote 1 y 2
+            stock_lote_1 = int(self.tableWidget.item(fila, 5).text())
+            stock_lote_2 = int(self.tableWidget.item(fila, 7).text())
+            lote = int(self.tableWidgetCarrito.item(fila_seleccionada, 3).text())
+            # Si el medicamento provenia del lote 2, lo devuelve al propio lote 2
+            if lote == 2:
+                stock_lote_2 += 1
+                self.tableWidget.setItem(fila, 7, QTableWidgetItem(str(stock_lote_2)))
+                self.tableWidget.setItem(fila, 3, QTableWidgetItem(str(stock_lote_1+stock_lote_2)))
+            else:
+            # Sino lo devuelve al lote 1
+                stock_lote_1 += 1
+                self.tableWidget.setItem(fila, 5, QTableWidgetItem(str(stock_lote_1)))
+                self.tableWidget.setItem(fila, 3, QTableWidgetItem(str(stock_lote_1+stock_lote_2)))
+            
             # Elimina el medicamento del carrito
             self.carrito.pop(fila_seleccionada)
 
@@ -323,10 +356,11 @@ class VentComprarMedicamentos(object):
     def actualizarTablaCarrito(self):
         cantidad_de_filas = len(self.carrito)
         self.tableWidgetCarrito.setRowCount(cantidad_de_filas)
-        for i, (id_medicamento, nombre_medicamento, precio_medicamento) in enumerate(self.carrito):
+        for i, (id_medicamento, nombre_medicamento, precio_medicamento, lote) in enumerate(self.carrito):
             self.tableWidgetCarrito.setItem(i, 0, QTableWidgetItem(str(id_medicamento)))
             self.tableWidgetCarrito.setItem(i, 1, QTableWidgetItem(nombre_medicamento))
             self.tableWidgetCarrito.setItem(i, 2, QTableWidgetItem(str(precio_medicamento)))
+            self.tableWidgetCarrito.setItem(i, 3, QTableWidgetItem(str(lote)))
         
     def actualizarDatos(self):
         cantidad_medicamentos = len(self.carrito)

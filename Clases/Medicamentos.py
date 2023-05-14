@@ -71,7 +71,7 @@ class Medicamentos:
     def guardar_medicamentos_CSV(self, lista_medicamentos):
         with open('ArchivosCSV/Medicamentos.csv', mode='w', newline='') as file:
             writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            writer.writerow(['ID', 'Nombre', 'Precio', 'Stock', 'Descripcion', 'Lote 1', 'Fecha Caducidad Lote 1', 'Lote 2', 'Fecha Caducidad Lote 2'])
+            writer.writerow(['ID', 'Nombre', 'Precio', 'Stock', 'Descripcion', 'Lote 1', 'Caducidad Lote 1', 'Lote 2', 'Caducidad Lote 2'])
             for medicamento in lista_medicamentos:
                 writer.writerow([medicamento.get_id(), medicamento.get_nombre(), medicamento.get_precio(), medicamento.get_stock(), medicamento.get_descripcion(),
                                  medicamento.get_lote1(), medicamento.get_caducidadLote1(), medicamento.get_lote2(), medicamento.get_caducidadLote2()])
