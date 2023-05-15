@@ -158,35 +158,31 @@ class VentComprarMedicamentos(object):
         
     # Accion al clickear boton comprar
     def onActionBtnComprar(self):
-        if self.tableWidgetCarrito.rowCount() == 0:
-            self.alertBox("No se han agregado medicamentos al carrito\npor lo que no se ha comprado nada", "Falta ingresar medicamentos")
-        else:
+        for fila in range(self.tableWidget.rowCount()):
+            if self.tableWidget.item(fila, 5).text() == '0':
+                self.actualizarLotes(fila)
+        # Abre el archivo CSV para guardar los datos
+        with open('ArchivosCSV/Medicamentos.csv', 'w', newline='') as csvfile:
+            writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+            # Escribe los encabezados de las columnas
+            encabezados = [self.tableWidget.horizontalHeaderItem(i).text() for i in range(self.tableWidget.columnCount())]
+            writer.writerow(encabezados)
+            # Sobreescribe los datos de los medicamentos con los nuevos valores (El nuevo stock despues de comprar medicamentos)
             for fila in range(self.tableWidget.rowCount()):
-                if self.tableWidget.item(fila, 5).text() == '0':
-                    self.actualizarLotes(fila)
-            # Abre el archivo CSV para guardar los datos
-            with open('ArchivosCSV/Medicamentos.csv', 'w', newline='') as csvfile:
-                writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-
-                # Escribe los encabezados de las columnas
-                encabezados = [self.tableWidget.horizontalHeaderItem(i).text() for i in range(self.tableWidget.columnCount())]
-                writer.writerow(encabezados)
-                # Sobreescribe los datos de los medicamentos con los nuevos valores (El nuevo stock despues de comprar medicamentos)
-                for fila in range(self.tableWidget.rowCount()):
-                    datos_de_la_fila = []
-                    for columna in range(self.tableWidget.columnCount()):
-                        celda = self.tableWidget.item(fila, columna)
-                        if celda is not None:
-                            datos_de_la_fila.append(celda.text())
-                        else:
-                            datos_de_la_fila.append('')
-                    writer.writerow(datos_de_la_fila)
-            # Mensaje de que los cambios se guardaron correctamente
-            self.alertBox("Se han comprado los medicamentos.\nLa lista de medicamentos se ha actualizado", "Compra exitosa")
-            self.tableWidgetCarrito.setRowCount(0)
-            # Aqui se borra, pero en verdad se tendría que guardar para la boleta, pero no es tarea nuestra wuejeje
-            self.carrito = []
-            self.actualizarDatos()
+                datos_de_la_fila = []
+                for columna in range(self.tableWidget.columnCount()):
+                    celda = self.tableWidget.item(fila, columna)
+                    if celda is not None:
+                        datos_de_la_fila.append(celda.text())
+                    else:
+                        datos_de_la_fila.append('')
+                writer.writerow(datos_de_la_fila)
+        # Mensaje de que los cambios se guardaron correctamente
+        self.alertBox("Se han comprado los medicamentos.\nLa lista de medicamentos se ha actualizado", "Compra exitosa")
+        self.tableWidgetCarrito.setRowCount(0)
+        # Aqui se borra, pero en verdad se tendría que guardar para la boleta, pero no es tarea nuestra wuejeje
+        self.carrito = []
+        self.actualizarDatos()
             
     def actualizarLotes(self, fila):
         # Si el stock del lote 1 es igual a 0 copia el stock y vencimiento del lote 2 al lote 1, dejando el lote 2 libre para agregar un nuevo lote de medicamentos
@@ -386,8 +382,14 @@ class VentComprarMedicamentos(object):
         self.costo_envioLineEdit.setText("$"+str(costo_envio))
         self.totalLineEdit.setText("$"+str(total))
 
-        # Desactiva el botón "-" si el carrito está vacío
-        if len(self.carrito) > 0:
-            self.btnMenos.setEnabled(True)
+        # Desactiva el botón "-", "Comprar" y Checkboxes si el carrito está vacío
+        if self.tableWidgetCarrito.rowCount() == 0:
+            self.btnComprar.setDisabled(True)
+            self.btnMenos.setDisabled(True)
+            self.necesita_envioCheckBox.setDisabled(True)
+            self.tiene_recetaCheckbox.setDisabled(True)
         else:
-            self.btnMenos.setEnabled(False)
+            self.btnComprar.setEnabled(True)
+            self.btnMenos.setEnabled(True)
+            self.necesita_envioCheckBox.setEnabled(True)
+            self.tiene_recetaCheckbox.setEnabled(True)
