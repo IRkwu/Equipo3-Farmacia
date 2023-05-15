@@ -104,7 +104,7 @@ class VentListaClientes(object):
         self.btnEditar.setText(_translate("VentListaClientes", "Editar"))
         self.btnEliminar.setText(_translate("VentListaClientes", "Eliminar"))
         self.btnGuardar.setText(_translate("VentListaClientes", "Guardar Cambios"))
-        self.mensajeEditarLabel.setText(_translate("VentListaClientes", "Para editar el cliente seleccione una celda y haga click en Editar"))
+        self.mensajeEditarLabel.setText(_translate("VentListaClientes", "Para editar el cliente seleccione una fila y haga click en Editar"))
         self.mensajeEditarLabel.setFont(fuenteEstado)
         self.mensajeEliminarLabel.setText(_translate("VentListaClientes", "Para eliminar el cliente seleccione una ID y haga click en Eliminar"))
         self.mensajeEliminarLabel.setFont(fuenteEstado)
@@ -131,7 +131,12 @@ class VentListaClientes(object):
         else:
             columna = self.tableWidget.currentColumn()
             fila = self.tableWidget.currentRow()
-            dialog = VentEditarCliente()
+            dialog = VentEditarCliente(nombres=self.tableWidget.item(fila, 1).text(),
+                                       apellidos=self.tableWidget.item(fila, 2).text(),
+                                       genero=self.tableWidget.item(fila, 3).text(),
+                                       telefono=self.tableWidget.item(fila, 7).text(),
+                                       email=self.tableWidget.item(fila, 5).text(),
+                                       domicilio=self.tableWidget.item(fila, 8).text())
             if dialog.exec_() == QDialog.Accepted:
                 nombres = dialog.get_nombres()
                 apellidos = dialog.get_apellidos()

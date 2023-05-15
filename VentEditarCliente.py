@@ -6,8 +6,15 @@ from PyQt5.QtCore import Qt, QDate
 
 
 class VentEditarCliente(QDialog):
-    def __init__(self, parent=None):
+    def __init__(self, nombres='', apellidos='', genero='', telefono='', email='', domicilio='', parent=None):
         super(VentEditarCliente, self).__init__(parent)
+        self.nombres = nombres
+        self.apellidos = apellidos
+        self.genero = genero
+        self.telefono = telefono
+        self.email = email
+        self.domicilio = domicilio
+        
         self.setupUi(self)
 
         # Elimina el botón ? de la barra de titulo
@@ -101,7 +108,8 @@ class VentEditarCliente(QDialog):
 
         # Conectar todo
         QtCore.QMetaObject.connectSlotsByName(VentEditarCliente)
-
+        self.rellenarDatos()
+        
     # Metodo definir textos
     def retranslateUi(self, VentEditarCliente):
         # Definiendo textos
@@ -135,8 +143,12 @@ class VentEditarCliente(QDialog):
         telefono =self.telefonoLineEdit.text()
         email = self.emailLineEdit.text()
         domicilio = self.domicilioLineEdit.text()
+        if "@" not in email:
+            self.alertBox("Falta ingresar el '@' en el email", "Falta un dato")
+        elif "." not in email:
+            self.alertBox("Falta ingresar el '.' en el email", "Falta un dato")
         # El .strip es para verificar que tenga datos
-        if nombres.strip() == "":
+        elif nombres.strip() == "":
             self.alertBox("Falta ingresar el nombre", "Falta un dato")
         elif apellidos.strip() == "":
             self.alertBox("Falta ingresar el apellido", "Falta un dato")
@@ -148,7 +160,14 @@ class VentEditarCliente(QDialog):
             self.alertBox("Falta ingresar el domicilio", "Falta un dato")
         else:
             self.accept()
-        
+            
+    def rellenarDatos(self):
+        self.nombresLineEdit.setText(self.nombres)
+        self.apellidosLineEdit.setText(self.apellidos)
+        self.generoComboBox.setCurrentText(self.genero)
+        self.telefonoLineEdit.setText(self.telefono)
+        self.emailLineEdit.setText(self.email)
+        self.domicilioLineEdit.setText(self.domicilio)
             
     def get_nombres(self):
         return self.nombresLineEdit.text()
