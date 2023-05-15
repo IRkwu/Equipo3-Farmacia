@@ -116,7 +116,7 @@ class VentEditarCliente(QDialog):
         self.telefonoLabel.setText(_translate("VentEditarCliente", "Telefono"))
         self.emailLabel.setText(_translate("VentEditarCliente", "Email"))
         self.domicilioLabel.setText(_translate("VentEditarCliente", "Domicilio"))
-        self.btnIngresar.setText(_translate("VentEditarCliente", "Ingresar Cliente"))
+        self.btnIngresar.setText(_translate("VentEditarCliente", "Confirmar\nCambios"))
         
     # Mensajes de alerta, Vent emergente
     def alertBox(self, Mensaje, Titulo):
