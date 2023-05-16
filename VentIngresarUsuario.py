@@ -191,8 +191,12 @@ class VentIngresarUsuario(object):
             rut_con_digito_verificador = rutFormatted + "-" + digito_verificador
         else:
             rut_con_digito_verificador = ""
+        if "@" not in email:
+            self.alertBox("Falta ingresar el '@' en el email", "Falta un dato")
+        elif "." not in email:
+            self.alertBox("Falta ingresar el '.' en el email", "Falta un dato")
         # El .strip es para verificar que tenga datos
-        if nombres.strip() == "":
+        elif nombres.strip() == "":
             self.alertBox("Falta ingresar el nombre", "Falta un dato")
         elif apellidos.strip() == "":
             self.alertBox("Falta ingresar el apellido", "Falta un dato")
