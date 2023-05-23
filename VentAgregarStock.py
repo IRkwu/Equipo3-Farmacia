@@ -3,8 +3,9 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import Qt, QDate
 
 class AgregarStockDialog(QDialog):
-    def __init__(self, parent=None):
-        super(AgregarStockDialog, self).__init__(parent)
+    def __init__(self, tipo='', parent=None):
+        super(AgregarStockDialog, self).__init__(parent)    
+        self.tipo = tipo    
         self.setupUi(self)
 
         # Elimina el botón ? de la barra de titulo
@@ -25,7 +26,7 @@ class AgregarStockDialog(QDialog):
         self.stockSpinBox = QtWidgets.QSpinBox(AgregarStockDialog)
         self.stockSpinBox.setGeometry(QtCore.QRect(130, 20, 110, 25))
         self.stockSpinBox.setMinimum(1)
-
+        
         # Etiqueta caducidad y DateEdit
         self.caducidadLabel = QtWidgets.QLabel(AgregarStockDialog)
         self.caducidadLabel.setGeometry(QtCore.QRect(20, 60, 100, 25))
@@ -43,7 +44,21 @@ class AgregarStockDialog(QDialog):
         self.bntCancelar = QtWidgets.QPushButton(AgregarStockDialog)
         self.bntCancelar.setGeometry(QtCore.QRect(10, 100, 115, 23))
         self.bntCancelar.clicked.connect(self.reject)
-
+        
+        if self.tipo == "Experimental":
+            AgregarStockDialog.resize(260, 140)
+            AgregarStockDialog.setMinimumSize(QtCore.QSize(260, 180))
+            AgregarStockDialog.setMaximumSize(QtCore.QSize(260, 180))
+            self.btnConfirmar.setGeometry(QtCore.QRect(135, 140, 115, 23))
+            self.bntCancelar.setGeometry(QtCore.QRect(10, 140, 115, 23))
+            # Etiqueta caducidad y DateEdit
+            self.fechaEntregaLabel = QtWidgets.QLabel(AgregarStockDialog)
+            self.fechaEntregaLabel.setGeometry(QtCore.QRect(20, 100, 100, 25))
+            self.fechaEntregaDateEdit = QtWidgets.QDateEdit(AgregarStockDialog)
+            self.fechaEntregaDateEdit.setGeometry(QtCore.QRect(130, 100, 110, 25))
+            self.fechaEntregaDateEdit.setMinimumDate(QDate.currentDate())
+            self.fechaEntregaLabel.setText("Fecha de Entrega")
+            
         self.retranslateUi(AgregarStockDialog)
         QtCore.QMetaObject.connectSlotsByName(AgregarStockDialog)
 
@@ -60,3 +75,11 @@ class AgregarStockDialog(QDialog):
 
     def get_fecha_caducidad(self):
         return self.caducidadDateEdit.date().toString("dd/MM/yyyy")
+    
+    def get_fecha_entrega(self):
+        if self.tipo == "Experimental":
+            fecha_entrega = self.fechaEntregaDateEdit.date().toString("dd/MM/yyyy")
+        else:
+            fecha_entrega = "No Aplica"
+        return fecha_entrega
+        

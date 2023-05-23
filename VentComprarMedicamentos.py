@@ -13,15 +13,15 @@ class VentComprarMedicamentos(object):
         
         VentComprarMedicamentos.setWindowIcon(IconoTitulo)
         
-        VentComprarMedicamentos.resize(930, 770)
-        VentComprarMedicamentos.setMinimumSize(QtCore.QSize(930, 770))
-        VentComprarMedicamentos.setMaximumSize(QtCore.QSize(930, 770))
+        VentComprarMedicamentos.resize(1200, 670)
+        VentComprarMedicamentos.setMinimumSize(QtCore.QSize(1200, 670))
+        VentComprarMedicamentos.setMaximumSize(QtCore.QSize(1200, 670))
         
         # Etiqueta imagen superior
         self.imagen_on_topLabel = QtWidgets.QLabel(VentComprarMedicamentos)
-        self.imagen_on_topLabel.setGeometry(QtCore.QRect(0, 0, 930, 144))
+        self.imagen_on_topLabel.setGeometry(QtCore.QRect(0, 0, 1200, 144))
         self.imagen_on_topLabel.setText("")
-        self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(930, 144))
+        self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(1200, 144))
         
         # Boton regresar y accion al pulsar
         self.btnRegresar = QtWidgets.QPushButton(VentComprarMedicamentos)
@@ -34,7 +34,7 @@ class VentComprarMedicamentos(object):
         
         # Tabla con columnas y filas para el carrito
         self.tableWidgetCarrito = QtWidgets.QTableWidget(VentComprarMedicamentos)
-        self.tableWidgetCarrito.setGeometry(QtCore.QRect(620, 210, 300, 180))
+        self.tableWidgetCarrito.setGeometry(QtCore.QRect(620, 210, 300, 445))
         self.tableWidgetCarrito.setColumnCount(4)
         self.tableWidgetCarrito.setHorizontalHeaderLabels(["ID", "Nombre", "Precio", "Lote"])
         
@@ -48,13 +48,13 @@ class VentComprarMedicamentos(object):
         # Para ocultar el lote del producto que fue agregado al carrito
         self.tableWidgetCarrito.setColumnHidden(3, True) 
         
-        # Tabla con columnas y filas y que sean 9 columnas [ID, Nombre, Precio, Stock, Descripcion], carga las demás columnas, las de vencimiento y lote pero no las muestra, es para que al guardar no se vacien
+        # Tabla con columnas y filas y que sean 10 columnas [ID, Nombre, Precio, Stock, Descripcion], carga las demás columnas pero no las muestra, es para que al guardar no se vacien
         self.tableWidget = QtWidgets.QTableWidget(VentComprarMedicamentos)
-        self.tableWidget.setGeometry(QtCore.QRect(10, 210, 600, 545))
-        self.tableWidget.setColumnCount(9)
+        self.tableWidget.setGeometry(QtCore.QRect(10, 210, 600, 445))
+        self.tableWidget.setColumnCount(11)
         
         # Columnas a ocultar
-        columnas_ocultar = [5, 6, 7, 8]
+        columnas_ocultar = [5, 6, 7, 8, 9, 10]
         for columna in columnas_ocultar:
             self.tableWidget.setColumnHidden(columna, True)
 
@@ -63,47 +63,47 @@ class VentComprarMedicamentos(object):
         
         # CheckBox de necesita_envio y acción al cambiar su estado
         self.necesita_envioCheckBox = QtWidgets.QCheckBox(VentComprarMedicamentos)
-        self.necesita_envioCheckBox.setGeometry(QtCore.QRect(665, 648, 250, 30))
+        self.necesita_envioCheckBox.setGeometry(QtCore.QRect(945, 545, 250, 30))
         self.necesita_envioCheckBox.stateChanged.connect(self.actualizarDatos)
         
         # CheckBox de tiene_receta y acción al cambiar su estado
         self.tiene_recetaCheckbox = QtWidgets.QCheckBox(VentComprarMedicamentos)
-        self.tiene_recetaCheckbox.setGeometry(QtCore.QRect(665, 678, 250, 30))
+        self.tiene_recetaCheckbox.setGeometry(QtCore.QRect(945, 575, 250, 30))
         self.tiene_recetaCheckbox.stateChanged.connect(self.actualizarDatos)
         
         # Etiqueta cantidad_medicamentos y LineEdit
         self.cantidad_medicamentosLabel = QtWidgets.QLabel(VentComprarMedicamentos)
-        self.cantidad_medicamentosLabel.setGeometry(QtCore.QRect(670, 410, 101, 31))
+        self.cantidad_medicamentosLabel.setGeometry(QtCore.QRect(950, 307, 101, 31))
         self.cantidad_medicamentosLineEdit = QtWidgets.QLineEdit(VentComprarMedicamentos)
-        self.cantidad_medicamentosLineEdit.setGeometry(QtCore.QRect(770, 410, 113, 31))
+        self.cantidad_medicamentosLineEdit.setGeometry(QtCore.QRect(1050, 307, 113, 31))
         self.cantidad_medicamentosLineEdit.setReadOnly(True)
         
         # Etiqueta subtotal y LineEdit
         self.subtotalLabel = QtWidgets.QLabel(VentComprarMedicamentos)
-        self.subtotalLabel.setGeometry(QtCore.QRect(670, 460, 101, 31))
+        self.subtotalLabel.setGeometry(QtCore.QRect(950, 357, 101, 31))
         self.subtotalLineEdit = QtWidgets.QLineEdit(VentComprarMedicamentos)
-        self.subtotalLineEdit.setGeometry(QtCore.QRect(770, 460, 113, 31))
+        self.subtotalLineEdit.setGeometry(QtCore.QRect(1050, 357, 113, 31))
         self.subtotalLineEdit.setReadOnly(True)
         
         # Etiqueta descuento y LineEdit
         self.descuentoLabel = QtWidgets.QLabel(VentComprarMedicamentos)
-        self.descuentoLabel.setGeometry(QtCore.QRect(670, 510, 101, 31))
+        self.descuentoLabel.setGeometry(QtCore.QRect(950, 407, 101, 31))
         self.descuentoLineEdit = QtWidgets.QLineEdit(VentComprarMedicamentos)
-        self.descuentoLineEdit.setGeometry(QtCore.QRect(770, 510, 113, 31))
+        self.descuentoLineEdit.setGeometry(QtCore.QRect(1050, 407, 113, 31))
         self.descuentoLineEdit.setReadOnly(True)
         
         # Etiqueta costo_envio y LineEdit
         self.costo_envioLabel = QtWidgets.QLabel(VentComprarMedicamentos)
-        self.costo_envioLabel.setGeometry(QtCore.QRect(670, 560, 101, 31))
+        self.costo_envioLabel.setGeometry(QtCore.QRect(950, 457, 101, 31))
         self.costo_envioLineEdit = QtWidgets.QLineEdit(VentComprarMedicamentos)
-        self.costo_envioLineEdit.setGeometry(QtCore.QRect(770, 560, 113, 31))
+        self.costo_envioLineEdit.setGeometry(QtCore.QRect(1050, 457, 113, 31))
         self.costo_envioLineEdit.setReadOnly(True)
         
         # Etiqueta total y LineEdit
         self.totalLabel = QtWidgets.QLabel(VentComprarMedicamentos)
-        self.totalLabel.setGeometry(QtCore.QRect(670, 610, 101, 31))
+        self.totalLabel.setGeometry(QtCore.QRect(950, 507, 101, 31))
         self.totalLineEdit = QtWidgets.QLineEdit(VentComprarMedicamentos)
-        self.totalLineEdit.setGeometry(QtCore.QRect(770, 610, 113, 31))
+        self.totalLineEdit.setGeometry(QtCore.QRect(1050, 507, 113, 31))
         self.totalLineEdit.setReadOnly(True)
         
         # Boton mas y accion al pulsar
@@ -123,7 +123,7 @@ class VentComprarMedicamentos(object):
         
         # Boton comprar y accion al pulsar
         self.btnComprar = QtWidgets.QPushButton(VentComprarMedicamentos)
-        self.btnComprar.setGeometry(QtCore.QRect(660, 713, 231, 45))
+        self.btnComprar.setGeometry(QtCore.QRect(945, 610, 231, 45))
         self.btnComprar.clicked.connect(self.onActionBtnComprar)
 
         # Barra de busqueda y accion al actualizar el texto
@@ -222,9 +222,12 @@ class VentComprarMedicamentos(object):
                     item = QtWidgets.QTableWidgetItem(value)
                     self.tableWidget.setItem(posicionFila, columna, item)
                     
-        # Ajusta el tamaño de las celdas automaticamente
-        self.tableWidget.resizeColumnsToContents()
-        self.tableWidget.resizeRowsToContents()
+            # Oculta la fila si es "Experimental"
+            for posicionFila in range(self.tableWidget.rowCount()):
+                if self.tableWidget.item(posicionFila, 9).text() == "Experimental":
+                    self.tableWidget.setRowHidden(posicionFila, True)
+
+        self.ajustarCeldas()
     
     # Mensajes de alerta, Vent emergente
     def alertBox(self, Mensaje, Titulo):
@@ -393,3 +396,10 @@ class VentComprarMedicamentos(object):
             self.btnMenos.setEnabled(True)
             self.necesita_envioCheckBox.setEnabled(True)
             self.tiene_recetaCheckbox.setEnabled(True)
+    
+    def ajustarCeldas(self):
+        # Ajusta el tamaño de las celdas automaticamente
+        self.tableWidget.resizeColumnsToContents()
+        self.tableWidget.setColumnWidth(4, 280)        
+        for fila in range(self.tableWidget.rowCount()):
+            self.tableWidget.setRowHeight(fila, 34)

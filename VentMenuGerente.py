@@ -6,6 +6,7 @@ from VentListaClientes import VentListaClientes
 from VentComprarMedicamentos import VentComprarMedicamentos
 from VentIngresarUsuario import VentIngresarUsuario
 from VentModificarStock import VentModificarStock
+from VentModificarMedicamentos import VentModificarMedicamentos
 
 class VentMenuGerente(object):
     def setupUi(self, VentMenuGerente):
@@ -26,31 +27,37 @@ class VentMenuGerente(object):
         
         # Boton Ingresar Cliente
         self.BtnIngresarCliente = QtWidgets.QPushButton(VentMenuGerente)
-        self.BtnIngresarCliente.setGeometry(QtCore.QRect(115, 151, 200, 50))
+        self.BtnIngresarCliente.setGeometry(QtCore.QRect(125, 141, 200, 50))
         self.BtnIngresarCliente.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.BtnIngresarCliente.setCursor(QtCore.Qt.PointingHandCursor)
         
         # Boton Editar Cliente
         self.BtnEditarCliente = QtWidgets.QPushButton(VentMenuGerente)
-        self.BtnEditarCliente.setGeometry(QtCore.QRect(358, 151, 200, 50))
+        self.BtnEditarCliente.setGeometry(QtCore.QRect(368, 141, 200, 50))
         self.BtnEditarCliente.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.BtnEditarCliente.setCursor(QtCore.Qt.PointingHandCursor)
         
         # Boton Editar Cliente
         self.BtnIngresarUsuario = QtWidgets.QPushButton(VentMenuGerente)
-        self.BtnIngresarUsuario.setGeometry(QtCore.QRect(115, 228, 200, 50))
+        self.BtnIngresarUsuario.setGeometry(QtCore.QRect(125, 218, 200, 50))
         self.BtnIngresarUsuario.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.BtnIngresarUsuario.setCursor(QtCore.Qt.PointingHandCursor)
         
         # Boton Editar Cliente
         self.BtnCarrito = QtWidgets.QPushButton(VentMenuGerente)
-        self.BtnCarrito.setGeometry(QtCore.QRect(358, 228, 200, 50))
+        self.BtnCarrito.setGeometry(QtCore.QRect(368, 218, 200, 50))
         self.BtnCarrito.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.BtnCarrito.setCursor(QtCore.Qt.PointingHandCursor)
         
-        # Boton AgregarMedicamentos
+        # Boton Modificar Medicamentos
+        self.BtnModificarMedicamentos = QtWidgets.QPushButton(VentMenuGerente)
+        self.BtnModificarMedicamentos.setGeometry(QtCore.QRect(125, 300, 200, 51))
+        self.BtnModificarMedicamentos.setStyleSheet("background-color: transparent;\n""border: none;\n""")
+        self.BtnModificarMedicamentos.setCursor(QtCore.Qt.PointingHandCursor)
+        
+        # Boton Modificar Stock
         self.BtnModificarStock = QtWidgets.QPushButton(VentMenuGerente)
-        self.BtnModificarStock.setGeometry(QtCore.QRect(115, 311, 443, 50))
+        self.BtnModificarStock.setGeometry(QtCore.QRect(368, 300, 200, 51))
         self.BtnModificarStock.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.BtnModificarStock.setCursor(QtCore.Qt.PointingHandCursor)
         
@@ -65,6 +72,7 @@ class VentMenuGerente(object):
         self.BtnEditarCliente.clicked.connect(lambda: self.cambiarVent(VentListaClientes))
         self.BtnIngresarUsuario.clicked.connect(lambda: self.cambiarVent(VentIngresarUsuario))
         self.BtnCarrito.clicked.connect(lambda: self.cambiarVent(VentComprarMedicamentos))
+        self.BtnModificarMedicamentos.clicked.connect(lambda: self.cambiarVent(VentModificarMedicamentos))
         self.BtnModificarStock.clicked.connect(lambda: self.cambiarVent(VentModificarStock))
         self.BtnCerrarMenu.clicked.connect(VentMenuGerente.close)
         

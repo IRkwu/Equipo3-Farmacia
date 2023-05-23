@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QMessageBox
 from VentIngresarCliente import VentIngresarCliente
 from VentComprarMedicamentos import VentComprarMedicamentos
+from VentModificarStock import VentModificarStock
 
 class VentMenuVendedor(object):
     def setupUi(self, VentMenuVendedor):
@@ -22,15 +23,21 @@ class VentMenuVendedor(object):
         
         # Boton Ingresar Cliente
         self.BtnIngresarCliente = QtWidgets.QPushButton(VentMenuVendedor)
-        self.BtnIngresarCliente.setGeometry(QtCore.QRect(115, 211, 200, 50))
+        self.BtnIngresarCliente.setGeometry(QtCore.QRect(115, 171, 200, 50))
         self.BtnIngresarCliente.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.BtnIngresarCliente.setCursor(QtCore.Qt.PointingHandCursor)
         
         # Boton Carrito
         self.BtnCarrito = QtWidgets.QPushButton(VentMenuVendedor)
-        self.BtnCarrito.setGeometry(QtCore.QRect(358, 211, 200, 50))
+        self.BtnCarrito.setGeometry(QtCore.QRect(358, 171, 200, 50))
         self.BtnCarrito.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.BtnCarrito.setCursor(QtCore.Qt.PointingHandCursor)
+        
+        # Boton Carrito
+        self.BtnModificarStock = QtWidgets.QPushButton(VentMenuVendedor)
+        self.BtnModificarStock.setGeometry(QtCore.QRect(115, 251, 442, 50))
+        self.BtnModificarStock.setStyleSheet("background-color: transparent;\n""border: none;\n""")
+        self.BtnModificarStock.setCursor(QtCore.Qt.PointingHandCursor)
         
         # Boton Cerrar Menu
         self.BtnCerrarMenu = QtWidgets.QPushButton(VentMenuVendedor)
@@ -41,6 +48,7 @@ class VentMenuVendedor(object):
         # Acción clickear botones
         self.BtnIngresarCliente.clicked.connect(lambda: self.cambiarVent(VentIngresarCliente))
         self.BtnCarrito.clicked.connect(lambda: self.cambiarVent(VentComprarMedicamentos))
+        self.BtnModificarStock.clicked.connect(lambda: self.cambiarVent(VentModificarStock))
         self.BtnCerrarMenu.clicked.connect(VentMenuVendedor.close)
         
         self.retranslateUi(VentMenuVendedor)

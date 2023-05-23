@@ -1,8 +1,8 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QMessageBox, QDialog
 import csv, datetime
+from Clases.Medicamentos import Medicamentos
 from VentAgregarStock import AgregarStockDialog
-
 
 class VentModificarStock(object):
     def __init__(self):
@@ -15,15 +15,15 @@ class VentModificarStock(object):
         
         VentModificarStock.setWindowIcon(IconoTitulo)
         
-        VentModificarStock.resize(884, 675)
-        VentModificarStock.setMinimumSize(QtCore.QSize(884, 675))
-        VentModificarStock.setMaximumSize(QtCore.QSize(884, 675))
+        VentModificarStock.resize(1119, 675)
+        VentModificarStock.setMinimumSize(QtCore.QSize(1119, 675))
+        VentModificarStock.setMaximumSize(QtCore.QSize(1119, 675))
         
         # Etiqueta imagen superior
         self.imagen_on_topLabel = QtWidgets.QLabel(VentModificarStock)
-        self.imagen_on_topLabel.setGeometry(QtCore.QRect(0, 0, 884, 144))
+        self.imagen_on_topLabel.setGeometry(QtCore.QRect(0, 0, 1119, 144))
         self.imagen_on_topLabel.setText("")
-        self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(884, 144))
+        self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(1119, 144))
         
         # Boton regresar y accion al pulsar
         self.btnRegresar = QtWidgets.QPushButton(VentModificarStock)
@@ -34,10 +34,10 @@ class VentModificarStock(object):
         self.btnRegresar.setCursor(QtCore.Qt.PointingHandCursor)
         self.btnRegresar.clicked.connect(VentModificarStock.close)
 
-        # Tabla con columnas y filas y que sean 9 columnas [ID, Nombre, Precio, Stock, Descripcion, Stock Lote 1, Caducidad Lote 1, Stock Lote 2, Caducidad Lote 2]
+        # Tabla con columnas y filas y que sean 10 columnas
         self.tableWidget = QtWidgets.QTableWidget(VentModificarStock)
-        self.tableWidget.setGeometry(QtCore.QRect(10, 210, 680, 450))
-        self.tableWidget.setColumnCount(9)
+        self.tableWidget.setGeometry(QtCore.QRect(10, 210, 915, 450))
+        self.tableWidget.setColumnCount(11)
         
         # Ocultar columna de descripción
         item = QtWidgets.QTableWidgetItem()
@@ -48,33 +48,33 @@ class VentModificarStock(object):
         
         # Boton informacion y accion al pulsar
         self.btnInfo = QtWidgets.QPushButton(VentModificarStock)
-        self.btnInfo.setGeometry(QtCore.QRect(697, 210, 180, 60))
+        self.btnInfo.setGeometry(QtCore.QRect(932, 210, 180, 60))
         self.btnInfo.clicked.connect(self.onActionBtnInfo)
         
         # Boton agregar stock y accion al pulsar
         self.BtnAgregar = QtWidgets.QPushButton(VentModificarStock)
-        self.BtnAgregar.setGeometry(QtCore.QRect(697, 290, 180, 60))
+        self.BtnAgregar.setGeometry(QtCore.QRect(932, 290, 180, 60))
         self.BtnAgregar.clicked.connect(self.onActionBtnAgregar)
         
         # Boton retirar stock y accion al pulsar
         self.BtnRetirar = QtWidgets.QPushButton(VentModificarStock)
-        self.BtnRetirar.setGeometry(QtCore.QRect(697, 370, 180, 60))
+        self.BtnRetirar.setGeometry(QtCore.QRect(932, 370, 180, 60))
         self.BtnRetirar.clicked.connect(self.onActionBtnRetirar)
         
         # Boton revisar caducidad y accion al pulsar
         self.btnCaducidad = QtWidgets.QPushButton(VentModificarStock)
-        self.btnCaducidad.setGeometry(QtCore.QRect(697, 450, 180, 60))
+        self.btnCaducidad.setGeometry(QtCore.QRect(932, 450, 180, 60))
         self.btnCaducidad.clicked.connect(self.onActionBtnCaducidad)
         
-        # Boton guardar stock y accion al pulsar
-        self.btnGuardar = QtWidgets.QPushButton(VentModificarStock)
-        self.btnGuardar.setGeometry(QtCore.QRect(697, 600, 180, 60))
-        self.btnGuardar.clicked.connect(self.onActionBtnGuardar)
+        # Boton revisar caducidad y accion al pulsar
+        self.btnEntregar = QtWidgets.QPushButton(VentModificarStock)
+        self.btnEntregar.setGeometry(QtCore.QRect(932, 530, 180, 60))
+        self.btnEntregar.clicked.connect(self.onActionBtnEntregar)
         
         # Barra de busqueda y accion al actualizar el texto
         self.buscarLineEdit = QtWidgets.QLineEdit(VentModificarStock)
-        self.buscarLineEdit.setGeometry(QtCore.QRect(10, 150, 864, 50))
-        self.buscarLineEdit.setPlaceholderText("Ingrese el nombre o ID del medicamento")
+        self.buscarLineEdit.setGeometry(QtCore.QRect(10, 150, 1101, 50))
+        self.buscarLineEdit.setPlaceholderText("Ingrese el nombre, tipo o ID del medicamento")
         self.buscarLineEdit.setStyleSheet("font-size: 16px;")
         self.buscarLineEdit.textChanged.connect(self.buscarMedicamentos)
 
@@ -92,7 +92,7 @@ class VentModificarStock(object):
         self.BtnRetirar.setText(_translate("VentModificarStock", "Retirar 1 al Stock del\nproducto seleccionado (-)"))
         self.btnInfo.setText(_translate("VentModificarStock", "Instrucciones (!)"))
         self.btnCaducidad.setText(_translate("VentModificarStock", "Revisar caducidad cercana de\nlos Medicamentos (!!!)"))
-        self.btnGuardar.setText(_translate("VentModificarStock", "Confirmar Cambios"))
+        self.btnEntregar.setText(_translate("VentModificarStock", "Entregar medicamentos\nexperimentales (-w-)"))
 
     # Metodo para que cargue los clientes desde el archivo CSV
     def cargarMedicamentosCSV(self):
@@ -111,10 +111,8 @@ class VentModificarStock(object):
                     item = QtWidgets.QTableWidgetItem(value)
                     self.tableWidget.setItem(posicionFila, columna, item)
                     
-        # Ajusta el tamaño de las celdas automaticamente
-        self.tableWidget.resizeColumnsToContents()
-        self.tableWidget.resizeRowsToContents()
-    
+        self.ajustarCeldas()
+                    
     # Mensajes de alerta, Vent emergente
     def alertBox(self, Mensaje, Titulo):
         IconoTitulo = QtGui.QIcon('Imagenes/icono_titulo.png')
@@ -133,11 +131,14 @@ class VentModificarStock(object):
                 found = False
                 id_medicamento = self.tableWidget.item(i, 0)
                 nombre_medicamento = self.tableWidget.item(i, 1)
+                tipo_medicamento = self.tableWidget.item(i, 9)
                 # Si la id del medicamento existe la muestra
                 if id_medicamento and texto in id_medicamento.text().lower():
                     found = True
                 # Si el nombre del medicamento existe la muestra
                 elif nombre_medicamento and texto in nombre_medicamento.text().lower():
+                    found = True
+                elif tipo_medicamento and texto in tipo_medicamento.text().lower():
                     found = True
                 # Oculta los elementos que no tengan texto o numeros similares a los ingresados
                 self.tableWidget.setRowHidden(i, not found)
@@ -155,19 +156,34 @@ class VentModificarStock(object):
 
         # Si se ha seleccionado un medicamento
         if fila_seleccionada != -1:
-            if (int(self.tableWidget.item(fila_seleccionada, 7).text()) == 0):
+            if (self.tableWidget.item(fila_seleccionada, 9).text() == "Experimental"):
+                if (int(self.tableWidget.item(fila_seleccionada, 5).text()) == 0):
+                    # Se abre una nueva ventana para ingresar la cantidad de stock y fecha de entrega y caducidad del Lote a agregar
+                    dialog = AgregarStockDialog(tipo=self.tableWidget.item(fila_seleccionada, 9).text())
+                    if dialog.exec_() == QDialog.Accepted:
+                        nuevo_stock = dialog.get_stock()
+                        fecha_caducidad = dialog.get_fecha_caducidad()
+                        fecha_entrega = dialog.get_fecha_entrega()
+                        # Actualiza el stock en la tabla
+                        self.tableWidget.setItem(fila_seleccionada, 5, QTableWidgetItem(nuevo_stock))
+                        self.tableWidget.setItem(fila_seleccionada, 6, QTableWidgetItem(fecha_caducidad))
+                        self.tableWidget.setItem(fila_seleccionada, 10, QTableWidgetItem(fecha_entrega))
+                        self.actualizarStock(fila_seleccionada)
+                else:
+                    self.alertBox("No se puede agregar stock al medicamento experimental hasta que\nse haya entregado el lote", "No es posible agregar Stock")
+            elif (int(self.tableWidget.item(fila_seleccionada, 7).text()) == 0):
                 # Se abre una nueva ventana para ingresar la cantidad de stock y fecha de caducidad del Lote a agregar
                 dialog = AgregarStockDialog()
                 if dialog.exec_() == QDialog.Accepted:
                     nuevo_stock = dialog.get_stock()
                     fecha_caducidad = dialog.get_fecha_caducidad()
-
                     # Actualiza el stock en la tabla
                     self.tableWidget.setItem(fila_seleccionada, 7, QTableWidgetItem(nuevo_stock))
                     self.tableWidget.setItem(fila_seleccionada, 8, QTableWidgetItem(fecha_caducidad))
+                    self.actualizarStock(fila_seleccionada)
             else:
                 self.alertBox("No puede agregar stock hasta que un Lote esté vacio\nEsto es para evitar la acumulación de Medicamentos", "Alerta")
-
+        self.guardarMedicamentos()
 
     # Accion al pulsar boton menos, elimina medicamentos de la tableWidgetCarrito y agrega el stock devuelta en el tableWidget de medicamentos
     def onActionBtnRetirar(self):
@@ -182,8 +198,10 @@ class VentModificarStock(object):
             stock_medicamento = int(self.tableWidget.item(fila_seleccionada, 3).text())
             stock_lote_1 = int(self.tableWidget.item(fila_seleccionada, 5).text())
             stock_lote_2 = int(self.tableWidget.item(fila_seleccionada, 7).text())
-             
-            if (stock_lote_1>0):
+            
+            if (self.tableWidget.item(fila_seleccionada, 9).text() == "Experimental"):
+                self.alertBox("No se puede retirar stock de medicamentos experimentales\ndebe marcarlo como entregado", "No es posible retirar stock") 
+            elif (stock_lote_1>0):
                 # Retira 1 al stock del medicamento seleccionado en el Lote 1 y actualiza el Stock
                 stock_lote_1 -= 1
                 self.tableWidget.setItem(fila_seleccionada, 5, QTableWidgetItem(str(stock_lote_1)))
@@ -195,6 +213,7 @@ class VentModificarStock(object):
                 self.tableWidget.setItem(fila_seleccionada, 3, QTableWidgetItem(str(stock_lote_1+stock_lote_2)))
             else:
                 self.alertBox("No se puede retirar más stock", "Alerta Stock")
+        self.guardarMedicamentos()
             
     def onActionBtnInfo(self):
         self.alertBox("- Para agregar nuevo stock debe un medicamento con Lote libre desde \nla lista de medicamentos y hacer click en Agregar nuevo Lote\n"
@@ -202,8 +221,6 @@ class VentModificarStock(object):
                       "\n- Para ver en cuales productos están por vencer, hacer click en \nRevisar caducidad cercana de los Medicamentos\n"
                       "\n- Para guardar los cambios hechos haga click en Confirmar Cambios", "Lista de Instrucciones")
         
-
-    
     def onActionBtnCaducidad(self):
         # Toma la fecha actual y pone como límite un mes para caducidad cercana
         fecha_actual = datetime.date.today()
@@ -259,10 +276,32 @@ class VentModificarStock(object):
 
         # Crea el alertbox con el mensaje de medicamentos por caducar y/o vencidos
         self.alertBox(mensaje, "Medicamentos por caducar/vencidos")
-
-
+        
+    def onActionBtnEntregar(self):
+        fila_seleccionada = self.tableWidget.currentRow()
+        
+        if fila_seleccionada == -1:
+            self.alertBox("Debe seleccionar un medicamento experimental para marcarlo\ncomo entregado", "Entregar Medicamento")
+        
+        # Si se ha seleccionado un medicamento
+        if fila_seleccionada != -1:
+            # Obtiene el stock del medicamento seleccionado
+            stock_medicamento = int(self.tableWidget.item(fila_seleccionada, 3).text())
+            stock_lote_1 = int(self.tableWidget.item(fila_seleccionada, 5).text())
             
-    def onActionBtnGuardar(self):
+            if (self.tableWidget.item(fila_seleccionada, 9).text() == "Experimental"):
+                if stock_lote_1 != 0:
+                    self.alertBox("Se ha entregado el medicamento experimental", "Medicamento Entregado")
+                    self.tableWidget.setItem(fila_seleccionada, 5, QTableWidgetItem("0"))
+                    self.tableWidget.setItem(fila_seleccionada, 10, QTableWidgetItem("Entregado"))
+                    self.actualizarStock(fila_seleccionada)
+                else:
+                    self.alertBox("El medicamento ya ha sido entregado", "Alerta Entrega")
+            else:
+                self.alertBox("El medicamento no es experimental", "Alerta Entrega")
+        self.guardarMedicamentos()
+            
+    def guardarMedicamentos(self):
         for fila in range(self.tableWidget.rowCount()):
             if self.tableWidget.item(fila, 5).text() == '0':
                 self.actualizarLotes(fila)
@@ -282,8 +321,6 @@ class VentModificarStock(object):
                     else:
                         datos_de_la_fila.append('')
                 writer.writerow(datos_de_la_fila)
-        # Mensaje de que los cambios se guardaron correctamente
-        self.alertBox("Se han guardado los cambios","Stock Actulizado")
         
     def actualizarLotes(self, fila):
         # Lo que hace es que si el stock del lote 1 es igual a 0 copia los datos del lote 2 al lote 1, dejando el lote 2 libre para agregar un nuevo lote de medicamentos
@@ -297,10 +334,22 @@ class VentModificarStock(object):
             self.tableWidget.setItem(fila, 8, QTableWidgetItem(""))
             if (self.tableWidget.item(fila, 5).text() == "0"):
                 self.tableWidget.setItem(fila, 6, QTableWidgetItem(""))
-    
+                
     # Ventana para agregar nuevo stock en el Lote disponible 
     def agregarStockDialog(self):
         dialog = AgregarStockDialog()
         if dialog.exec_():
             cantidad = int(dialog.stock_edit.text())
             fecha_caducidad = dialog.fecha_edit.date().toString("yyyy-MM-dd")
+            
+    def ajustarCeldas(self):
+        # Ajusta el tamaño de las celdas automaticamente
+        self.tableWidget.resizeColumnsToContents()
+        self.tableWidget.setColumnWidth(4, 283)        
+        for fila in range(self.tableWidget.rowCount()):
+            self.tableWidget.setRowHeight(fila, 34)
+    
+    def actualizarStock(self, fila_seleccionada):
+        stock_lote_1 = int(self.tableWidget.item(fila_seleccionada, 5).text())
+        stock_lote_2 = int(self.tableWidget.item(fila_seleccionada, 7).text())
+        self.tableWidget.setItem(fila_seleccionada, 3, QTableWidgetItem(str(stock_lote_1+stock_lote_2)))
