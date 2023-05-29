@@ -216,45 +216,43 @@ class VentModificarStock(object):
         self.guardarMedicamentos()
             
     def onActionBtnInfo(self):
-        self.alertBox("- Para agregar nuevo stock debe un medicamento con Lote libre desde \nla lista de medicamentos y hacer click en Agregar nuevo Lote\n"
-                      "\n- Para retirar stock debe seleccionarlo desde la lista de medicamentos y \nhacer click en Retirar 1 al Stock\n"
-                      "\n- Para ver en cuales productos están por vencer, hacer click en \nRevisar caducidad cercana de los Medicamentos\n"
-                      "\n- Para guardar los cambios hechos haga click en Confirmar Cambios", "Lista de Instrucciones")
+        self.alertBox("- Para agregar nuevo stock debe seleccionar un medicamento con Lote libre desde la lista de medicamentos y hacer click en Agregar nuevo Lote\n\n"
+                      "- Para retirar stock debe seleccionarlo el medicamento desde la lista de medicamentos y hacer click en Retirar 1 al Stock\n\n"
+                      "- Para ver en cuales productos están por vencer/o están vencidos, hacer click en Revisar caducidad cercana de los Medicamentos\n\n"
+                      "- Para entregar los medicamentos experimentales debe seleccionarlo y dar click en Entregar medicamentos Experimentales", "Lista de Instrucciones")
         
     def onActionBtnCaducidad(self):
-        # Toma la fecha actual y pone como límite un mes para caducidad cercana
         fecha_actual = datetime.date.today()
         limite_mes = fecha_actual + datetime.timedelta(days=30)
 
-        # Arreglos para imprimir los datos en una alertBox
         medicamentos_por_caducar = []
         medicamentos_caducados = []
         dias_para_caducar = []
-        dias_caducados = []
+        dias_med_caducados = []
 
-        # Obtiene la caducidad cercana de los medicamentos y los clasifica según la cantidad de días restantes
         for fila in range(self.tableWidget.rowCount()):
             caducidad = self.tableWidget.item(fila, 6).text()
-            caducidad = datetime.datetime.strptime(caducidad, "%d/%m/%Y").date()
 
-            # Con .days se obtiene el numero de días
-            dias_restantes = (caducidad - fecha_actual).days
+            # Verificar si hay medicamento sin fecha de caducidad
+            if caducidad:
+                try:
+                    caducidad = datetime.datetime.strptime(caducidad, "%d/%m/%Y").date()
+                    dias_restantes = (caducidad - fecha_actual).days
 
-            # Si los dias restantes son < 0 está caducado
-            if dias_restantes < 0:
-                medicamentos = self.tableWidget.item(fila, 1).text()
-                medicamentos_caducados.append(medicamentos)
-                dias_caducados.append(dias_restantes)
-            # Si los días restantes son < al limite está por caducar
-            elif dias_restantes < (limite_mes - fecha_actual).days:
-                medicamentos = self.tableWidget.item(fila, 1).text()
-                medicamentos_por_caducar.append(medicamentos)
-                dias_para_caducar.append(dias_restantes)
+                    if dias_restantes <= 0:
+                        medicamentos = self.tableWidget.item(fila, 1).text()
+                        medicamentos_caducados.append(medicamentos)
+                        dias_med_caducados.append(dias_restantes)
+                    elif dias_restantes < (limite_mes - fecha_actual).days:
+                        medicamentos = self.tableWidget.item(fila, 1).text()
+                        medicamentos_por_caducar.append(medicamentos)
+                        dias_para_caducar.append(dias_restantes)
+                except ValueError:
+                    # En caso de error imprime un mensaje en consola
+                    print("Error al analizar la fecha")
 
-        # String mensaje para mostrar todos los datos juntos en la alertbox y no hacer 2 separadas
         mensaje = ""
 
-        # Si hay medicamentos por caducar los agrega al mensaje
         if medicamentos_por_caducar:
             mensaje += "Medicamentos por caducar:\n\n"
             for i in range(len(medicamentos_por_caducar)):
@@ -262,19 +260,16 @@ class VentModificarStock(object):
                 dias_restantes = dias_para_caducar[i]
                 mensaje += medicamento + ": " + str(dias_restantes) + " días\n"
 
-        # Si hay medicamentos vencidos los agrega al mensaje
         if medicamentos_caducados:
             mensaje += "\nMedicamentos vencidos:\n\n"
             for i in range(len(medicamentos_caducados)):
                 medicamento_vencido = medicamentos_caducados[i]
-                dias_caducados = dias_caducados[i]
-                mensaje += medicamento_vencido + ": " + str(dias_caducados*-1) + " días\n"
+                dias_med_vencidos = dias_med_caducados[i]
+                mensaje += medicamento_vencido + ": " + str(dias_med_vencidos * -1) + " días\n"
 
-        # Si no hay medicamentos cercanos por caducar ni medicamentos vencidos llama un alertbox para avisar
         if not medicamentos_por_caducar and not medicamentos_caducados:
             mensaje = "No hay medicamentos cercanos por caducar ni medicamentos vencidos"
 
-        # Crea el alertbox con el mensaje de medicamentos por caducar y/o vencidos
         self.alertBox(mensaje, "Medicamentos por caducar/vencidos")
         
     def onActionBtnEntregar(self):

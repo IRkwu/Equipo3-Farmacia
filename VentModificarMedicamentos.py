@@ -46,8 +46,6 @@ class VentModificarMedicamentos(object):
         self.tableWidget.setColumnHidden(6, True)
         self.tableWidget.setColumnHidden(7, True)
         self.tableWidget.setColumnHidden(8, True)
-        # Posiciona la columna de tipo de medicamento antes de la columna de descripcion
-        self.tableWidget.horizontalHeader().moveSection(9, 4)
         
         # Para que no se puedan editar los medicamentos de la lista de medicamentos
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
@@ -89,7 +87,7 @@ class VentModificarMedicamentos(object):
     def retranslateUi(self, VentModificarMedicamentos):
         _translate = QtCore.QCoreApplication.translate
         VentModificarMedicamentos.setWindowTitle(_translate("VentModificarMedicamentos", "Modificar Medicamentos"))
-        self.btnAgregar.setText(_translate("VentModificarMedicamentos", "Agregar Medicamento (+)"))
+        self.btnAgregar.setText(_translate("VentModificarMedicamentos", "Agregar Nuevo\nMedicamento (+)"))
         self.btnBorrar.setText(_translate("VentModificarMedicamentos", "Borrar Medicamento (-)"))
         self.btnInfo.setText(_translate("VentModificarMedicamentos", "Instrucciones (!)"))
         self.btnRevisarTipo.setText(_translate("VentModificarMedicamentos", "Revisar Medicamentos\nExperimentales (!!!)"))
@@ -178,29 +176,32 @@ class VentModificarMedicamentos(object):
             
             self.ajustarCeldas()
             self.guardarMedicamentos()
-            self.alertBox("Se ha agregado el medicamento correctamente", "Agregar Medicamento")
 
     # Accion al pulsar boton borrar, elimina medicamentos de la tableWidget
     def onActionBtnBorrar(self):
         fila_seleccionada = self.tableWidget.currentRow()
+        columna = self.tableWidget.currentColumn()
         
         if fila_seleccionada == -1:
             self.alertBox("Debe seleccionar un medicamento para borrarlo", "Borrar Medicamento")
         
         # Si se ha seleccionado un medicamento
-        if fila_seleccionada != -1:
-            medicamento = self.tableWidget.item(fila_seleccionada, 1).text()
+        if columna == 0:
+            if fila_seleccionada != -1:
+                medicamento = self.tableWidget.item(fila_seleccionada, 1).text()
 
-            # Eliminar el medicamento de la lista
-            self.tableWidget.removeRow(fila_seleccionada)
+                # Eliminar el medicamento de la lista
+                self.tableWidget.removeRow(fila_seleccionada)
 
-            self.guardarMedicamentos()
-            self.alertBox("Se ha eliminado el medicamento correctamente", "Eliminar Medicamento")
+                self.guardarMedicamentos()
+                self.alertBox("Se ha eliminado el medicamento correctamente", "Eliminar Medicamento")
+        else:
+            self.alertBox("Debe seleccionar la 'ID' para borrar el medicamento", "Instrucciones para borrar")
             
     def onActionBtnInfo(self):
-        self.alertBox("- Para agregar nuevo medicamento debe hacer click en Agregar Medicamento\n"
-                      "\n- Para borrar un medicamento debe seleccionarlo desde la lista de medicamentos\n y hacer click en Borrar Medicamento\n"
-                      "\n- Para ver los medicamentos experimentales y su fecha de entrega haga click en\n Revisar Medicamentos Experimentales", "Lista de Instrucciones")
+        self.alertBox("- Para agregar nuevo medicamento debe hacer click en Agregar Nuevo Medicamento\n\n"
+                      "- Para borrar un medicamento debe seleccionar su ID desde la lista de medicamentos y hacer click en Borrar Medicamento\n\n"
+                      "- Para ver los medicamentos experimentales y su fecha de entrega debe hacer click en Revisar Medicamentos Experimentales", "Lista de Instrucciones")
         
     def onActionBtnRevisarTipo(self):
         medicamentos_experimentales = []

@@ -2,74 +2,75 @@ import csv
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QInputDialog, QMessageBox, QDialog, QTableWidgetItem
 from PyQt5.QtGui import QIntValidator, QIcon
-from VentEditarCliente import VentEditarCliente
+from VentEditarUsuario import VentEditarUsuario
 
-class VentListaClientes(object):
-    def setupUi(self, VentListaClientes):
+class VentListaUsuarios(object):
+    def setupUi(self, VentListaUsuarios):
         ImagenBanner = QtGui.QPixmap('Imagenes/banner_cvi.png')
         IconoRegresar = QtGui.QIcon('Imagenes/boton_regresar.png')
         IconoTitulo = QtGui.QIcon('Imagenes/icono_titulo.png')
 
-        VentListaClientes.setWindowIcon(IconoTitulo)
+        VentListaUsuarios.setWindowIcon(IconoTitulo)
         
-        VentListaClientes.resize(865, 565)
-        VentListaClientes.setMinimumSize(QtCore.QSize(865, 565))
-        VentListaClientes.setMaximumSize(QtCore.QSize(865, 565))
+        VentListaUsuarios.resize(855, 565)
+        VentListaUsuarios.setMinimumSize(QtCore.QSize(855, 565))
+        VentListaUsuarios.setMaximumSize(QtCore.QSize(855, 565))
         
         # Etiqueta imagen superior
-        self.imagen_on_topLabel = QtWidgets.QLabel(VentListaClientes)
-        self.imagen_on_topLabel.setGeometry(QtCore.QRect(0, 0, 865, 96))
+        self.imagen_on_topLabel = QtWidgets.QLabel(VentListaUsuarios)
+        self.imagen_on_topLabel.setGeometry(QtCore.QRect(0, 0, 855, 96))
         self.imagen_on_topLabel.setText("")
-        self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(865, 96))
+        self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(855, 96))
 
         # Boton regresar y accion al pulsar
-        self.btnRegresar = QtWidgets.QPushButton(VentListaClientes)
+        self.btnRegresar = QtWidgets.QPushButton(VentListaUsuarios)
         self.btnRegresar.setGeometry(QtCore.QRect(20, 20, 50, 50))
         self.btnRegresar.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.btnRegresar.setIcon(IconoRegresar)
         self.btnRegresar.setIconSize(QtCore.QSize(60, 60))
         self.btnRegresar.setCursor(QtCore.Qt.PointingHandCursor)
-        self.btnRegresar.clicked.connect(VentListaClientes.close)
+        self.btnRegresar.clicked.connect(VentListaUsuarios.close)
         
         # Tabla con columnas y filas y que sean 9 columnas [ID, Nombres, Apellidos, Genero, Fecha_Nacimiento, Rut, Telefono, Email, Domicilio]
-        self.tableWidget = QtWidgets.QTableWidget(VentListaClientes)
-        self.tableWidget.setGeometry(QtCore.QRect(10, 140, 845, 342))
-        self.tableWidget.setColumnCount(9)
+        self.tableWidget = QtWidgets.QTableWidget(VentListaUsuarios)
+        self.tableWidget.setGeometry(QtCore.QRect(10, 140, 835, 342))
+        self.tableWidget.setColumnCount(11)
+        self.tableWidget.setColumnHidden(6, True)
         
         # Para que no se puedan editar a no ser que se de click en el boton editar
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
 
         # Boton editar y accion al pulsar
-        self.btnEditar = QtWidgets.QPushButton(VentListaClientes)
+        self.btnEditar = QtWidgets.QPushButton(VentListaUsuarios)
         self.btnEditar.setGeometry(QtCore.QRect(20, 500, 121, 50))
         self.btnEditar.clicked.connect(self.onActionBtnEditar)
         
         # Boton eliminar y accion al pulsar
-        self.btnEliminar = QtWidgets.QPushButton(VentListaClientes)
+        self.btnEliminar = QtWidgets.QPushButton(VentListaUsuarios)
         self.btnEliminar.setGeometry(QtCore.QRect(160, 500, 121, 50))
         self.btnEliminar.clicked.connect(self.onActionBtnEliminar)
         
         # Boton guardar y accion al pulsar
-        self.btnGuardar = QtWidgets.QPushButton(VentListaClientes)
-        self.btnGuardar.setGeometry(QtCore.QRect(725, 500, 121, 50))
+        self.btnGuardar = QtWidgets.QPushButton(VentListaUsuarios)
+        self.btnGuardar.setGeometry(QtCore.QRect(715, 500, 121, 50))
         self.btnGuardar.clicked.connect(self.onActionBtnGuardar)
         
-        # Etiqueta de instruccion para editar clientes
-        self.mensajeEditarLabel = QtWidgets.QLabel(VentListaClientes)
+        # Etiqueta de instruccion para editar Usuarios
+        self.mensajeEditarLabel = QtWidgets.QLabel(VentListaUsuarios)
         self.mensajeEditarLabel.setGeometry(QtCore.QRect(14, 94, 865, 50))
         
-        # Etiqueta de instruccion para eliminar clientes
-        self.mensajeEliminarLabel = QtWidgets.QLabel(VentListaClientes)
-        self.mensajeEliminarLabel.setGeometry(QtCore.QRect(460, 94, 865, 50))
+        # Etiqueta de instruccion para eliminar Usuarios
+        self.mensajeEliminarLabel = QtWidgets.QLabel(VentListaUsuarios)
+        self.mensajeEliminarLabel.setGeometry(QtCore.QRect(450, 94, 865, 50))
         
-        self.retranslateUi(VentListaClientes)
-        QtCore.QMetaObject.connectSlotsByName(VentListaClientes)
+        self.retranslateUi(VentListaUsuarios)
+        QtCore.QMetaObject.connectSlotsByName(VentListaUsuarios)
         
-        # Cargar Clientes del CSV
-        self.cargarClienteCSV()
+        # Cargar Usuarios del CSV
+        self.cargarUsuarioCSV()
         
     # Metodo definir textos
-    def retranslateUi(self, VentListaClientes):
+    def retranslateUi(self, VentListaUsuarios):
         # Fuente de texto
         fuenteEstado = QtGui.QFont()
         fuenteEstado.setPointSize(9)
@@ -78,13 +79,13 @@ class VentListaClientes(object):
         
         # Definiendo textos
         _translate = QtCore.QCoreApplication.translate
-        VentListaClientes.setWindowTitle(_translate("VentListaClientes", "Listas de Clientes"))
-        self.btnEditar.setText(_translate("VentListaClientes", "Editar"))
-        self.btnEliminar.setText(_translate("VentListaClientes", "Eliminar"))
-        self.btnGuardar.setText(_translate("VentListaClientes", "Guardar Cambios"))
-        self.mensajeEditarLabel.setText(_translate("VentListaClientes", "Para editar el cliente seleccione una fila y haga click en Editar"))
+        VentListaUsuarios.setWindowTitle(_translate("VentListaUsuarios", "Listas de Usuarios"))
+        self.btnEditar.setText(_translate("VentListaUsuarios", "Editar"))
+        self.btnEliminar.setText(_translate("VentListaUsuarios", "Eliminar"))
+        self.btnGuardar.setText(_translate("VentListaUsuarios", "Guardar Cambios"))
+        self.mensajeEditarLabel.setText(_translate("VentListaUsuarios", "Para editar el Usuario seleccione una fila y haga click en Editar"))
         self.mensajeEditarLabel.setFont(fuenteEstado)
-        self.mensajeEliminarLabel.setText(_translate("VentListaClientes", "Para eliminar el cliente seleccione una ID y haga click en Eliminar"))
+        self.mensajeEliminarLabel.setText(_translate("VentListaUsuarios", "Para eliminar el Usuario seleccione una ID y haga click en Eliminar"))
         self.mensajeEliminarLabel.setFont(fuenteEstado)
         
         
@@ -98,9 +99,10 @@ class VentListaClientes(object):
                 # Elimina la fila seleccionada
                 self.tableWidget.removeRow(fila)
         else:
-            self.alertBox("Debe seleccionar una 'ID' para borrar el cliente", "Instrucciones para borrar")
+            self.alertBox("Debe seleccionar una 'ID' para borrar el Usuario", "Instrucciones para borrar")
     
     # Accion al clickear boton editar
+    # Dentro del método onActionBtnEditar()
     def onActionBtnEditar(self):
         celda = self.tableWidget.currentItem() 
         if celda is None:
@@ -108,12 +110,13 @@ class VentListaClientes(object):
         else:
             columna = self.tableWidget.currentColumn()
             fila = self.tableWidget.currentRow()
-            dialog = VentEditarCliente(nombres=self.tableWidget.item(fila, 1).text(),
+            dialog = VentEditarUsuario(nombres=self.tableWidget.item(fila, 1).text(),
                                        apellidos=self.tableWidget.item(fila, 2).text(),
                                        genero=self.tableWidget.item(fila, 3).text(),
-                                       telefono=self.tableWidget.item(fila, 7).text(),
+                                       telefono=self.tableWidget.item(fila, 8).text(),
                                        email=self.tableWidget.item(fila, 5).text(),
-                                       domicilio=self.tableWidget.item(fila, 8).text())
+                                       domicilio=self.tableWidget.item(fila, 9).text(),
+                                       cargo=self.tableWidget.item(fila, 10).text())
             if dialog.exec_() == QDialog.Accepted:
                 nombres = dialog.get_nombres()
                 apellidos = dialog.get_apellidos()
@@ -121,25 +124,29 @@ class VentListaClientes(object):
                 telefono = dialog.get_telefono()
                 email = dialog.get_email()
                 domicilio = dialog.get_domicilio()
+                password = dialog.get_password()
+                cargo = dialog.get_cargo()
                 
                 # Asignar los nuevos valores a la fila seleccionada en la tabla
                 self.tableWidget.setItem(fila, 1, QtWidgets.QTableWidgetItem(str(nombres)))
                 self.tableWidget.setItem(fila, 2, QtWidgets.QTableWidgetItem(apellidos))
                 self.tableWidget.setItem(fila, 3, QtWidgets.QTableWidgetItem(genero))
                 self.tableWidget.setItem(fila, 5, QtWidgets.QTableWidgetItem(email))
-                self.tableWidget.setItem(fila, 7, QtWidgets.QTableWidgetItem(telefono))
-                self.tableWidget.setItem(fila, 8, QtWidgets.QTableWidgetItem(domicilio))
+                self.tableWidget.setItem(fila, 8, QtWidgets.QTableWidgetItem(telefono))
+                self.tableWidget.setItem(fila, 9, QtWidgets.QTableWidgetItem(domicilio))
+                self.tableWidget.setItem(fila, 6, QtWidgets.QTableWidgetItem(password))
+                self.tableWidget.setItem(fila, 10, QtWidgets.QTableWidgetItem(cargo))
             
     # Accion al clickear boton guardar
     def onActionBtnGuardar(self):
         # Abre el archivo CSV
-        with open('ArchivosCSV/Cliente.csv', 'w', newline='') as csvfile:
+        with open('ArchivosCSV/Usuario.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
             
             # Escribe los encabezados de las columnas
             encabezados = [self.tableWidget.horizontalHeaderItem(i).text() for i in range(self.tableWidget.columnCount())]
             writer.writerow(encabezados)
-            # Sobreescribe los datos de los clientes con los nuevos valores (Cliente editado o eliminado)
+            # Sobreescribe los datos de los Usuarios con los nuevos valores (Usuario editado o eliminado)
             for fila in range(self.tableWidget.rowCount()):
                 datos_de_la_fila = []
                 for columna in range(self.tableWidget.columnCount()):
@@ -152,10 +159,10 @@ class VentListaClientes(object):
         # Mensaje de que los cambios se guardaron correctamente
         self.alertBox("Se han guardado los cambios exitosamente!", "Se han completado los cambios")
 
-    # Metodo para que cargue los clientes desde el archivo CSV
-    def cargarClienteCSV(self):
-        # Abre el archivo CSV
-        with open('ArchivosCSV/Cliente.csv', newline='') as csvfile:
+    # Metodo para que cargue los Usuarios desde el archivo CSV
+    def cargarUsuarioCSV(self):
+        # Abre el archivo CSV con codificación UTF-8
+        with open('ArchivosCSV/Usuario.csv', newline='') as csvfile:
             reader = csv.reader(csvfile, delimiter=',', quotechar='"')
             #  Lee la primera fila como los encabezados de las columnas y los posiciona en el tableWidget
             encabezados = next(reader)
@@ -167,8 +174,8 @@ class VentListaClientes(object):
                 for columna, value in enumerate(fila):
                     item = QtWidgets.QTableWidgetItem(value)
                     self.tableWidget.setItem(posicionFila, columna, item)
-                    
-        # Ajusta el tamaño de las celdas automaticamente
+
+        # Ajusta el tamaño de las celdas automáticamente
         self.tableWidget.resizeColumnsToContents()
         self.tableWidget.resizeRowsToContents()
         

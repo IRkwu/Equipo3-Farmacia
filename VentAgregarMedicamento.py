@@ -43,6 +43,7 @@ class AgregarMedicamentos(QDialog):
         self.lote_inicialSpinBox = QtWidgets.QSpinBox(AgregarMedicamentos)
         self.lote_inicialSpinBox.setGeometry(QtCore.QRect(20, 245, 121, 31))
         self.lote_inicialSpinBox.setMinimum(1)
+        self.lote_inicialSpinBox.setMaximum(999)
         
         self.fechaCaducidadLabel = QtWidgets.QLabel(AgregarMedicamentos)
         self.fechaCaducidadLabel.setGeometry(QtCore.QRect(170, 245, 100, 31))

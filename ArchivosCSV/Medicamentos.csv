@@ -1,9 +1,9 @@
 ID,Nombre,Precio,Stock,Descripcion,Stock Lote 1,Caducidad Lote 1,Stock Lote 2,Caducidad Lote 2, Tipo de Medicamento,Fecha de Entrega
-004,Lomper,1200,70,Medicamento antiparasitario para perros y gatos,29,30/06/2023,41,30/10/2023,Nacional,No Aplica
+004,Lomper,1200,66,Medicamento antiparasitario para perros y gatos,25,30/06/2023,41,30/10/2023,Nacional,No Aplica
 032,Florfenicol,3000,24,Medicamento antibiotico para aves de corral,9,28/07/2023,15,28/12/2023,Nacional,No Aplica
 003,Fenobarbital,5000,12,Medicamento antiepileptico para perros y gatos,12,29/08/2023,0,,Nacional,No Aplica
 002,Meloxicam,2500,35,Medicamento antiinflamatorio no esteroideo para perros y gatos,35,30/06/2023,0,,Nacional,No Aplica
-011,Amoxicilina,1800,75,Medicamento antibiotico para perros y gatos,35,15/08/2023,40,15/01/2024,Nacional,No Aplica
+011,Amoxicilina,1800,71,Medicamento antibiotico para perros y gatos,31,15/08/2023,40,15/01/2024,Nacional,No Aplica
 026,Milteforan,20000,15,Medicamento para leishmaniasis en perros,15,30/07/2023,0,,Nacional,No Aplica
 021,Clorfeniramina,1400,80,Medicamento antihistaminico para perros y gatos,21,31/05/2023,59,30/10/2023,Nacional,No Aplica
 039,Melengestrol,20000,10,Medicamento hormonal para ganado y cerdos,4,25/08/2023,6,25/12/2023,Nacional,No Aplica
@@ -43,6 +43,7 @@ ID,Nombre,Precio,Stock,Descripcion,Stock Lote 1,Caducidad Lote 1,Stock Lote 2,Ca
 037,Oxitocina,3500,30,Medicamento para estimular la produccion de leche en vacas y ovejas,8,12/07/2023,22,12/11/2023,Nacional,No Aplica
 018,Furosemida,1800,70,Medicamento diuretico para perros y gatos,4,24/05/2023,66,24/09/2023,Nacional,No Aplica
 025,Pimobendan,15000,12,Medicamento para insuficiencia cardiaca en perros,2,30/05/2023,10,30/08/2023,Nacional,No Aplica
-015,Itraconazol,5000,17,Medicamento antifungico para perros y gatos,11,17/12/2023,6,12/04/2024,Nacional,No Aplica
+015,Itraconazol,5000,16,Medicamento antifungico para perros y gatos,10,17/12/2023,6,12/04/2024,Nacional,No Aplica
 046,Perrolol,3000,5,Perrolol esta lol,5,15/08/2024,0,,Experimental,30/06/2023
-047,Perrolol 2,2500,46,Perrolol pero producto nacional,46,25/09/2026,0,,Nacional,No Aplica
+047,Perrolol 2,2500,44,Perrolol pero producto nacional,44,25/09/2026,0,,Nacional,No Aplica
+048,Crotolamo,5400,60,Medicamento Chistosito Wuajaja,60,15/03/2025,0,,Experimental,30/08/2023

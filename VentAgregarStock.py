@@ -26,6 +26,7 @@ class AgregarStockDialog(QDialog):
         self.stockSpinBox = QtWidgets.QSpinBox(AgregarStockDialog)
         self.stockSpinBox.setGeometry(QtCore.QRect(130, 20, 110, 25))
         self.stockSpinBox.setMinimum(1)
+        self.stockSpinBox.setMaximum(999)
         
         # Etiqueta caducidad y DateEdit
         self.caducidadLabel = QtWidgets.QLabel(AgregarStockDialog)

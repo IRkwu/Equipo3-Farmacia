@@ -143,5 +143,50 @@ class Usuario:
         except FileNotFoundError:
             print("El archivo CSV no existe.")
 
+    def editar_usuario(id_usuario, nuevos_datos):
+        # Buscar el usuario por su ID
+        usuario_encontrado = None
+        for usuario in usuarios:
+            if usuario.get_id() == id_usuario:
+                usuario_encontrado = usuario
+                break
+            
+        if usuario_encontrado:
+            # Actualizar los atributos del usuario con los nuevos datos
+            if 'nombres' in nuevos_datos:
+                usuario_encontrado.set_nombres(nuevos_datos['nombres'])
+            if 'apellidos' in nuevos_datos:
+                usuario_encontrado.set_apellidos(nuevos_datos['apellidos'])
+            if 'genero' in nuevos_datos:
+                usuario_encontrado.set_genero(nuevos_datos['genero'])
+            if 'fecha_nacimiento' in nuevos_datos:
+                usuario_encontrado.set_fecha_nacimiento(nuevos_datos['fecha_nacimiento'])
+            if 'email' in nuevos_datos:
+                usuario_encontrado.set_email(nuevos_datos['email'])
+            if 'password' in nuevos_datos:
+                usuario_encontrado.set_password(nuevos_datos['password'])
+            if 'rut' in nuevos_datos:
+                usuario_encontrado.set_rut(nuevos_datos['rut'])
+            if 'telefono' in nuevos_datos:
+                usuario_encontrado.set_telefono(nuevos_datos['telefono'])
+            if 'domicilio' in nuevos_datos:
+                usuario_encontrado.set_domicilio(nuevos_datos['domicilio'])
+            if 'cargo' in nuevos_datos:
+                usuario_encontrado.set_cargo(nuevos_datos['cargo'])
+
+            # Guardar los cambios en el archivo CSV
+            guardar_usuarios_csv()
+
+            print("Usuario actualizado correctamente.")
+        else:
+            print("No se encontró ningún usuario con el ID especificado.")
+            
+    def guardar_usuarios_csv():
+        with open('ArchivosCSV/Usuario.csv', mode='w', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['ID', 'Nombres', 'Apellidos', 'Genero', 'Fecha de Nacimiento', 'Correo Electronico', 'Contraseña', 'RUT', 'Telefono', 'Domicilio', 'Cargo'])
+            for usuario in usuarios:
+                writer.writerow([usuario.get_id(), usuario.get_nombres(), usuario.get_apellidos(), usuario.get_genero(), usuario.get_fecha_nacimiento(), usuario.get_email(), usuario.get_password(), usuario.get_rut(), usuario.get_telefono(), usuario.get_domicilio(), usuario.get_cargo()])
+    
 # Crea una lista para almacenar los objetos Usuario
 usuarios = []

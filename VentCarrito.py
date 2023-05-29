@@ -2,38 +2,38 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QMessageBox
 import csv
 
-class VentComprarMedicamentos(object):
+class VentCarrito(object):
     def __init__(self):
         self.carrito = []  # Lista para almacenar los medicamentos del carrito
     
-    def setupUi(self, VentComprarMedicamentos):
+    def setupUi(self, VentCarrito):
         ImagenBanner = QtGui.QPixmap('Imagenes/banner_carrito.png')
         IconoRegresar = QtGui.QIcon('Imagenes/boton_regresar.png')
         IconoTitulo = QtGui.QIcon('Imagenes/icono_titulo.png')
         
-        VentComprarMedicamentos.setWindowIcon(IconoTitulo)
+        VentCarrito.setWindowIcon(IconoTitulo)
         
-        VentComprarMedicamentos.resize(1200, 670)
-        VentComprarMedicamentos.setMinimumSize(QtCore.QSize(1200, 670))
-        VentComprarMedicamentos.setMaximumSize(QtCore.QSize(1200, 670))
+        VentCarrito.resize(1200, 670)
+        VentCarrito.setMinimumSize(QtCore.QSize(1200, 670))
+        VentCarrito.setMaximumSize(QtCore.QSize(1200, 670))
         
         # Etiqueta imagen superior
-        self.imagen_on_topLabel = QtWidgets.QLabel(VentComprarMedicamentos)
+        self.imagen_on_topLabel = QtWidgets.QLabel(VentCarrito)
         self.imagen_on_topLabel.setGeometry(QtCore.QRect(0, 0, 1200, 144))
         self.imagen_on_topLabel.setText("")
         self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(1200, 144))
         
         # Boton regresar y accion al pulsar
-        self.btnRegresar = QtWidgets.QPushButton(VentComprarMedicamentos)
+        self.btnRegresar = QtWidgets.QPushButton(VentCarrito)
         self.btnRegresar.setGeometry(QtCore.QRect(20, 20, 50, 50))
         self.btnRegresar.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.btnRegresar.setIcon(IconoRegresar)
         self.btnRegresar.setIconSize(QtCore.QSize(60, 60))
         self.btnRegresar.setCursor(QtCore.Qt.PointingHandCursor)
-        self.btnRegresar.clicked.connect(VentComprarMedicamentos.close)
+        self.btnRegresar.clicked.connect(VentCarrito.close)
         
         # Tabla con columnas y filas para el carrito
-        self.tableWidgetCarrito = QtWidgets.QTableWidget(VentComprarMedicamentos)
+        self.tableWidgetCarrito = QtWidgets.QTableWidget(VentCarrito)
         self.tableWidgetCarrito.setGeometry(QtCore.QRect(620, 210, 300, 445))
         self.tableWidgetCarrito.setColumnCount(4)
         self.tableWidgetCarrito.setHorizontalHeaderLabels(["ID", "Nombre", "Precio", "Lote"])
@@ -49,7 +49,7 @@ class VentComprarMedicamentos(object):
         self.tableWidgetCarrito.setColumnHidden(3, True) 
         
         # Tabla con columnas y filas y que sean 10 columnas [ID, Nombre, Precio, Stock, Descripcion], carga las demás columnas pero no las muestra, es para que al guardar no se vacien
-        self.tableWidget = QtWidgets.QTableWidget(VentComprarMedicamentos)
+        self.tableWidget = QtWidgets.QTableWidget(VentCarrito)
         self.tableWidget.setGeometry(QtCore.QRect(10, 210, 600, 445))
         self.tableWidget.setColumnCount(11)
         
@@ -62,99 +62,99 @@ class VentComprarMedicamentos(object):
         self.tableWidget.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         
         # CheckBox de necesita_envio y acción al cambiar su estado
-        self.necesita_envioCheckBox = QtWidgets.QCheckBox(VentComprarMedicamentos)
+        self.necesita_envioCheckBox = QtWidgets.QCheckBox(VentCarrito)
         self.necesita_envioCheckBox.setGeometry(QtCore.QRect(945, 545, 250, 30))
         self.necesita_envioCheckBox.stateChanged.connect(self.actualizarDatos)
         
         # CheckBox de tiene_receta y acción al cambiar su estado
-        self.tiene_recetaCheckbox = QtWidgets.QCheckBox(VentComprarMedicamentos)
+        self.tiene_recetaCheckbox = QtWidgets.QCheckBox(VentCarrito)
         self.tiene_recetaCheckbox.setGeometry(QtCore.QRect(945, 575, 250, 30))
         self.tiene_recetaCheckbox.stateChanged.connect(self.actualizarDatos)
         
         # Etiqueta cantidad_medicamentos y LineEdit
-        self.cantidad_medicamentosLabel = QtWidgets.QLabel(VentComprarMedicamentos)
+        self.cantidad_medicamentosLabel = QtWidgets.QLabel(VentCarrito)
         self.cantidad_medicamentosLabel.setGeometry(QtCore.QRect(950, 307, 101, 31))
-        self.cantidad_medicamentosLineEdit = QtWidgets.QLineEdit(VentComprarMedicamentos)
+        self.cantidad_medicamentosLineEdit = QtWidgets.QLineEdit(VentCarrito)
         self.cantidad_medicamentosLineEdit.setGeometry(QtCore.QRect(1050, 307, 113, 31))
         self.cantidad_medicamentosLineEdit.setReadOnly(True)
         
         # Etiqueta subtotal y LineEdit
-        self.subtotalLabel = QtWidgets.QLabel(VentComprarMedicamentos)
+        self.subtotalLabel = QtWidgets.QLabel(VentCarrito)
         self.subtotalLabel.setGeometry(QtCore.QRect(950, 357, 101, 31))
-        self.subtotalLineEdit = QtWidgets.QLineEdit(VentComprarMedicamentos)
+        self.subtotalLineEdit = QtWidgets.QLineEdit(VentCarrito)
         self.subtotalLineEdit.setGeometry(QtCore.QRect(1050, 357, 113, 31))
         self.subtotalLineEdit.setReadOnly(True)
         
         # Etiqueta descuento y LineEdit
-        self.descuentoLabel = QtWidgets.QLabel(VentComprarMedicamentos)
+        self.descuentoLabel = QtWidgets.QLabel(VentCarrito)
         self.descuentoLabel.setGeometry(QtCore.QRect(950, 407, 101, 31))
-        self.descuentoLineEdit = QtWidgets.QLineEdit(VentComprarMedicamentos)
+        self.descuentoLineEdit = QtWidgets.QLineEdit(VentCarrito)
         self.descuentoLineEdit.setGeometry(QtCore.QRect(1050, 407, 113, 31))
         self.descuentoLineEdit.setReadOnly(True)
         
         # Etiqueta costo_envio y LineEdit
-        self.costo_envioLabel = QtWidgets.QLabel(VentComprarMedicamentos)
+        self.costo_envioLabel = QtWidgets.QLabel(VentCarrito)
         self.costo_envioLabel.setGeometry(QtCore.QRect(950, 457, 101, 31))
-        self.costo_envioLineEdit = QtWidgets.QLineEdit(VentComprarMedicamentos)
+        self.costo_envioLineEdit = QtWidgets.QLineEdit(VentCarrito)
         self.costo_envioLineEdit.setGeometry(QtCore.QRect(1050, 457, 113, 31))
         self.costo_envioLineEdit.setReadOnly(True)
         
         # Etiqueta total y LineEdit
-        self.totalLabel = QtWidgets.QLabel(VentComprarMedicamentos)
+        self.totalLabel = QtWidgets.QLabel(VentCarrito)
         self.totalLabel.setGeometry(QtCore.QRect(950, 507, 101, 31))
-        self.totalLineEdit = QtWidgets.QLineEdit(VentComprarMedicamentos)
+        self.totalLineEdit = QtWidgets.QLineEdit(VentCarrito)
         self.totalLineEdit.setGeometry(QtCore.QRect(1050, 507, 113, 31))
         self.totalLineEdit.setReadOnly(True)
         
         # Boton mas y accion al pulsar
-        self.btnMas = QtWidgets.QPushButton(VentComprarMedicamentos)
+        self.btnMas = QtWidgets.QPushButton(VentCarrito)
         self.btnMas.setGeometry(QtCore.QRect(722, 150, 96, 50))
         self.btnMas.clicked.connect(self.onActionBtnMas)
         
         # Boton menos y accion al pulsar
-        self.btnMenos = QtWidgets.QPushButton(VentComprarMedicamentos)
+        self.btnMenos = QtWidgets.QPushButton(VentCarrito)
         self.btnMenos.setGeometry(QtCore.QRect(620, 150, 90, 50))
         self.btnMenos.clicked.connect(self.onActionBtnMenos)
         
         # Boton informacion y accion al pulsar
-        self.btnInfo = QtWidgets.QPushButton(VentComprarMedicamentos)
+        self.btnInfo = QtWidgets.QPushButton(VentCarrito)
         self.btnInfo.setGeometry(QtCore.QRect(830, 150, 90, 50))
         self.btnInfo.clicked.connect(self.onActionBtnInfo)
         
         # Boton comprar y accion al pulsar
-        self.btnComprar = QtWidgets.QPushButton(VentComprarMedicamentos)
+        self.btnComprar = QtWidgets.QPushButton(VentCarrito)
         self.btnComprar.setGeometry(QtCore.QRect(945, 610, 231, 45))
         self.btnComprar.clicked.connect(self.onActionBtnComprar)
 
         # Barra de busqueda y accion al actualizar el texto
-        self.buscarLineEdit = QtWidgets.QLineEdit(VentComprarMedicamentos)
+        self.buscarLineEdit = QtWidgets.QLineEdit(VentCarrito)
         self.buscarLineEdit.setGeometry(QtCore.QRect(10, 150, 600, 50))
         self.buscarLineEdit.setPlaceholderText("Ingrese el nombre o ID del medicamento")
         self.buscarLineEdit.setStyleSheet("font-size: 16px;")
         self.buscarLineEdit.textChanged.connect(self.buscarMedicamentos)
 
-        self.retranslateUi(VentComprarMedicamentos)
-        QtCore.QMetaObject.connectSlotsByName(VentComprarMedicamentos)
+        self.retranslateUi(VentCarrito)
+        QtCore.QMetaObject.connectSlotsByName(VentCarrito)
         
         # Cargar lista de medicamentos del CSV y actualiar datos (subtotal, total, entre otros)
         self.cargarMedicamentosCSV()
         self.actualizarDatos()
         
     # Metodo definir textos
-    def retranslateUi(self, VentComprarMedicamentos):
+    def retranslateUi(self, VentCarrito):
         _translate = QtCore.QCoreApplication.translate
-        VentComprarMedicamentos.setWindowTitle(_translate("VentComprarMedicamentos", "Agregar medicamentos al carrito"))
-        self.cantidad_medicamentosLabel.setText(_translate("VentComprarMedicamentos", "Cantidad de\nMedicamentos:"))
-        self.subtotalLabel.setText(_translate("VentComprarMedicamentos", "Subtotal:"))
-        self.descuentoLabel.setText(_translate("VentComprarMedicamentos", "Descuento:"))
-        self.costo_envioLabel.setText(_translate("VentComprarMedicamentos", "Costo Envio:"))
-        self.totalLabel.setText(_translate("VentComprarMedicamentos", "Total:"))
-        self.necesita_envioCheckBox.setText(_translate("VentComprarMedicamentos", "Seleccione si necesita envio. Precio: $2000\nEl envío es gratis si el subtotal es > $30000"))
-        self.tiene_recetaCheckbox.setText(_translate("VentComprarMedicamentos", "Seleccione si tiene receta, en caso de\ntener receta, se aplica 10% de descuento"))
-        self.btnComprar.setText(_translate("VentComprarMedicamentos", "Confirmar Compra"))
-        self.btnMas.setText(_translate("VentComprarMedicamentos", "Agregar \nMedicamento\n(+)"))
-        self.btnMenos.setText(_translate("VentComprarMedicamentos", "Quitar \nMedicamento\n(-)"))
-        self.btnInfo.setText(_translate("VentComprarMedicamentos", "Instrucciones\n(!)"))
+        VentCarrito.setWindowTitle(_translate("VentCarrito", "Agregar medicamentos al carrito"))
+        self.cantidad_medicamentosLabel.setText(_translate("VentCarrito", "Cantidad de\nMedicamentos:"))
+        self.subtotalLabel.setText(_translate("VentCarrito", "Subtotal:"))
+        self.descuentoLabel.setText(_translate("VentCarrito", "Descuento:"))
+        self.costo_envioLabel.setText(_translate("VentCarrito", "Costo Envio:"))
+        self.totalLabel.setText(_translate("VentCarrito", "Total:"))
+        self.necesita_envioCheckBox.setText(_translate("VentCarrito", "Seleccione si necesita envio. Precio: $2000\nEl envío es gratis si el subtotal es > $30000"))
+        self.tiene_recetaCheckbox.setText(_translate("VentCarrito", "Seleccione si tiene receta, en caso de\ntener receta, se aplica 10% de descuento"))
+        self.btnComprar.setText(_translate("VentCarrito", "Confirmar Compra"))
+        self.btnMas.setText(_translate("VentCarrito", "Agregar \nMedicamento\n(+)"))
+        self.btnMenos.setText(_translate("VentCarrito", "Quitar \nMedicamento\n(-)"))
+        self.btnInfo.setText(_translate("VentCarrito", "Instrucciones\n(!)"))
         
     # Accion al clickear boton comprar
     def onActionBtnComprar(self):
@@ -199,11 +199,11 @@ class VentComprarMedicamentos(object):
             
         
     def onActionBtnInfo(self):
-        self.alertBox("- Para comprar un medicamento debe seleccionarlo desde la lista de\nmedicamentos y hacer click en Agregar Medicamento\n"
-                      "\n- Para quitar un medicamento del carrito, debe seleccionarlo y dar click\nen Quitar Medicamento\n"
-                      "\n- Para comprar los medicamentos debe haber agregado al menos un\nmedicamento al carrito, de lo contrario la compra no se va efectuar\n"
-                      "\n- Si necesita envio, debe marcar la opción: [Seleccione si necesita envío]\nEl costo del envío son $2000 pero si el total supera los $30000 el envío es gratis\n"
-                      "\n- Si usted tiene una receta, debe marcar la opción: [Seleccione si tiene receta]\nSi el cliente tiene receta se aplica un 10% de descuento, este es aplicado\nen el subtotal por lo que no afecta el costro de envío", "Lista de Instrucciones")
+        self.alertBox("- Para comprar un medicamento debe seleccionarlo desde la lista de medicamentos y hacer click en Agregar Medicamento\n\n"
+                      "- Para quitar un medicamento del carrito, debe seleccionarlo y dar click en Quitar Medicamento\n\n"
+                      "- Para comprar los medicamentos debe haber agregado al menos un medicamento al carrito, de lo contrario la compra no se va efectuar\n\n"
+                      "- Si necesita envio, debe marcar la casilla apropiada.\nEl costo del envío son $2000 pero si el total supera los $30000 el envío es gratis\n\n"
+                      "- Si usted tiene una receta, debe marcar la casilla apropiada.\nSe aplica un 10% de descuento, este es aplicado en el subtotal por lo que no afecta el costo de envío", "Lista de Instrucciones")
 
     # Metodo para que cargue los clientes desde el archivo CSV
     def cargarMedicamentosCSV(self):
