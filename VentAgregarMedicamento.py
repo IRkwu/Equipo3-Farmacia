@@ -118,6 +118,8 @@ class AgregarMedicamentos(QDialog):
         
         if nombre.strip() == "":
             self.alertBox("Falta ingresar el nombre", "Falta un dato")
+        elif self.verificarMedicamentoExistente(nombre):
+            self.alertBox("El medicamento ya existe, no se puede agregar nuevamente", "Medicamento duplicado")
         elif precio.strip() == "":
             self.alertBox("Falta ingresar el precio", "Falta un dato")
         elif descripcion.strip() == "":
@@ -138,6 +140,14 @@ class AgregarMedicamentos(QDialog):
         else:
             self.fechaEntregaLabel.setVisible(False)
             self.fechaEntregaDateEdit.setVisible(False)
+            
+    def verificarMedicamentoExistente(self, nombre):
+        with open('ArchivosCSV/Medicamentos.csv', 'r') as file:
+            encabezados = csv.reader(file)
+            for fila in encabezados:
+                if fila[1].lower() == nombre.lower():
+                    return True
+        return False
             
     def get_nombre(self):
         return self.nombreLineEdit.text()

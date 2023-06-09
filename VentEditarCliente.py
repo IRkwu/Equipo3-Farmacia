@@ -4,7 +4,6 @@ from PyQt5.QtWidgets import QMessageBox, QLabel, QSpinBox, QDateEdit, QDialog, Q
 from Clases.Cliente import Cliente
 from PyQt5.QtCore import Qt, QDate
 
-
 class VentEditarCliente(QDialog):
     def __init__(self, nombres='', apellidos='', genero='', telefono='', email='', domicilio='', parent=None):
         super(VentEditarCliente, self).__init__(parent)
@@ -37,6 +36,7 @@ class VentEditarCliente(QDialog):
         self.nombresLineEdit = QtWidgets.QLineEdit(VentEditarCliente)
         self.nombresLineEdit.setGeometry(QtCore.QRect(106, 137, 260, 50))
         self.nombresLineEdit.setPlaceholderText("Ingrese Primer y segundo nombre")
+        self.nombresLineEdit.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp("[^0-9]+"), self.nombresLineEdit))
         
         # Etiqueta apellidos y LineEdit
         self.apellidosLabel = QtWidgets.QLabel(VentEditarCliente)
@@ -44,6 +44,7 @@ class VentEditarCliente(QDialog):
         self.apellidosLineEdit = QtWidgets.QLineEdit(VentEditarCliente)
         self.apellidosLineEdit.setGeometry(QtCore.QRect(504, 137, 260, 50))
         self.apellidosLineEdit.setPlaceholderText("Ingrese apellido paterno y materno")
+        self.apellidosLineEdit.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp("[^0-9]+"), self.apellidosLineEdit))
 
         # Etiqueta genero y ComboBox
         self.generoLabel = QtWidgets.QLabel(VentEditarCliente)
@@ -143,19 +144,17 @@ class VentEditarCliente(QDialog):
         telefono =self.telefonoLineEdit.text()
         email = self.emailLineEdit.text()
         domicilio = self.domicilioLineEdit.text()
-        if "@" not in email:
-            self.alertBox("Falta ingresar el '@' en el email", "Falta un dato")
-        elif "." not in email:
-            self.alertBox("Falta ingresar el '.' en el email", "Falta un dato")
+        if '@' not in email or '.' not in email:
+            self.alertBox("Falta agregar '@' o '.' en el email", "Falta un dato")
         # El .strip es para verificar que tenga datos
         elif nombres.strip() == "":
             self.alertBox("Falta ingresar el nombre", "Falta un dato")
         elif apellidos.strip() == "":
             self.alertBox("Falta ingresar el apellido", "Falta un dato")
-        elif len(self.telefonoLineEdit.text()) != 9:
+        elif len(telefono) != 9:
             self.alertBox("Faltan numeros en el telefono", "Falta un dato")
-        elif email.strip() == "":
-            self.alertBox("Falta ingresar el email", "Falta un dato")
+        elif '@' not in email or '.' not in email:
+            self.alertBox("Falta agregar '@' o '.' en el email", "Falta un dato")
         elif domicilio.strip() == "":
             self.alertBox("Falta ingresar el domicilio", "Falta un dato")
         else:
@@ -168,7 +167,8 @@ class VentEditarCliente(QDialog):
         self.telefonoLineEdit.setText(self.telefono)
         self.emailLineEdit.setText(self.email)
         self.domicilioLineEdit.setText(self.domicilio)
-            
+    
+    # Getters
     def get_nombres(self):
         return self.nombresLineEdit.text()
 

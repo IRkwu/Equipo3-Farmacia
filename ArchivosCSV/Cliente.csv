@@ -5,12 +5,7 @@ ID,Nombres,Apellidos,Genero,Fecha Nacimiento,Email,RUT,Telefono,Domicilio
 6778,Cristian Eduardo,Avila Morales,Masculino,17/06/1997,criseduardo.avila@gmail.com,19.567.234-5,936785412,Psj Los Cerezos
 7296,Martin Alonso,Marquez Flores,Masculino,21/08/1989,martinalonso@gmail.com,15.456.789-2,947821365,Av. Las Palmeras
 9423,Marcelo Andres,Salas Vega,Masculino,11/03/1996,masave96@hotmail.com,13.456.789-0,925684171,Av. Las Azaleas
-1056,Antonella Sofia,Rodriguez Rojas,Femenino,09/06/2000,antonellasr@gmail.com,16.345.789-3,982563471,Calle Los Aromos
-1168,Mauricio David,Valenzuela Gutierrez,Masculino,25/01/1991,maudavgtz@gmail.com,17.890.123-5,912346871,Av. Las Acacias
 1257,Laura Isabel,Ortiz Gomez,Femenino,12/10/1998,lauraog94@hotmail.com,19.567.891-2,946271538,Calle Los Rosales
-1875,Francisco Jos�,Torres Castro,Masculino,08/07/1994,franctorresc@gmail.com,14.567.890-1,913467825,Av. Los Naranjos
-1425,Isidora Andrea,Soto Silva,Femenino,19/02/1999,isasotos@gmail.com,18.678.901-4,968734125,Calle Los Tilos
-1963,Juan Pablo,Saavedra Perez,Masculino,02/12/1987,jpsaavedra@hotmail.com,11.234.567-8,967543218,Av. Las Camelias
 2675,Ana Mar�a,Rojas Torres,Femenino,15/05/1995,anamariarojas@gmail.com,12.345.678-9,978654321,Calle Los Almendros
 3478,Francisco Javier,Rodriguez Gomez,Masculino,29/09/1980,fjrodriguez@gmail.com,23.456.789-0,986532147,Av. Los Leones
 4732,Alejandra,Contreras Hernandez,Femenino,21/06/1991,alecontreras@gmail.com,14.567.890-1,945671238,Calle Las Acacias
@@ -21,4 +16,4 @@ ID,Nombres,Apellidos,Genero,Fecha Nacimiento,Email,RUT,Telefono,Domicilio
 1056,Carolina,Gonzalez Garcia,Femenino,27/07/1996,cgonzalezg@hotmail.com,19.123.456-7,945671238,Calle Los Pinos
 2341,Sebastian,Fernandez Torres,Masculino,03/05/1989,sfernandezt@hotmail.com,18.234.567-8,967543218,Av. Los Nogales
 3567,Camila,Aravena Diaz,Femenino,08/12/1992,camilaaravenad@gmail.com,19.345.678-9,978654321,Calle Las Palmeras
-4790,Andres,Lopez Perez,Masculino,18/09/1982,alopezp@gmail.com,16.456.789-0,986532147,Av. Las Magnolias
+4790,Andres,Lopez Perez,Femenino,18/09/1982,alopezp@gmail.com,16.456.789-0,986532147,Av. Las Magnolias

@@ -50,11 +50,6 @@ class VentListaUsuarios(object):
         self.btnEliminar.setGeometry(QtCore.QRect(160, 500, 121, 50))
         self.btnEliminar.clicked.connect(self.onActionBtnEliminar)
         
-        # Boton guardar y accion al pulsar
-        self.btnGuardar = QtWidgets.QPushButton(VentListaUsuarios)
-        self.btnGuardar.setGeometry(QtCore.QRect(715, 500, 121, 50))
-        self.btnGuardar.clicked.connect(self.onActionBtnGuardar)
-        
         # Etiqueta de instruccion para editar Usuarios
         self.mensajeEditarLabel = QtWidgets.QLabel(VentListaUsuarios)
         self.mensajeEditarLabel.setGeometry(QtCore.QRect(14, 94, 865, 50))
@@ -82,7 +77,6 @@ class VentListaUsuarios(object):
         VentListaUsuarios.setWindowTitle(_translate("VentListaUsuarios", "Listas de Usuarios"))
         self.btnEditar.setText(_translate("VentListaUsuarios", "Editar"))
         self.btnEliminar.setText(_translate("VentListaUsuarios", "Eliminar"))
-        self.btnGuardar.setText(_translate("VentListaUsuarios", "Guardar Cambios"))
         self.mensajeEditarLabel.setText(_translate("VentListaUsuarios", "Para editar el Usuario seleccione una fila y haga click en Editar"))
         self.mensajeEditarLabel.setFont(fuenteEstado)
         self.mensajeEliminarLabel.setText(_translate("VentListaUsuarios", "Para eliminar el Usuario seleccione una ID y haga click en Eliminar"))
@@ -98,8 +92,10 @@ class VentListaUsuarios(object):
             if fila != -1:
                 # Elimina la fila seleccionada
                 self.tableWidget.removeRow(fila)
+                self.guardarUsuarios()
         else:
-            self.alertBox("Debe seleccionar una 'ID' para borrar el Usuario", "Instrucciones para borrar")
+            self.alertBox("Por seguridad, debe seleccionar la ID para eliminar al Usuario", "Instrucciones para borrar")
+        
     
     # Accion al clickear boton editar
     # Dentro del método onActionBtnEditar()
@@ -136,9 +132,10 @@ class VentListaUsuarios(object):
                 self.tableWidget.setItem(fila, 9, QtWidgets.QTableWidgetItem(domicilio))
                 self.tableWidget.setItem(fila, 6, QtWidgets.QTableWidgetItem(password))
                 self.tableWidget.setItem(fila, 10, QtWidgets.QTableWidgetItem(cargo))
+                self.guardarUsuarios()
             
     # Accion al clickear boton guardar
-    def onActionBtnGuardar(self):
+    def guardarUsuarios(self):
         # Abre el archivo CSV
         with open('ArchivosCSV/Usuario.csv', 'w', newline='') as csvfile:
             writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)

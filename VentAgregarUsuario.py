@@ -2,6 +2,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIntValidator, QFont, QIcon
 from PyQt5.QtWidgets import QMessageBox
 from Clases.Usuario import Usuario
+import csv
 
 class VentAgregarUsuario(object):
     def setupUi(self, VentAgregarUsuario):
@@ -21,6 +22,7 @@ class VentAgregarUsuario(object):
         self.nombresLineEdit = QtWidgets.QLineEdit(VentAgregarUsuario)
         self.nombresLineEdit.setGeometry(QtCore.QRect(106, 137, 260, 50))
         self.nombresLineEdit.setPlaceholderText("Ingrese Primer y segundo nombre")
+        self.nombresLineEdit.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp("[^0-9]+"), self.nombresLineEdit))
         
         # Etiqueta apellidos y LineEdit
         self.apellidosLabel = QtWidgets.QLabel(VentAgregarUsuario)
@@ -28,8 +30,8 @@ class VentAgregarUsuario(object):
         self.apellidosLineEdit = QtWidgets.QLineEdit(VentAgregarUsuario)
         self.apellidosLineEdit.setGeometry(QtCore.QRect(504, 137, 260, 50))
         self.apellidosLineEdit.setPlaceholderText("Ingrese apellido paterno y materno")
+        self.apellidosLineEdit.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp("[^0-9]+"), self.apellidosLineEdit))
 
-        
         # Etiqueta genero y ComboBox
         self.generoLabel = QtWidgets.QLabel(VentAgregarUsuario)
         self.generoLabel.setGeometry(QtCore.QRect(14, 229, 35, 50))
@@ -49,6 +51,8 @@ class VentAgregarUsuario(object):
         self.fecha_nacimientoLabel.setGeometry(QtCore.QRect(399, 229, 99, 50))
         self.fecha_nacimientoDateEdit = QtWidgets.QDateEdit(VentAgregarUsuario)
         self.fecha_nacimientoDateEdit.setGeometry(QtCore.QRect(504, 229, 260, 50))
+        self.fecha_nacimientoDateEdit.setMaximumDate(QtCore.QDate.currentDate().addYears(-18))
+        self.fecha_nacimientoDateEdit.setMinimumDate(QtCore.QDate.currentDate().addYears(-100))
         
         # Etiqueta rut y LineEdit
         self.rutLabel = QtWidgets.QLabel(VentAgregarUsuario)
@@ -85,7 +89,8 @@ class VentAgregarUsuario(object):
         self.emailLineEdit = QtWidgets.QLineEdit(VentAgregarUsuario)
         self.emailLineEdit.setGeometry(QtCore.QRect(106, 413, 260, 50))
         self.emailLineEdit.setPlaceholderText("Ingrese su email")
-        
+        self.emailLineEdit.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp("[a-zA-Z@.0-9]+")))
+
         # Etiqueta domicilio y LineEdit
         self.domicilioLabel = QtWidgets.QLabel(VentAgregarUsuario)
         self.domicilioLabel.setGeometry(QtCore.QRect(399, 413, 40, 50))
@@ -191,27 +196,22 @@ class VentAgregarUsuario(object):
             rut_con_digito_verificador = rutFormatted + "-" + digito_verificador
         else:
             rut_con_digito_verificador = ""
-        if "@" not in email:
-            self.alertBox("Falta agregar el '@' en el email", "Falta un dato")
-        elif "." not in email:
-            self.alertBox("Falta agregar el '.' en el email", "Falta un dato")
-        # El .strip es para verificar que tenga datos
-        elif nombres.strip() == "":
+        if nombres.strip() == "":
             self.alertBox("Falta agregar el nombre", "Falta un dato")
         elif apellidos.strip() == "":
             self.alertBox("Falta agregar el apellido", "Falta un dato")
-        elif len(self.rutLineEdit.text()) != 8:
-            self.alertBox("Faltan numeros en el rut", "Falta un dato")
-        elif len(self.digito_verificadorLineEdit.text()) != 1:
-            self.alertBox("Falta agregar el digito verificador", "Falta un dato")
-        elif len(self.telefonoLineEdit.text()) != 9:
+        elif len(rut) < 7 or len(digito_verificador) != 1:
+            self.alertBox("Faltan números en el rut o el dígito verificador", "Falta un dato")
+        elif self.verificarRutExistente(rut_con_digito_verificador):
+            self.alertBox("El rut ya pertenece a un usuario", "RUT duplicado")
+        elif len(telefono) != 9:
             self.alertBox("Faltan numeros en el telefono", "Falta un dato")
-        elif email.strip() == "":
-            self.alertBox("Falta agregar el email", "Falta un dato")
+        elif '@' not in email or '.' not in email:
+            self.alertBox("Falta agregar '@' o '.' en el email", "Falta un dato")
         elif domicilio.strip() == "":
             self.alertBox("Falta agregar el domicilio", "Falta un dato")
-        elif password.strip() == "":
-            self.alertBox("Falta agregar la contraseña", "Falta un dato")
+        elif len(password) < 4:
+            self.alertBox("La contraseña debe tener al menos 4 caracteres", "Contraseña inválida")
         else:
             Usuario.agregar_usuario(nombres, apellidos, domicilio, genero, fecha_nacimiento, rut_con_digito_verificador, email, password, telefono, cargo, )
             self.alertBox("El usuario: "+nombres+" "+apellidos+" ha sido ingresado", "Se ha ingresado el Usuario")
@@ -226,3 +226,12 @@ class VentAgregarUsuario(object):
             self.telefonoLineEdit.setText("")
             self.domicilioLineEdit.setText("")
             self.passwordLineEdit.setText("")
+    
+    # Verificar si ya existe el rut
+    def verificarRutExistente(self, rut):
+        with open('ArchivosCSV/Usuario.csv', 'r') as file:
+            encabezados = csv.reader(file)
+            for fila in encabezados:
+                if fila[7] == rut:
+                    return True
+        return False
