@@ -6,12 +6,13 @@ from VentMenuGerente import VentMenuGerente
 from VentModificarMedicamentos import VentModificarMedicamentos
 from VentListaUsuarios import VentListaUsuarios
 from VentModificarStock import VentModificarStock
+from VentIniciarSesion import VentIniciarSesion
 
 class main(QMainWindow):
            
     def __init__(self):
         QMainWindow.__init__(self)
-        self.ui = VentMenuGerente()
+        self.ui = VentIniciarSesion()
         self.ui.setupUi(self)
                 
         self.show()

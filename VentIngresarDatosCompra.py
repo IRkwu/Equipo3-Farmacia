@@ -38,15 +38,15 @@ class VentIngresarDatosCompra(QDialog):
         
         # Etiqueta nombres y LineEdit
         self.nombresLabel = QtWidgets.QLabel(VentIngresarDatosCompra)
-        self.nombresLabel.setGeometry(QtCore.QRect(14, 122, 42, 50))
+        self.nombresLabel.setGeometry(QtCore.QRect(14, 122, 100, 50))
         self.nombresLineEdit = QtWidgets.QLineEdit(VentIngresarDatosCompra)
         self.nombresLineEdit.setGeometry(QtCore.QRect(106, 122, 260, 50))
-        self.nombresLineEdit.setPlaceholderText("Ingrese Primer y segundo nombre")
+        self.nombresLineEdit.setPlaceholderText("Ingrese primer y segundo nombre")
         self.nombresLineEdit.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp("[^0-9]+"), self.nombresLineEdit))
         
         # Etiqueta apellidos y LineEdit
         self.apellidosLabel = QtWidgets.QLabel(VentIngresarDatosCompra)
-        self.apellidosLabel.setGeometry(QtCore.QRect(14, 214, 35, 50))
+        self.apellidosLabel.setGeometry(QtCore.QRect(14, 214, 100, 50))
         self.apellidosLineEdit = QtWidgets.QLineEdit(VentIngresarDatosCompra)
         self.apellidosLineEdit.setGeometry(QtCore.QRect(106, 214, 260, 50))
         self.apellidosLineEdit.setPlaceholderText("Ingrese apellido paterno y materno")

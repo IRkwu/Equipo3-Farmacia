@@ -34,7 +34,7 @@ class VentAgregarClienteCarrito(QDialog):
         self.nombresLabel.setGeometry(QtCore.QRect(14, 137, 42, 50))
         self.nombresLineEdit = QtWidgets.QLineEdit(VentAgregarClienteCarrito)
         self.nombresLineEdit.setGeometry(QtCore.QRect(106, 137, 260, 50))
-        self.nombresLineEdit.setPlaceholderText("Ingrese Primer y segundo nombre")
+        self.nombresLineEdit.setPlaceholderText("Ingrese primer y segundo nombre")
         self.nombresLineEdit.setValidator(QtGui.QRegExpValidator(QtCore.QRegExp("[^0-9]+"), self.nombresLineEdit))
 
         # Etiqueta apellidos y LineEdit
