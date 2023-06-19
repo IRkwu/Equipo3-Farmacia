@@ -1,6 +1,7 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox
+from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox, QDialog
 from Clases.Boleta import Boleta
+from VentIngresarDatosCompra import VentIngresarDatosCompra
 import csv, datetime
 
 class VentCarrito(object):
@@ -161,32 +162,38 @@ class VentCarrito(object):
         
     # Accion al clickear boton comprar
     def onActionBtnComprar(self):
-        for fila in range(self.tableWidget.rowCount()):
-            if self.tableWidget.item(fila, 5).text() == '0':
-                self.actualizarLotes(fila)
-        # Abre el archivo CSV para guardar los datos
-        with open('ArchivosCSV/Medicamentos.csv', 'w', newline='') as csvfile:
-            writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
-            # Escribe los encabezados de las columnas
-            encabezados = [self.tableWidget.horizontalHeaderItem(i).text() for i in range(self.tableWidget.columnCount())]
-            writer.writerow(encabezados)
-            # Sobreescribe los datos de los medicamentos con los nuevos valores (El nuevo stock despues de comprar medicamentos)
+        dialog = VentIngresarDatosCompra()
+        if dialog.exec_() == QDialog.Accepted:
+            nombres = dialog.get_nombres()
+            apellidos = dialog.get_apellidos()
+            rut = dialog.get_rut()
+            
             for fila in range(self.tableWidget.rowCount()):
-                datos_de_la_fila = []
-                for columna in range(self.tableWidget.columnCount()):
-                    celda = self.tableWidget.item(fila, columna)
-                    if celda is not None:
-                        datos_de_la_fila.append(celda.text())
-                    else:
-                        datos_de_la_fila.append('')
-                writer.writerow(datos_de_la_fila)
-        # Mensaje de que los cambios se guardaron correctamente
-        self.alertBox("Se han comprado los medicamentos.\nLa lista de medicamentos se ha actualizado", "Compra exitosa")
-        self.tableWidgetCarrito.setRowCount(0)
-        Boleta.agregarBoleta(self, datetime.datetime.now().strftime("%d/%m/%Y"), "cliente", "21.354.784-4", self.medicamentos_cliente, self.cantidad_medicamentosLineEdit.text(), self.subtotalLineEdit.text(), self.descuentoLineEdit.text(), self.costo_envioLineEdit.text(), self.totalLineEdit.text())
-        self.carrito = []
-        self.medicamentos_cliente = []
-        self.actualizarDatos()
+                if self.tableWidget.item(fila, 5).text() == '0':
+                    self.actualizarLotes(fila)
+            # Abre el archivo CSV para guardar los datos
+            with open('ArchivosCSV/Medicamentos.csv', 'w', newline='') as csvfile:
+                writer = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+                # Escribe los encabezados de las columnas
+                encabezados = [self.tableWidget.horizontalHeaderItem(i).text() for i in range(self.tableWidget.columnCount())]
+                writer.writerow(encabezados)
+                # Sobreescribe los datos de los medicamentos con los nuevos valores (El nuevo stock despues de comprar medicamentos)
+                for fila in range(self.tableWidget.rowCount()):
+                    datos_de_la_fila = []
+                    for columna in range(self.tableWidget.columnCount()):
+                        celda = self.tableWidget.item(fila, columna)
+                        if celda is not None:
+                            datos_de_la_fila.append(celda.text())
+                        else:
+                            datos_de_la_fila.append('')
+                    writer.writerow(datos_de_la_fila)
+            # Mensaje de que los cambios se guardaron correctamente
+            self.alertBox("Se han comprado los medicamentos.\nLa lista de medicamentos se ha actualizado", "Compra exitosa")
+            self.tableWidgetCarrito.setRowCount(0)
+            Boleta.agregarBoleta(self, datetime.datetime.now().strftime("%d/%m/%Y"), nombres+" "+apellidos, rut, self.medicamentos_cliente, self.cantidad_medicamentosLineEdit.text(), self.subtotalLineEdit.text(), self.descuentoLineEdit.text(), self.costo_envioLineEdit.text(), self.totalLineEdit.text())
+            self.carrito = []
+            self.medicamentos_cliente = []
+            self.actualizarDatos()
             
     def actualizarLotes(self, fila):
         # Si el stock del lote 1 es igual a 0 copia el stock y vencimiento del lote 2 al lote 1, dejando el lote 2 libre para agregar un nuevo lote de medicamentos

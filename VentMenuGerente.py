@@ -84,21 +84,21 @@ class VentMenuGerente(object):
         self.BtnModificarStock.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.BtnModificarStock.setCursor(QtCore.Qt.PointingHandCursor)
         
-        # Boton Carrito
-        self.BtnCarrito = QtWidgets.QPushButton(VentMenuGerente)
-        self.BtnCarrito.setGeometry(QtCore.QRect(125, 361, 200, 50))
-        self.BtnCarrito.setIcon(ImgCarrito)
-        self.BtnCarrito.setIconSize(QtCore.QSize(200, 50))
-        self.BtnCarrito.setStyleSheet("background-color: transparent;\n""border: none;\n""")
-        self.BtnCarrito.setCursor(QtCore.Qt.PointingHandCursor)
-        
         # Boton Historial Boletas
         self.BtnBoletas = QtWidgets.QPushButton(VentMenuGerente)
-        self.BtnBoletas.setGeometry(QtCore.QRect(368, 361, 200, 50))
+        self.BtnBoletas.setGeometry(QtCore.QRect(125, 361, 200, 50))
         self.BtnBoletas.setIcon(ImgBoletas)
         self.BtnBoletas.setIconSize(QtCore.QSize(200, 50))
         self.BtnBoletas.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.BtnBoletas.setCursor(QtCore.Qt.PointingHandCursor)
+        
+        # Boton Carrito
+        self.BtnCarrito = QtWidgets.QPushButton(VentMenuGerente)
+        self.BtnCarrito.setGeometry(QtCore.QRect(368, 361, 200, 50))
+        self.BtnCarrito.setIcon(ImgCarrito)
+        self.BtnCarrito.setIconSize(QtCore.QSize(200, 50))
+        self.BtnCarrito.setStyleSheet("background-color: transparent;\n""border: none;\n""")
+        self.BtnCarrito.setCursor(QtCore.Qt.PointingHandCursor)
         
         # Boton Cerrar Menu
         self.BtnCerrarMenu = QtWidgets.QPushButton(VentMenuGerente)
