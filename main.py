@@ -5,6 +5,7 @@ from VentCarrito import VentCarrito
 from VentMenuGerente import VentMenuGerente
 from VentModificarMedicamentos import VentModificarMedicamentos
 from VentListaUsuarios import VentListaUsuarios
+from VentModificarStock import VentModificarStock
 
 class main(QMainWindow):
            

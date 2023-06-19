@@ -140,34 +140,3 @@ class Boleta:
 
     
 boletas = Boleta.cargarBoletasCSV(None)
-#Boleta.guardarBoletasCSV(None, boletas)
-
-#if len(boletas) > 0:
-#    for i, boleta in enumerate(boletas):
-#        print("Boleta número", i + 1, ":")
-#        print("Número de Boleta:", boleta.get_numero_boleta())
-#        print("Fecha:", boleta.get_fecha())
-#        print("Cliente:", boleta.get_cliente())
-#        print("Productos:", boleta.get_productos())
-#        print("Subtotal:", boleta.get_subtotal())
-#        print("Descuento:", boleta.get_descuento())
-#        print("Costo de Envío:", boleta.get_costo_envio())
-#        print("Total:", boleta.get_total())
-#        print()  # Agregar una línea en blanco entre boletas
-#else:
-#    print("No hay boletas cargadas en el archivo CSV.")
-
-    
-#boleta = Boleta(
-#    numero_boleta="B001",
-#    fecha="2023-06-10",
-#    cliente="John Doe",
-#    productos=["Producto 1", "Producto 2"],
-#    subtotal=100.0,
-#    descuento=10.0,
-#    costo_envio=5.0,
-#    total=95.0
-#)
-#
-#boleta.agregarBoleta(boleta)
-#

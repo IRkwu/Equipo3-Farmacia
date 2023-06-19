@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QMessageBox, QDialog
 import csv, datetime
 from Clases.Medicamentos import Medicamentos
 from VentAgregarStock import AgregarStockDialog
+from VentIngresarDatosDevolucion import VentIngresarDatosDevolucion
 
 class VentModificarStock(object):
     def __init__(self):
@@ -66,10 +67,15 @@ class VentModificarStock(object):
         self.btnCaducidad.setGeometry(QtCore.QRect(932, 426, 180, 60))
         self.btnCaducidad.clicked.connect(self.onActionBtnCaducidad)
         
-        # Boton revisar caducidad y accion al pulsar
+        # Boton entregar y accion al pulsar
         self.btnEntregar = QtWidgets.QPushButton(VentModificarStock)
         self.btnEntregar.setGeometry(QtCore.QRect(932, 506, 180, 60))
         self.btnEntregar.clicked.connect(self.onActionBtnEntregar)
+        
+        # Boton devolucion y accion al pulsar
+        self.btnDevolucion = QtWidgets.QPushButton(VentModificarStock)
+        self.btnDevolucion.setGeometry(QtCore.QRect(932, 586, 180, 60))
+        self.btnDevolucion.clicked.connect(self.onActionBtnDevolucion)
         
         # Barra de busqueda y accion al actualizar el texto
         self.buscarLineEdit = QtWidgets.QLineEdit(VentModificarStock)
@@ -93,6 +99,7 @@ class VentModificarStock(object):
         self.btnInfo.setText(_translate("VentModificarStock", "Instrucciones (!)"))
         self.btnCaducidad.setText(_translate("VentModificarStock", "Revisar caducidad cercana de\nlos Medicamentos (!!!)"))
         self.btnEntregar.setText(_translate("VentModificarStock", "Entregar medicamentos\nexperimentales (-w-)"))
+        self.btnDevolucion.setText(_translate("VentModificarStock", "Devolución medicamentos\n>:("))
 
     # Metodo para que cargue los clientes desde el archivo CSV
     def cargarMedicamentosCSV(self):
@@ -294,6 +301,27 @@ class VentModificarStock(object):
                     self.alertBox("El medicamento ya ha sido entregado", "Alerta Entrega")
             else:
                 self.alertBox("El medicamento no es experimental", "Alerta Entrega")
+        self.guardarMedicamentos()
+        
+    def onActionBtnDevolucion(self):
+        fila_seleccionada = self.tableWidget.currentRow()
+        
+        if fila_seleccionada == -1:
+            self.alertBox("Debe seleccionar un medicamento para poder hacer la devolución", "Devolución Medicamento")
+        
+        # Si se ha seleccionado un medicamento
+        if fila_seleccionada != -1:
+            dialog = VentIngresarDatosDevolucion(stock_lote_2 = int(self.tableWidget.item(fila_seleccionada, 7).text()))
+            if dialog.exec_() == QDialog.Accepted:
+                lote = dialog.get_lote()
+                if lote == "Lote 1":
+                    stock_lote_1 = int(self.tableWidget.item(fila_seleccionada, 5).text())+1
+                    self.tableWidget.item(fila_seleccionada, 5).setText(str(stock_lote_1))
+                else:
+                    stock_lote_2 = int(self.tableWidget.item(fila_seleccionada, 7).text())+1
+                    self.tableWidget.item(fila_seleccionada, 7).setText(str(stock_lote_2))
+            
+                self.actualizarStock(fila_seleccionada)
         self.guardarMedicamentos()
             
     def guardarMedicamentos(self):

@@ -137,7 +137,7 @@ class VentIngresarDatosCompra(QDialog):
             self.alertBox("Gracias por la compra :D\nEl cliente ya está registrado como:\n"+self.nombres+" "+self.apellidos, "Cliente Registrado")
             self.accept()
         else:
-            respuesta = QMessageBox.question(None, "Registro Cliente", "¿Quiere registrarse como cliente?", QMessageBox.Yes | QMessageBox.No)
+            respuesta = QMessageBox.question(None, "Cliente Nuevo", "¿Quiere registrarse como cliente?", QMessageBox.Yes | QMessageBox.No)
             
             if respuesta == QMessageBox.Yes:
                 dialog = VentAgregarClienteCarrito(nombres=nombres,
