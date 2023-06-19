@@ -1,6 +1,10 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QMainWindow
+from VentHistorialBoletas import VentHistorialBoletas
+from VentCarrito import VentCarrito
 from VentMenuGerente import VentMenuGerente
+from VentModificarMedicamentos import VentModificarMedicamentos
+from VentListaUsuarios import VentListaUsuarios
 
 class main(QMainWindow):
            

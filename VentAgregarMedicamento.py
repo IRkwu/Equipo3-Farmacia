@@ -25,7 +25,7 @@ class AgregarMedicamentos(QDialog):
         self.imagen_on_topLabel = QtWidgets.QLabel(AgregarMedicamentos)
         self.imagen_on_topLabel.setGeometry(QtCore.QRect(-150, 0, 600, 90))
         self.imagen_on_topLabel.setText("")
-        self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(750, 90))
+        self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(750, 80))
         
         self.nombreLabel = QtWidgets.QLabel(AgregarMedicamentos)
         self.nombreLabel.setGeometry(QtCore.QRect(20, 105, 47, 13))

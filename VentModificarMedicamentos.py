@@ -16,15 +16,15 @@ class VentModificarMedicamentos(object):
         
         VentModificarMedicamentos.setWindowIcon(IconoTitulo)
         
-        VentModificarMedicamentos.resize(1048, 675)
-        VentModificarMedicamentos.setMinimumSize(QtCore.QSize(1048, 675))
-        VentModificarMedicamentos.setMaximumSize(QtCore.QSize(1048, 675))
+        VentModificarMedicamentos.resize(1048, 631)
+        VentModificarMedicamentos.setMinimumSize(QtCore.QSize(1048, 631))
+        VentModificarMedicamentos.setMaximumSize(QtCore.QSize(1048, 631))
         
         # Etiqueta imagen superior
         self.imagen_on_topLabel = QtWidgets.QLabel(VentModificarMedicamentos)
-        self.imagen_on_topLabel.setGeometry(QtCore.QRect(0, 0, 1048, 144))
+        self.imagen_on_topLabel.setGeometry(QtCore.QRect(0, 0, 1048, 100))
         self.imagen_on_topLabel.setText("")
-        self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(1048, 144))
+        self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(1048, 100))
         
         # Boton regresar y accion al pulsar
         self.btnRegresar = QtWidgets.QPushButton(VentModificarMedicamentos)
@@ -37,7 +37,7 @@ class VentModificarMedicamentos(object):
 
         # Tabla con columnas y filas y que sean 10 columnas
         self.tableWidget = QtWidgets.QTableWidget(VentModificarMedicamentos)
-        self.tableWidget.setGeometry(QtCore.QRect(10, 210, 844, 450))
+        self.tableWidget.setGeometry(QtCore.QRect(10, 166, 844, 450))
         self.tableWidget.setColumnCount(11)
                 
         # Ocultar columnas
@@ -52,27 +52,27 @@ class VentModificarMedicamentos(object):
         
         # Boton informacion y accion al pulsar
         self.btnInfo = QtWidgets.QPushButton(VentModificarMedicamentos)
-        self.btnInfo.setGeometry(QtCore.QRect(861, 210, 180, 60))
+        self.btnInfo.setGeometry(QtCore.QRect(861, 166, 180, 60))
         self.btnInfo.clicked.connect(self.onActionBtnInfo)
         
         # Boton agregar medicamentos y accion al pulsar
         self.btnAgregar = QtWidgets.QPushButton(VentModificarMedicamentos)
-        self.btnAgregar.setGeometry(QtCore.QRect(861, 290, 180, 60))
+        self.btnAgregar.setGeometry(QtCore.QRect(861, 246, 180, 60))
         self.btnAgregar.clicked.connect(self.onActionBtnAgregar)
         
         # Boton borrar medicamentos y accion al pulsar
         self.btnBorrar = QtWidgets.QPushButton(VentModificarMedicamentos)
-        self.btnBorrar.setGeometry(QtCore.QRect(861, 370, 180, 60))
+        self.btnBorrar.setGeometry(QtCore.QRect(861, 326, 180, 60))
         self.btnBorrar.clicked.connect(self.onActionBtnBorrar)
         
         # Boton revisar medicamentos experimentales y accion al pulsar
         self.btnRevisarTipo = QtWidgets.QPushButton(VentModificarMedicamentos)
-        self.btnRevisarTipo.setGeometry(QtCore.QRect(861, 450, 180, 60))
+        self.btnRevisarTipo.setGeometry(QtCore.QRect(861, 406, 180, 60))
         self.btnRevisarTipo.clicked.connect(self.onActionBtnRevisarTipo)
         
         # Barra de busqueda y accion al actualizar el texto
         self.buscarLineEdit = QtWidgets.QLineEdit(VentModificarMedicamentos)
-        self.buscarLineEdit.setGeometry(QtCore.QRect(10, 150, 1030, 50))
+        self.buscarLineEdit.setGeometry(QtCore.QRect(10, 106, 1030, 50))
         self.buscarLineEdit.setPlaceholderText("Ingrese el nombre, tipo o ID del medicamento")
         self.buscarLineEdit.setStyleSheet("font-size: 16px;")
         self.buscarLineEdit.textChanged.connect(self.buscarMedicamentos)

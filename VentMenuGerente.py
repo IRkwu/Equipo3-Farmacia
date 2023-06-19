@@ -8,6 +8,7 @@ from VentAgregarUsuario import VentAgregarUsuario
 from VentListaUsuarios import VentListaUsuarios
 from VentModificarStock import VentModificarStock
 from VentModificarMedicamentos import VentModificarMedicamentos
+from VentHistorialBoletas import VentHistorialBoletas
 
 class VentMenuGerente(object):
     def setupUi(self, VentMenuGerente):
@@ -20,6 +21,7 @@ class VentMenuGerente(object):
         ImgModificarMedicamento = QtGui.QIcon('Imagenes/modificar_medicamento.png')
         ImgModificarStock = QtGui.QIcon('Imagenes/modificar_stock.png')
         ImgCarrito = QtGui.QIcon('Imagenes/carrito.png')
+        ImgBoletas = QtGui.QIcon('Imagenes/historial_boletas.png')
         ImgCerrar = QtGui.QIcon('Imagenes/btn_cerrar.png')
         
         VentMenuGerente.setWindowIcon(IconoTitulo)
@@ -84,11 +86,19 @@ class VentMenuGerente(object):
         
         # Boton Carrito
         self.BtnCarrito = QtWidgets.QPushButton(VentMenuGerente)
-        self.BtnCarrito.setGeometry(QtCore.QRect(239, 361, 200, 50))
+        self.BtnCarrito.setGeometry(QtCore.QRect(125, 361, 200, 50))
         self.BtnCarrito.setIcon(ImgCarrito)
         self.BtnCarrito.setIconSize(QtCore.QSize(200, 50))
         self.BtnCarrito.setStyleSheet("background-color: transparent;\n""border: none;\n""")
         self.BtnCarrito.setCursor(QtCore.Qt.PointingHandCursor)
+        
+        # Boton Historial Boletas
+        self.BtnBoletas = QtWidgets.QPushButton(VentMenuGerente)
+        self.BtnBoletas.setGeometry(QtCore.QRect(368, 361, 200, 50))
+        self.BtnBoletas.setIcon(ImgBoletas)
+        self.BtnBoletas.setIconSize(QtCore.QSize(200, 50))
+        self.BtnBoletas.setStyleSheet("background-color: transparent;\n""border: none;\n""")
+        self.BtnBoletas.setCursor(QtCore.Qt.PointingHandCursor)
         
         # Boton Cerrar Menu
         self.BtnCerrarMenu = QtWidgets.QPushButton(VentMenuGerente)
@@ -104,6 +114,7 @@ class VentMenuGerente(object):
         self.BtnAgregarUsuario.clicked.connect(lambda: self.cambiarVent(VentAgregarUsuario))
         self.BtnEditarUsuario.clicked.connect(lambda: self.cambiarVent(VentListaUsuarios))
         self.BtnCarrito.clicked.connect(lambda: self.cambiarVent(VentCarrito))
+        self.BtnBoletas.clicked.connect(lambda: self.cambiarVent(VentHistorialBoletas))
         self.BtnModificarMedicamentos.clicked.connect(lambda: self.cambiarVent(VentModificarMedicamentos))
         self.BtnModificarStock.clicked.connect(lambda: self.cambiarVent(VentModificarStock))
         self.BtnCerrarMenu.clicked.connect(VentMenuGerente.close)

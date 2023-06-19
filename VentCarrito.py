@@ -1,10 +1,13 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem, QMessageBox
-import csv
+from PyQt5.QtWidgets import QTableWidgetItem, QMessageBox
+from Clases.Boleta import Boleta
+import csv, datetime
 
 class VentCarrito(object):
     def __init__(self):
         self.carrito = []  # Lista para almacenar los medicamentos del carrito
+        self.medicamentos_cliente = []  # Lista para almacenar los medicamentos del cliente
+
     
     def setupUi(self, VentCarrito):
         ImagenBanner = QtGui.QPixmap('Imagenes/banner_carrito.png')
@@ -35,13 +38,13 @@ class VentCarrito(object):
         # Tabla con columnas y filas para el carrito
         self.tableWidgetCarrito = QtWidgets.QTableWidget(VentCarrito)
         self.tableWidgetCarrito.setGeometry(QtCore.QRect(620, 210, 300, 445))
-        self.tableWidgetCarrito.setColumnCount(4)
-        self.tableWidgetCarrito.setHorizontalHeaderLabels(["ID", "Nombre", "Precio", "Lote"])
+        self.tableWidgetCarrito.setColumnCount(5)
+        self.tableWidgetCarrito.setHorizontalHeaderLabels(["ID", "Nombre", "Precio", "Lote", "Cantidad"])
         
         # Para que no se puedan editar los elementos del carrito
         self.tableWidgetCarrito.setEditTriggers(QtWidgets.QAbstractItemView.NoEditTriggers)
         
-        # Ajusta el tamaño de las celdas a un tamaño predefini en el carrito
+        # Ajusta el tamaño de las celdas a un tamaño predefinido en el carrito
         self.tableWidgetCarrito.setColumnWidth(0, 20)
         self.tableWidgetCarrito.setColumnWidth(1, 144)
         self.tableWidgetCarrito.setColumnWidth(2, 100)
@@ -180,8 +183,9 @@ class VentCarrito(object):
         # Mensaje de que los cambios se guardaron correctamente
         self.alertBox("Se han comprado los medicamentos.\nLa lista de medicamentos se ha actualizado", "Compra exitosa")
         self.tableWidgetCarrito.setRowCount(0)
-        # Aqui se borra, pero en verdad se tendría que guardar para la boleta, pero no es tarea nuestra wuejeje
+        Boleta.agregarBoleta(self, datetime.datetime.now().strftime("%d/%m/%Y"), "cliente", "21.354.784-4", self.medicamentos_cliente, self.cantidad_medicamentosLineEdit.text(), self.subtotalLineEdit.text(), self.descuentoLineEdit.text(), self.costo_envioLineEdit.text(), self.totalLineEdit.text())
         self.carrito = []
+        self.medicamentos_cliente = []
         self.actualizarDatos()
             
     def actualizarLotes(self, fila):
@@ -300,12 +304,13 @@ class VentCarrito(object):
                 
                 # Agrega el medicamento al carrito
                 self.carrito.append((id_medicamento, nombre_medicamento, precio_medicamento, lote))
+                self.medicamentos_cliente.append((nombre_medicamento,"$"+str(precio_medicamento),str(lote)))
 
                 # Actualiza la tabla de carrito
                 self.actualizarTablaCarrito()
 
                 # Calcula los valores de la boleta, cantidad medicamentos, subtotal, descuento y precio
-                self.actualizarDatos()                
+                self.actualizarDatos()
 
     # Accion al pulsar boton menos, elimina medicamentos de la tableWidgetCarrito y agrega el stock devuelta en el tableWidget de medicamentos
     def onActionBtnMenos(self):
@@ -345,6 +350,7 @@ class VentCarrito(object):
             
             # Elimina el medicamento del carrito
             self.carrito.pop(fila_seleccionada)
+            self.medicamentos_cliente.pop(fila_seleccionada)
 
             # Actualiza la tabla de carrito con el medicamento eliminado
             self.actualizarTablaCarrito()
@@ -396,7 +402,7 @@ class VentCarrito(object):
             self.btnMenos.setEnabled(True)
             self.necesita_envioCheckBox.setEnabled(True)
             self.tiene_recetaCheckbox.setEnabled(True)
-    
+                
     def ajustarCeldas(self):
         # Ajusta el tamaño de las celdas automaticamente
         self.tableWidget.resizeColumnsToContents()

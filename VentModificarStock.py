@@ -15,15 +15,15 @@ class VentModificarStock(object):
         
         VentModificarStock.setWindowIcon(IconoTitulo)
         
-        VentModificarStock.resize(1119, 675)
-        VentModificarStock.setMinimumSize(QtCore.QSize(1119, 675))
-        VentModificarStock.setMaximumSize(QtCore.QSize(1119, 675))
+        VentModificarStock.resize(1119, 651)
+        VentModificarStock.setMinimumSize(QtCore.QSize(1119, 651))
+        VentModificarStock.setMaximumSize(QtCore.QSize(1119, 651))
         
         # Etiqueta imagen superior
         self.imagen_on_topLabel = QtWidgets.QLabel(VentModificarStock)
-        self.imagen_on_topLabel.setGeometry(QtCore.QRect(0, 0, 1119, 144))
+        self.imagen_on_topLabel.setGeometry(QtCore.QRect(0, 0, 1119, 120))
         self.imagen_on_topLabel.setText("")
-        self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(1119, 144))
+        self.imagen_on_topLabel.setPixmap(ImagenBanner.scaled(1119, 120))
         
         # Boton regresar y accion al pulsar
         self.btnRegresar = QtWidgets.QPushButton(VentModificarStock)
@@ -36,7 +36,7 @@ class VentModificarStock(object):
 
         # Tabla con columnas y filas y que sean 10 columnas
         self.tableWidget = QtWidgets.QTableWidget(VentModificarStock)
-        self.tableWidget.setGeometry(QtCore.QRect(10, 210, 915, 450))
+        self.tableWidget.setGeometry(QtCore.QRect(10, 186, 915, 450))
         self.tableWidget.setColumnCount(11)
         
         # Ocultar columna de descripción
@@ -48,32 +48,32 @@ class VentModificarStock(object):
         
         # Boton informacion y accion al pulsar
         self.btnInfo = QtWidgets.QPushButton(VentModificarStock)
-        self.btnInfo.setGeometry(QtCore.QRect(932, 210, 180, 60))
+        self.btnInfo.setGeometry(QtCore.QRect(932, 186, 180, 60))
         self.btnInfo.clicked.connect(self.onActionBtnInfo)
         
         # Boton agregar stock y accion al pulsar
         self.BtnAgregar = QtWidgets.QPushButton(VentModificarStock)
-        self.BtnAgregar.setGeometry(QtCore.QRect(932, 290, 180, 60))
+        self.BtnAgregar.setGeometry(QtCore.QRect(932, 266, 180, 60))
         self.BtnAgregar.clicked.connect(self.onActionBtnAgregar)
         
         # Boton retirar stock y accion al pulsar
         self.BtnRetirar = QtWidgets.QPushButton(VentModificarStock)
-        self.BtnRetirar.setGeometry(QtCore.QRect(932, 370, 180, 60))
+        self.BtnRetirar.setGeometry(QtCore.QRect(932, 346, 180, 60))
         self.BtnRetirar.clicked.connect(self.onActionBtnRetirar)
         
         # Boton revisar caducidad y accion al pulsar
         self.btnCaducidad = QtWidgets.QPushButton(VentModificarStock)
-        self.btnCaducidad.setGeometry(QtCore.QRect(932, 450, 180, 60))
+        self.btnCaducidad.setGeometry(QtCore.QRect(932, 426, 180, 60))
         self.btnCaducidad.clicked.connect(self.onActionBtnCaducidad)
         
         # Boton revisar caducidad y accion al pulsar
         self.btnEntregar = QtWidgets.QPushButton(VentModificarStock)
-        self.btnEntregar.setGeometry(QtCore.QRect(932, 530, 180, 60))
+        self.btnEntregar.setGeometry(QtCore.QRect(932, 506, 180, 60))
         self.btnEntregar.clicked.connect(self.onActionBtnEntregar)
         
         # Barra de busqueda y accion al actualizar el texto
         self.buscarLineEdit = QtWidgets.QLineEdit(VentModificarStock)
-        self.buscarLineEdit.setGeometry(QtCore.QRect(10, 150, 1101, 50))
+        self.buscarLineEdit.setGeometry(QtCore.QRect(10, 126, 1101, 50))
         self.buscarLineEdit.setPlaceholderText("Ingrese el nombre, tipo o ID del medicamento")
         self.buscarLineEdit.setStyleSheet("font-size: 16px;")
         self.buscarLineEdit.textChanged.connect(self.buscarMedicamentos)
