@@ -2,13 +2,17 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIntValidator, QFont, QIcon
 from PyQt5.QtWidgets import QMessageBox, QLabel, QSpinBox, QDateEdit, QDialog, QPushButton
 from Clases.Cliente import Cliente
+from Clases.NotasDeCredito import NotasDeCredito
 from PyQt5.QtCore import Qt, QDate
+import datetime
 import csv
 
 
 class VentIngresarDatosDevolucion(QDialog):
-    def __init__(self, stock_lote_2='', parent=None):
+    def __init__(self, medicamento='', precio='', stock_lote_2='', parent=None):
         super(VentIngresarDatosDevolucion, self).__init__(parent)
+        self.medicamento = medicamento
+        self.precio = precio
         self.stock_lote_2 = stock_lote_2
         
         self.setupUi(self)
@@ -95,6 +99,7 @@ class VentIngresarDatosDevolucion(QDialog):
     def onActionBtnIngresar(self):
         if self.verificarNumeroBoletaExistente(self.numero_boletaLineEdit.text()):
             self.alertBox("La compra había sido efectuada\nLa devolución es correcta","Devolución Correcta")
+            NotasDeCredito.agregarNotasDeCredito(self, datetime.datetime.now().strftime("%d/%m/%Y"), self.cliente, self.rut, self.medicamento, self.precio)
             self.accept()
         else:
             self.alertBox("El numero de boleta no existe, no se puede hacer una devolución","Devolución Invalida")
@@ -105,6 +110,8 @@ class VentIngresarDatosDevolucion(QDialog):
             encabezados = csv.reader(file)
             for fila in encabezados:
                 if fila[0] == numero_boleta:
+                    self.cliente = fila[2]
+                    self.rut = fila[3]
                     return True
         return False
     

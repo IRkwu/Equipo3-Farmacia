@@ -311,7 +311,9 @@ class VentModificarStock(object):
         
         # Si se ha seleccionado un medicamento
         if fila_seleccionada != -1:
-            dialog = VentIngresarDatosDevolucion(stock_lote_2 = int(self.tableWidget.item(fila_seleccionada, 7).text()))
+            dialog = VentIngresarDatosDevolucion(stock_lote_2 = int(self.tableWidget.item(fila_seleccionada, 7).text()),
+                                                 medicamento = self.tableWidget.item(fila_seleccionada, 1).text(),
+                                                 precio  = self.tableWidget.item(fila_seleccionada, 2).text())
             if dialog.exec_() == QDialog.Accepted:
                 lote = dialog.get_lote()
                 if lote == "Lote 1":
