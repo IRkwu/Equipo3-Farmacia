@@ -79,6 +79,8 @@ class VentIniciarSesion(object):
                 self.alertBox("Contraseña o Email incorrecto","Inicio de sesión inválido","Vent - Datos Inválidos")
                 
     def cambiarVent(self, nombre_Vent):
+        self.ventanaActual = QtWidgets.QApplication.activeWindow()
+        self.ventanaActual.close()
         self.nombre_Vent = QtWidgets.QMainWindow()
         self.ui = nombre_Vent()
         self.ui.setupUi(self.nombre_Vent)
